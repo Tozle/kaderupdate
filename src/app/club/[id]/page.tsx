@@ -1,10 +1,9 @@
 
+type PageProps = { params: { id: string } };
 import { supabase } from '@/lib/supabaseClient';
 import { notFound } from 'next/navigation';
 import ClubDetailClient from './ClubDetailClient';
-
-
-type PageProps = { params: { id: string } };
+import type { PageProps } from './$types';
 
 export default async function ClubDetailPage({ params }: PageProps) {
     const { data: club, error } = await supabase
