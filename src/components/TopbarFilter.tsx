@@ -2,12 +2,7 @@ import React from 'react';
 import type { User } from '@supabase/supabase-js';
 import { useLocale } from '@/lib/useLocale';
 
-interface Club {
-    id: string;
-    name: string;
-    color_primary_hex?: string;
-    color_secondary_hex?: string;
-}
+// ...existing code...
 
 interface TopbarFilterProps {
     user?: User | null;
