@@ -4,7 +4,8 @@ import ClubDetailClient from './ClubDetailClient';
 import type { PageProps } from './$types';
 // Dummy-Funktion, damit Next.js die Typen generiert
 export async function generateStaticParams() {
-    return [];
+    // Dummy-Parameter, damit Next.js die Typen generiert
+    return [{ id: 'dummy' }];
 }
 
 export default async function ClubDetailPage({ params }: PageProps) {
