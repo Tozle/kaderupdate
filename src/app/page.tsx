@@ -28,9 +28,6 @@ type News = {
 
 export default function Home() {
   const [news, setNews] = useState<News[]>([]);
-  const [clubs, setClubs] = useState<Club[]>([]);
-  const [club, setClub] = useState('');
-  const [q, setQ] = useState('');
   const [debouncedQ, setDebouncedQ] = useState('');
   const debounceTimeout = useRef<NodeJS.Timeout | null>(null);
   const [loading, setLoading] = useState(false);
@@ -51,60 +48,11 @@ export default function Home() {
     return () => { listener.subscription.unsubscribe(); };
   }, []);
 
-  useEffect(() => {
-    // Force reload of club data to ensure color fields are present
-    sessionStorage.removeItem('clubs');
-    let isMounted = true;
-    const cached = sessionStorage.getItem('clubs');
-    if (cached) {
-      setClubs(JSON.parse(cached));
-      return;
-    }
-    supabase
-      .from('clubs')
-      .select('id, name, logo_url, color_primary_hex, color_secondary_hex')
-      .then(({ data, error }) => {
-        if (!isMounted) return;
-        if (error) {
-          setClubs([]);
-          console.error('Fehler beim Laden der Vereine:', error.message);
-          return;
-        }
-        console.log('Clubs from Supabase:', data);
-        setClubs(data || []);
-        if (data) sessionStorage.setItem('clubs', JSON.stringify(data));
-      });
-    return () => { isMounted = false; };
-  }, []);
+  // Club-Lade-Logik entfernt
 
-  useEffect(() => {
-    if (debounceTimeout.current) clearTimeout(debounceTimeout.current);
-    debounceTimeout.current = setTimeout(() => {
-      setDebouncedQ(q);
-    }, 400);
-    return () => {
-      if (debounceTimeout.current) clearTimeout(debounceTimeout.current);
-    };
-  }, [q]);
+  // Debounce-Logik entfernt
 
-  useEffect(() => {
-    const params = new URLSearchParams();
-    if (club) params.append('club', club);
-    if (debouncedQ) params.append('q', debouncedQ);
-    setLoading(true);
-    setError(null);
-    fetch(`/api/newsfeed?${params.toString()}`)
-      .then(async res => {
-        if (!res.ok) {
-          const err = await res.json().catch(() => ({}));
-          throw new Error(err.error || 'Fehler beim Laden der News');
-        }
-        return res.json();
-      })
-      .then(setNews)
-      .catch(e => setError(e.message))
-      .finally(() => setLoading(false));
-  }, [club, debouncedQ]);
+  // News-Lade-Logik angepasst oder entfernt
 
   return (
     <>
