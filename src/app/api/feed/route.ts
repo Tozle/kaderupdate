@@ -4,7 +4,7 @@ import type { NextRequest } from 'next/server';
 
 // Holt News aus Supabase und filtert nach club, badge, q
 export async function GET(req: NextRequest) {
-  const { searchParams } = new URL(req.url);
+  const searchParams = req.nextUrl.searchParams;
   const club = searchParams.get('club');
   const badge = searchParams.get('badge');
   const q = searchParams.get('q');
