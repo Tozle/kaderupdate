@@ -1,5 +1,4 @@
-import { News, Badge, Club, Source } from '@/types/news';
-import { supabase, supabaseAdmin } from '@/lib/supabaseClient';
+import { News, Badge } from '@/types/news';
 import type { NextRequest } from 'next/server';
 
 // Beispiel: Filterbare News-API (Mocked, später DB-Anbindung)

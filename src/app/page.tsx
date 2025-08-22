@@ -1,7 +1,6 @@
 "use client";
 import { useEffect, useState } from 'react';
-import { News, Badge } from '@/types/news';
-const BADGES: Badge[] = ['Bestätigt', 'Gut belegt', 'Gerücht'];
+import { News } from '@/types/news';
 const CLUBS = [
   { id: 'fcb', name: 'FC Bayern' },
   // TODO: Weitere Clubs ergänzen
@@ -52,6 +51,7 @@ export default function Home() {
         {news.map(n => (
           <article key={n.id} className="bg-gradient-to-br from-gray-800 via-gray-900 to-gray-950 rounded-2xl shadow-xl p-6 flex flex-col gap-4 border border-gray-800 hover:border-blue-500 transition-all hover:scale-[1.02]">
             <div className="flex items-center gap-3">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
               <img src={n.club.logoUrl} alt={n.club.name} className="w-10 h-10 object-contain rounded-full border-2 border-gray-700 shadow" />
               <span className="font-bold text-lg tracking-wide drop-shadow">{n.club.name}</span>
               <span className={`ml-auto px-3 py-1 rounded-full text-xs font-semibold shadow ${n.badge === 'Bestätigt' ? 'bg-green-600/80 text-green-100' : n.badge === 'Gut belegt' ? 'bg-yellow-600/80 text-yellow-100' : 'bg-red-700/80 text-red-100'}`}>{n.badge}</span>
