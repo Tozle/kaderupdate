@@ -38,6 +38,13 @@ export default function ImpressumPage() {
                     <p className="mt-4 sm:mt-8 text-xs sm:text-sm text-gray-400 text-center italic">{i18n.demo[locale] || i18n.demo.de}</p>
                 </div>
                 <div className="mt-6 sm:mt-10 w-full max-w-lg">
+                    <ul className="list-disc pl-5 text-gray-300">
+                        <li className="mb-2">Abschnitt 1: Einleitung</li>
+                        <li className="mb-2">Abschnitt 2: Rechtliche Angaben</li>
+                        <li className="mb-2">Abschnitt 3: Kontaktinformationen</li>
+                    </ul>
+                </div>
+                <div className="mt-6 sm:mt-10 w-full max-w-lg">
                     <LegalFooter />
                 </div>
             </main>
