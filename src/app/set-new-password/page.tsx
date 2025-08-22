@@ -5,8 +5,8 @@ import { supabase } from '@/lib/supabaseClient';
 
 export default function SetNewPasswordPage() {
     const router = useRouter();
-    const searchParams = useSearchParams();
-    const accessToken = searchParams!.get('access_token');
+    const searchParams = useSearchParams() ?? new URLSearchParams();
+    const accessToken = searchParams.get('access_token');
     const [password, setPassword] = useState('');
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
