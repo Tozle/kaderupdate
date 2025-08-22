@@ -114,8 +114,15 @@ export default function Home() {
 
         <section className="w-full grid gap-6">
           {filteredNews.length === 0 && (
-            <div className="col-span-full flex flex-col items-center justify-center py-12">
-              <span className="text-lg text-gray-400">{t.newsNotFound}</span>
+            <div className="col-span-full flex flex-col items-center justify-center py-20 animate-fadeIn">
+              <div className="mb-4">
+                <svg width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <circle cx="40" cy="40" r="38" fill="#18181b" stroke="#22c55e" strokeWidth="3" />
+                  <path d="M25 40h30M40 25v30" stroke="#22c55e" strokeWidth="3" strokeLinecap="round" />
+                </svg>
+              </div>
+              <span className="text-xl font-semibold text-gray-300 mb-2">{t.newsNotFound}</span>
+              <span className="text-base text-gray-500">{locale === 'en' ? 'Try another club or search term.' : 'Versuche einen anderen Verein oder Suchbegriff.'}</span>
             </div>
           )}
           {filteredNews.map(n => (
