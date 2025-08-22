@@ -41,7 +41,7 @@ export const TopbarFilter: React.FC<TopbarFilterProps> = ({
                     id="club-select"
                     value={selectedClub}
                     onChange={e => onClubChange(e.target.value)}
-                    className="bg-gray-800 border border-gray-700 rounded-lg p-2 text-white focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-all text-base min-w-[140px] shadow hover:border-green-400 hover:bg-gray-900 w-full sm:w-auto"
+                    className="bg-gray-800 border border-green-600 rounded-lg p-2 text-white focus:ring-2 focus:ring-green-400 focus:border-green-400 transition-all text-base min-w-[140px] shadow hover:border-green-400 hover:bg-gray-900 w-full sm:w-auto focus:outline-none"
                     aria-label="Verein auswählen"
                 >
                     <option value="">Alle Vereine</option>
@@ -55,7 +55,7 @@ export const TopbarFilter: React.FC<TopbarFilterProps> = ({
                     value={searchValue}
                     onChange={e => onSearchChange(e.target.value)}
                     placeholder="Suche..."
-                    className="bg-gray-800 border border-gray-700 rounded-lg p-2 text-white flex-1 focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-all mt-0 text-base shadow hover:border-green-400 hover:bg-gray-900 w-full sm:w-[180px] focus:outline-none"
+                    className="bg-gray-800 border border-green-600 rounded-lg p-2 text-white flex-1 focus:ring-2 focus:ring-green-400 focus:border-green-400 transition-all mt-0 text-base shadow hover:border-green-400 hover:bg-gray-900 w-full sm:w-[180px] focus:outline-none"
                     aria-label="News durchsuchen"
                     tabIndex={0}
                 />

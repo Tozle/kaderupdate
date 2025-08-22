@@ -78,9 +78,9 @@ export default function RegisterForm({ onSwitchToLogin }: { onSwitchToLogin?: ()
                 {loading && <span className="loader border-t-2 border-white border-solid rounded-full w-4 h-4 animate-spin"></span>}
                 <FaUserPlus /> {loading ? 'Registrieren…' : 'Registrieren'}
             </button>
-            {error && <div className="text-red-400 text-sm text-center">{error}</div>}
+            {error && <div className="text-red-400 text-sm text-center" role="alert" aria-live="assertive">{error}</div>}
             {success && (
-                <div className="text-green-400 text-sm text-center">
+                <div className="text-green-400 text-sm text-center" role="status" aria-live="polite">
                     <FaEnvelope className="inline mr-1" /> Wir haben dir soeben eine E-Mail geschickt.<br />
                     Bitte bestätige deine Adresse und logge dich anschließend ein.<br />
                     <span className="text-green-300">Du wirst gleich zum Login weitergeleitet…</span>

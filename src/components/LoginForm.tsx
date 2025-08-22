@@ -132,8 +132,8 @@ export default function LoginForm({ onSwitchToRegister }: { onSwitchToRegister?:
             >
                 Passwort vergessen?
             </button>
-            {error && <div className="text-red-400 text-sm text-center">{error}</div>}
-            {success && <div className="text-green-400 text-sm text-center">Login erfolgreich!</div>}
+            {error && <div className="text-red-400 text-sm text-center" role="alert" aria-live="assertive">{error}</div>}
+            {success && <div className="text-green-400 text-sm text-center" role="status" aria-live="polite">Login erfolgreich!</div>}
             <div className="text-sm text-gray-400 mt-2 text-center">
                 Noch kein Account?{' '}
                 <button type="button" className="underline text-green-400 hover:text-green-300 font-semibold" onClick={onSwitchToRegister} disabled={loading}>
