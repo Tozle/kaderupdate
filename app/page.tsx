@@ -27,7 +27,7 @@ export default function Home() {
     const [news, setNews] = useState<News[]>([]);
     const [clubs, setClubs] = useState<Club[]>([]);
     const [club, setClub] = useState('');
-    const [badge, setBadge] = useState<BadgeType>('');
+    // Badge-Filter entfernt
     const [q, setQ] = useState('');
     const [debouncedQ, setDebouncedQ] = useState('');
     const debounceTimeout = useRef<NodeJS.Timeout | null>(null);
@@ -76,7 +76,7 @@ export default function Home() {
     useEffect(() => {
         const params = new URLSearchParams();
         if (club) params.append('club', club);
-        if (badge) params.append('badge', badge);
+    // Badge-Filter entfernt
         if (debouncedQ) params.append('q', debouncedQ);
         setLoading(true);
         setError(null);
@@ -91,7 +91,7 @@ export default function Home() {
             .then(setNews)
             .catch(e => setError(e.message))
             .finally(() => setLoading(false));
-    }, [club, badge, debouncedQ]);
+    }, [club, debouncedQ]);
 
     return (
         <main className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-gray-950 text-white">

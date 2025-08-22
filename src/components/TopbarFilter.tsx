@@ -11,8 +11,6 @@ interface TopbarFilterProps {
     clubs: Club[];
     selectedClub: string;
     onClubChange: (club: string) => void;
-    showSearch: boolean;
-    onShowSearch: () => void;
     searchValue: string;
     onSearchChange: (q: string) => void;
     user?: User | null;
@@ -24,8 +22,6 @@ export const TopbarFilter: React.FC<TopbarFilterProps> = ({
     clubs,
     selectedClub,
     onClubChange,
-    showSearch,
-    onShowSearch,
     searchValue,
     onSearchChange,
     user,
