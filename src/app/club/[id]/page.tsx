@@ -5,6 +5,7 @@ import dynamic from 'next/dynamic';
 
 const Kader = dynamic(() => import('./kader'), { ssr: false });
 const ClubStats = dynamic(() => import('./stats'), { ssr: false });
+const ClubSocialFeed = dynamic(() => import('./social'), { ssr: false });
 
 export default async function ClubDetailPage({ params }: { params: { id: string } }) {
   const { data: club, error } = await supabase
@@ -32,6 +33,12 @@ export default async function ClubDetailPage({ params }: { params: { id: string 
     { label: 'Letztes Spiel', value: '2:1 vs. FC Beispiel' },
   ];
 
+  // Demo-Embeds für Social-Feed
+  const demoEmbeds = [
+    { url: 'https://www.youtube.com/embed/dQw4w9WgXcQ' },
+    { url: 'https://www.youtube.com/embed/3tmd-ClpJxA' },
+  ];
+
   return (
     <main className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-gray-950 text-white flex flex-col items-center justify-center p-8">
       <div className="bg-gray-900 rounded-3xl shadow-2xl p-8 max-w-xl w-full flex flex-col items-center border-4" style={{ borderColor: club.color_primary_hex || '#22c55e' }}>
@@ -45,8 +52,8 @@ export default async function ClubDetailPage({ params }: { params: { id: string 
         </div>
         <Kader players={demoPlayers} />
         <ClubStats stats={demoStats} />
-        <div className="w-full text-center text-lg text-gray-300 mb-4 mt-6">Social-Feed folgt hier!</div>
-        <a href="/" className="mt-4 inline-block text-green-400 underline hover:text-green-300 transition">Zurück zur Übersicht</a>
+        <ClubSocialFeed embeds={demoEmbeds} />
+        <a href="/" className="mt-8 inline-block text-green-400 underline hover:text-green-300 transition">Zurück zur Übersicht</a>
       </div>
     </main>
   );
