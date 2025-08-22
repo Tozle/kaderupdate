@@ -115,25 +115,34 @@ export default function Home() {
             />
 
             {/* Login/Registrierung Modal */}
-            {(showLogin || showRegister) && (
-                <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60">
-                    <div className="bg-gray-900 p-6 rounded-xl shadow-xl relative w-full max-w-sm mx-auto">
-                        <button
-                            className="absolute top-2 right-2 text-gray-400 hover:text-white text-2xl"
-                            onClick={() => { setShowLogin(false); setShowRegister(false); }}
-                            aria-label="Dialog schließen"
-                        >
-                            ×
-                        </button>
-                        {showLogin && (
-                            <LoginForm onSwitchToRegister={() => { setShowLogin(false); setShowRegister(true); }} />
-                        )}
-                        {showRegister && (
-                            <RegisterForm onSwitchToLogin={() => { setShowRegister(false); setShowLogin(true); }} />
-                        )}
-                    </div>
-                </div>
-            )}
+                    {(showLogin || showRegister) && (
+                        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm animate-fadein">
+                            <div className="bg-gradient-to-br from-gray-950 via-gray-900 to-gray-950 p-0 rounded-3xl shadow-2xl border-2 border-green-700/60 relative w-full max-w-sm mx-auto animate-popin">
+                                <button
+                                    className="absolute top-3 right-3 text-green-400 hover:text-green-200 text-3xl font-extrabold transition-all drop-shadow-lg"
+                                    onClick={() => { setShowLogin(false); setShowRegister(false); }}
+                                    aria-label="Dialog schließen"
+                                    style={{lineHeight:'1'}}
+                                >
+                                    ×
+                                </button>
+                                <div className="p-8">
+                                    {showLogin && (
+                                        <LoginForm onSwitchToRegister={() => { setShowLogin(false); setShowRegister(true); }} />
+                                    )}
+                                    {showRegister && (
+                                        <RegisterForm onSwitchToLogin={() => { setShowRegister(false); setShowLogin(true); }} />
+                                    )}
+                                </div>
+                            </div>
+                            <style jsx global>{`
+                                @keyframes fadein { from { opacity: 0; } to { opacity: 1; } }
+                                .animate-fadein { animation: fadein 0.3s; }
+                                @keyframes popin { 0% { transform: scale(0.95); opacity: 0; } 100% { transform: scale(1); opacity: 1; } }
+                                .animate-popin { animation: popin 0.25s cubic-bezier(.4,2,.6,1); }
+                            `}</style>
+                        </div>
+                    )}
 
             <section className="p-6 grid gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
                 {loading && Array.from({ length: 4 }).map((_, i) => (

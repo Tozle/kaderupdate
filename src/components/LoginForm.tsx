@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
 import { supabase } from '@/lib/supabaseClient';
+import { FaFutbol, FaSignInAlt, FaEnvelope, FaLock, FaUndo } from 'react-icons/fa';
 
 export default function LoginForm({ onSwitchToRegister }: { onSwitchToRegister?: () => void }) {
     const [email, setEmail] = useState('');
@@ -53,29 +54,32 @@ export default function LoginForm({ onSwitchToRegister }: { onSwitchToRegister?:
 
     if (showReset) {
         return (
-            <form onSubmit={handleReset} className="bg-gray-900 p-6 rounded-xl shadow-lg flex flex-col gap-4 max-w-sm mx-auto mt-12">
-                <h2 className="text-xl font-bold mb-2">Passwort zurücksetzen</h2>
-                <input
-                    ref={emailRef}
-                    type="email"
-                    value={email}
-                    onChange={e => setEmail(e.target.value)}
-                    placeholder="E-Mail"
-                    className="p-2 rounded bg-gray-800 border border-gray-700 text-white"
-                    required
-                />
+            <form onSubmit={handleReset} className="bg-gray-950 p-8 rounded-2xl shadow-2xl flex flex-col gap-5 max-w-sm mx-auto mt-16 border border-gray-800">
+                <h2 className="text-2xl font-extrabold mb-2 text-green-400 flex items-center gap-2"><FaUndo className="inline" /> Passwort zurücksetzen</h2>
+                <div className="flex items-center gap-2 bg-gray-900 rounded-lg px-3 py-2 border border-gray-700">
+                    <FaEnvelope className="text-green-500" />
+                    <input
+                        ref={emailRef}
+                        type="email"
+                        value={email}
+                        onChange={e => setEmail(e.target.value)}
+                        placeholder="E-Mail"
+                        className="bg-transparent border-none outline-none text-white flex-1"
+                        required
+                    />
+                </div>
                 <button
                     type="submit"
-                    className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 rounded-lg mt-2 disabled:opacity-60"
+                    className="bg-green-600 hover:bg-green-700 text-white font-bold py-2 rounded-lg mt-2 disabled:opacity-60 flex items-center justify-center gap-2 text-lg shadow"
                     disabled={loading}
                 >
-                    {loading ? 'Sende Link…' : 'Passwort-Reset Link senden'}
+                    {loading ? 'Sende Link…' : <><FaEnvelope /> Passwort-Reset Link senden</>}
                 </button>
-                {resetError && <div className="text-red-400 text-sm">{resetError}</div>}
-                {resetSent && <div className="text-green-400 text-sm">E-Mail zum Zurücksetzen gesendet!</div>}
+                {resetError && <div className="text-red-400 text-sm text-center">{resetError}</div>}
+                {resetSent && <div className="text-green-400 text-sm text-center">E-Mail zum Zurücksetzen gesendet!</div>}
                 <div className="text-sm text-gray-400 mt-2 text-center">
-                    <button type="button" className="underline text-blue-400 hover:text-blue-300" onClick={() => setShowReset(false)}>
-                        Zurück zum Login
+                    <button type="button" className="underline text-green-400 hover:text-green-300 font-semibold" onClick={() => setShowReset(false)}>
+                        <FaSignInAlt className="inline mr-1" /> Zurück zum Login
                     </button>
                 </div>
             </form>
@@ -83,50 +87,56 @@ export default function LoginForm({ onSwitchToRegister }: { onSwitchToRegister?:
     }
 
     return (
-        <form onSubmit={handleLogin} className="bg-gray-900 p-6 rounded-xl shadow-lg flex flex-col gap-4 max-w-sm mx-auto mt-12">
-            <h2 className="text-xl font-bold mb-2">Login</h2>
-            <input
-                ref={emailRef}
-                type="email"
-                value={email}
-                onChange={e => setEmail(e.target.value)}
-                placeholder="E-Mail"
-                className="p-2 rounded bg-gray-800 border border-gray-700 text-white"
-                required
-                autoFocus
-                disabled={loading}
-            />
-            <input
-                ref={passwordRef}
-                type="password"
-                value={password}
-                onChange={e => setPassword(e.target.value)}
-                placeholder="Passwort"
-                className="p-2 rounded bg-gray-800 border border-gray-700 text-white"
-                required
-                disabled={loading}
-            />
+        <form onSubmit={handleLogin} className="bg-gray-950 p-8 rounded-2xl shadow-2xl flex flex-col gap-5 max-w-sm mx-auto mt-16 border border-gray-800">
+            <h2 className="text-2xl font-extrabold mb-2 text-green-400 flex items-center gap-2"><FaSignInAlt className="inline" /> Login</h2>
+            <div className="flex items-center gap-2 bg-gray-900 rounded-lg px-3 py-2 border border-gray-700">
+                <FaEnvelope className="text-green-500" />
+                <input
+                    ref={emailRef}
+                    type="email"
+                    value={email}
+                    onChange={e => setEmail(e.target.value)}
+                    placeholder="E-Mail"
+                    className="bg-transparent border-none outline-none text-white flex-1"
+                    required
+                    autoFocus
+                    disabled={loading}
+                />
+            </div>
+            <div className="flex items-center gap-2 bg-gray-900 rounded-lg px-3 py-2 border border-gray-700">
+                <FaLock className="text-green-500" />
+                <input
+                    ref={passwordRef}
+                    type="password"
+                    value={password}
+                    onChange={e => setPassword(e.target.value)}
+                    placeholder="Passwort"
+                    className="bg-transparent border-none outline-none text-white flex-1"
+                    required
+                    disabled={loading}
+                />
+            </div>
             <button
                 type="submit"
-                className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 rounded-lg mt-2 disabled:opacity-60 flex items-center justify-center gap-2"
+                className="bg-green-600 hover:bg-green-700 text-white font-bold py-2 rounded-lg mt-2 disabled:opacity-60 flex items-center justify-center gap-2 text-lg shadow"
                 disabled={loading}
             >
                 {loading && <span className="loader border-t-2 border-white border-solid rounded-full w-4 h-4 animate-spin"></span>}
-                {loading ? 'Einloggen…' : 'Login'}
+                <FaSignInAlt /> {loading ? 'Einloggen…' : 'Login'}
             </button>
             <button
                 type="button"
-                className="text-xs underline text-blue-400 hover:text-blue-300 mt-1 self-end"
+                className="text-xs underline text-green-400 hover:text-green-300 mt-1 self-end font-semibold"
                 onClick={() => setShowReset(true)}
                 disabled={loading}
             >
                 Passwort vergessen?
             </button>
-            {error && <div className="text-red-400 text-sm">{error}</div>}
-            {success && <div className="text-green-400 text-sm">Login erfolgreich!</div>}
+            {error && <div className="text-red-400 text-sm text-center">{error}</div>}
+            {success && <div className="text-green-400 text-sm text-center">Login erfolgreich!</div>}
             <div className="text-sm text-gray-400 mt-2 text-center">
                 Noch kein Account?{' '}
-                <button type="button" className="underline text-blue-400 hover:text-blue-300" onClick={onSwitchToRegister} disabled={loading}>
+                <button type="button" className="underline text-green-400 hover:text-green-300 font-semibold" onClick={onSwitchToRegister} disabled={loading}>
                     Jetzt registrieren
                 </button>
             </div>
