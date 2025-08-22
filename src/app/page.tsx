@@ -53,7 +53,7 @@ export default function Home() {
       .then(data => {
         // Extrahiere Clubs aus News
         const uniqueClubs: Club[] = [];
-        data.forEach((n: any) => {
+        (data as News[]).forEach((n) => {
           if (n.club && !uniqueClubs.some(c => c.id === n.club.id)) {
             uniqueClubs.push(n.club);
           }
@@ -142,7 +142,7 @@ export default function Home() {
             key={n.id}
             title={n.title}
             summary={n.summary}
-            badge={n.badge as any}
+            badge={n.badge as BadgeType}
             club={n.club}
             sources={n.sources}
             social_embed={n.social_embed}
