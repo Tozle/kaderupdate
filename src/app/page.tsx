@@ -1,6 +1,9 @@
 "use client";
 
 import { useEffect, useState, useRef } from 'react';
+import { supabase } from '@/lib/supabaseClient';
+import LoginForm from '@/components/LoginForm';
+import RegisterForm from '@/components/RegisterForm';
 
 import { TopbarFilter } from '@/components/TopbarFilter';
 import NewsCard from '@/components/NewsCard';
@@ -30,6 +33,17 @@ export default function Home() {
   const [showSearch, setShowSearch] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [user, setUser] = useState<any>(null);
+  const [showLogin, setShowLogin] = useState(false);
+  const [showRegister, setShowRegister] = useState(false);
+  // Check Auth-Status beim Mount
+  useEffect(() => {
+    supabase.auth.getUser().then(({ data }) => setUser(data.user));
+    const { data: listener } = supabase.auth.onAuthStateChange((_event, session) => {
+      setUser(session?.user ?? null);
+    });
+    return () => { listener.subscription.unsubscribe(); };
+  }, []);
 
   useEffect(() => {
     // Clubs aus Supabase laden (optional: nur einmal beim Mount)
@@ -90,7 +104,32 @@ export default function Home() {
         onShowSearch={() => setShowSearch(v => !v)}
         searchValue={q}
         onSearchChange={setQ}
+        user={user}
+        onLoginClick={() => { setShowLogin(true); setShowRegister(false); }}
+        onLogoutClick={async () => { await supabase.auth.signOut(); }}
       />
+
+      {/* Login/Registrierung Modal */}
+      {(showLogin || showRegister) && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60">
+          <div className="bg-gray-900 p-6 rounded-xl shadow-xl relative w-full max-w-sm mx-auto">
+            <button
+              className="absolute top-2 right-2 text-gray-400 hover:text-white text-2xl"
+              onClick={() => { setShowLogin(false); setShowRegister(false); }}
+              aria-label="Dialog schließen"
+            >
+              ×
+            </button>
+            {showLogin && (
+              <LoginForm onSwitchToRegister={() => { setShowLogin(false); setShowRegister(true); }} />
+            )}
+            {showRegister && (
+              <RegisterForm onSwitchToLogin={() => { setShowRegister(false); setShowLogin(true); }} />
+            )}
+          </div>
+        </div>
+      )}
+
       <section className="p-6 grid gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
         {loading && Array.from({ length: 4 }).map((_, i) => (
           <div key={i} className="rounded-2xl bg-gray-800 animate-pulse h-48 w-full col-span-1" aria-label="Lade News…"></div>
