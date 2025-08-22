@@ -37,9 +37,7 @@ interface NewsCardProps {
 const NewsCard: React.FC<NewsCardProps> = ({ title, summary, badge, club, sources, social_embed }) => {
     const locale = useLocale();
     // ...existing code...
-    // Farben aus Club holen (Fallbacks wie im Dropdown)
-    const primary = club.color_primary_hex || '#22c55e';
-    const secondary = club.color_secondary_hex || '#166534';
+    // ...existing code...
     return (
         <article
             className="bg-gray-950 rounded-xl shadow p-4 sm:p-6 flex flex-col gap-3 transition-all hover:scale-[1.01] group focus-within:scale-[1.01] outline-none ring-0 border border-gray-800"
