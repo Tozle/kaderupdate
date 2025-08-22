@@ -140,7 +140,7 @@ export default function Home() {
           </div>
         )}
 
-  <section className="p-8 grid gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+        <section className="p-8 grid gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           {loading && (
             <div className="col-span-full flex flex-col items-center justify-center py-12">
               <svg className="animate-spin h-10 w-10 text-green-500 mb-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">

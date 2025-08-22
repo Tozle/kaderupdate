@@ -12,6 +12,7 @@ export default function RegisterForm({ onSwitchToLogin }: { onSwitchToLogin?: ()
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
     const [success, setSuccess] = useState(false);
+    const [showPassword, setShowPassword] = useState(false);
     const emailRef = useRef<HTMLInputElement>(null);
     const passwordRef = useRef<HTMLInputElement>(null);
 
@@ -31,15 +32,26 @@ export default function RegisterForm({ onSwitchToLogin }: { onSwitchToLogin?: ()
             setLoading(false);
             return;
         }
+        // Einfache E-Mail-Validierung
+        if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) {
+            setError(locale === 'en' ? 'Please enter a valid email address.' : 'Bitte gib eine gültige E-Mail-Adresse ein.');
+            setLoading(false);
+            return;
+        }
+        if (password.length < 8) {
+            setError(locale === 'en' ? 'Password must be at least 8 characters.' : 'Das Passwort muss mindestens 8 Zeichen haben.');
+            setLoading(false);
+            return;
+        }
         const { error } = await supabase.auth.signUp({ email, password });
         if (error) {
-            setError(error.message);
+            setError(error.message.includes('rate limit') ? (locale === 'en' ? 'Too many attempts. Please try again later.' : 'Zu viele Versuche. Bitte später erneut versuchen.') : error.message);
             passwordRef.current?.focus();
         } else {
             setSuccess(true);
             setTimeout(() => {
                 if (onSwitchToLogin) onSwitchToLogin();
-            }, 2000);
+            }, 4000);
         }
         setLoading(false);
     };
@@ -61,18 +73,31 @@ export default function RegisterForm({ onSwitchToLogin }: { onSwitchToLogin?: ()
                     disabled={loading}
                 />
             </div>
-            <div className="flex items-center gap-2 bg-gray-900 rounded-lg px-3 py-2 border border-gray-700">
+            <div className="flex items-center gap-2 bg-gray-900 rounded-lg px-3 py-2 border border-gray-700 relative">
                 <FaLock className="text-green-500" />
                 <input
                     ref={passwordRef}
-                    type="password"
+                    type={showPassword ? 'text' : 'password'}
                     value={password}
                     onChange={e => setPassword(e.target.value)}
                     placeholder={locale === 'en' ? 'Password' : 'Passwort'}
-                    className="bg-gray-800 border border-green-600 rounded-lg px-4 py-2 text-white flex-1 focus:ring-2 focus:ring-green-400 focus:border-green-400 transition-all shadow"
+                    className="bg-gray-800 border border-green-600 rounded-lg px-4 py-2 text-white flex-1 focus-visible:ring-2 focus-visible:ring-green-400 focus-visible:border-green-400 transition-all shadow pr-10"
                     required
                     disabled={loading}
                 />
+                <button
+                    type="button"
+                    tabIndex={-1}
+                    className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-green-400 focus:outline-none"
+                    onClick={() => setShowPassword(v => !v)}
+                    aria-label={showPassword ? (locale === 'en' ? 'Hide password' : 'Passwort verbergen') : (locale === 'en' ? 'Show password' : 'Passwort anzeigen')}
+                >
+                    {showPassword ? (
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13.875 18.825A10.05 10.05 0 0112 19c-5.523 0-10-4.477-10-10 0-1.657.403-3.22 1.125-4.575M15 12a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
+                    ) : (
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
+                    )}
+                </button>
             </div>
             <button
                 type="submit"
@@ -84,13 +109,14 @@ export default function RegisterForm({ onSwitchToLogin }: { onSwitchToLogin?: ()
             </button>
             {error && <div className="text-red-400 text-sm text-center" role="alert" aria-live="assertive">{error}</div>}
             {success && (
-                <div className="text-green-400 text-sm text-center" role="status" aria-live="polite">
+                <div className="text-green-400 text-base text-center font-semibold p-4 bg-green-900/40 rounded-xl border border-green-700 mt-2 animate-pulse" role="status" aria-live="polite">
                     <FaEnvelope className="inline mr-1" />
                     {locale === 'en'
                         ? 'We just sent you an e-mail. Please confirm your address and then log in.'
                         : 'Wir haben dir soeben eine E-Mail geschickt. Bitte bestätige deine Adresse und logge dich anschließend ein.'}
                     <br />
-                    <span className="text-green-300">{locale === 'en' ? 'You will be redirected to login…' : 'Du wirst gleich zum Login weitergeleitet…'}</span>
+                    <span className="text-green-300 block mt-1">{locale === 'en' ? 'Check your spam folder if you do not see the mail.' : 'Schau auch im Spam-Ordner nach, falls du keine Mail findest.'}</span>
+                    <span className="text-green-200 block mt-1">{locale === 'en' ? 'You will be redirected to login…' : 'Du wirst gleich zum Login weitergeleitet…'}</span>
                 </div>
             )}
             {!success && (

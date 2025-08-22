@@ -7,7 +7,7 @@ export default function CookieNotice() {
     }, []);
     if (!visible) return null;
     return (
-    <div className="fixed bottom-0 left-0 w-full bg-gradient-to-r from-gray-950 via-gray-900 to-gray-950 text-gray-200 p-6 z-50 flex flex-col sm:flex-row items-center justify-center gap-3 border-t border-green-700 shadow-2xl animate-slideInUp">
+        <div className="fixed bottom-0 left-0 w-full bg-gradient-to-r from-gray-950 via-gray-900 to-gray-950 text-gray-200 p-6 z-50 flex flex-col sm:flex-row items-center justify-center gap-3 border-t border-green-700 shadow-2xl animate-slideInUp">
             <span className="text-xs sm:text-sm text-gray-300 text-center">
                 Diese Website verwendet Cookies für ein besseres Nutzererlebnis. Mit der Nutzung akzeptierst du unsere{' '}
                 <a href="/datenschutz" className="underline underline-offset-2 decoration-green-500 text-green-400 hover:text-green-300 focus:text-green-300 focus:outline-none transition-colors">Datenschutzerklärung</a>.

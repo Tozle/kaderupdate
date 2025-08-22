@@ -1,38 +1,7 @@
 @layer components {
+  /* Custom component styles können hier ergänzt werden, aktuell leer */
+}
 
-  button,
-  .btn {
-  /* Tailwind-Klassen direkt in Komponenten verwenden */
-    min-height: 44px;
-    min-width: 44px;
-    padding-left: 1.25rem;
-    padding-right: 1.25rem;
-    padding-top: 0.5rem;
-    padding-bottom: 0.5rem;
-  }
-
-
-
-  select,
-  .select {
-  /* Tailwind-Klassen direkt in Komponenten verwenden */
-    min-height: 44px;
-  }
-
-  .modal {
-  /* Tailwind-Klassen direkt in Komponenten verwenden */
-    animation: scaleIn 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-    animation: fadeIn 0.25s ease;
-  }
-
-  .animate-scaleIn {
-    animation: scaleIn 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-  }
-  input,
-  .input {
-  /* Tailwind-Klassen direkt in Komponenten verwenden */
-    min-height: 44px;
-  }
 @keyframes scaleIn {
   from {
     opacity: 0;
