@@ -71,7 +71,6 @@ const NewsCard: React.FC<NewsCardProps> = ({ title, summary, badge, club, source
                         className="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-gray-700 object-contain border-2 shadow-lg group-hover:border-green-400 group-focus-within:border-green-400 transition-all"
                         style={{ objectFit: 'contain', borderColor: secondary }}
                         loading="lazy"
-                        priority={false}
                     />
                 ) : (
                     <span className="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-gray-700 flex items-center justify-center text-3xl sm:text-4xl border-2 shadow-lg" style={{ color: primary, borderColor: secondary }} aria-label={locale === 'en' ? 'No logo' : 'Kein Logo'}><FaFutbol /></span>

@@ -68,7 +68,7 @@ export const TopbarFilter: React.FC<TopbarFilterProps> = ({
                                 onClick={() => setOpen(v => !v)}
                             >
                                 {selectedClub && clubs.find(c => c.id === selectedClub)?.logo_url ? (
-                                    <Image src={clubs.find(c => c.id === selectedClub)?.logo_url || ''} alt="Club Logo" width={38} height={38} className="w-10 h-10 rounded-full object-contain mr-3" />
+                                    <Image src={clubs.find(c => c.id === selectedClub)?.logo_url || ''} alt="Club Logo" width={38} height={38} className="w-10 h-10 rounded-full object-contain mr-3" loading="lazy" />
                                 ) : (
                                     <FaFutbol className="text-green-400 text-2xl mr-3" />
                                 )}
@@ -108,7 +108,7 @@ export const TopbarFilter: React.FC<TopbarFilterProps> = ({
                                                     {/* Farbbalken */}
                                                     <span style={{ background: primary, width: 6, height: 38, borderRadius: 4, marginRight: 8, display: 'inline-block' }}></span>
                                                     {c.logo_url ? (
-                                                        <Image src={c.logo_url} alt={c.name} width={38} height={38} className="w-10 h-10 rounded-full object-contain border-2" style={{ borderColor: secondary }} />
+                                                        <Image src={c.logo_url} alt={c.name} width={38} height={38} className="w-10 h-10 rounded-full object-contain border-2" style={{ borderColor: secondary }} loading="lazy" />
                                                     ) : (
                                                         <FaFutbol className="text-2xl" style={{ color: primary }} />
                                                     )}
