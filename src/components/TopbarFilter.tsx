@@ -78,7 +78,7 @@ export const TopbarFilter: React.FC<TopbarFilterProps> = ({
                             {/* Dropdown-Overlay */}
                             {open && (
                                 <div className="absolute z-50 left-0 mt-2 w-full max-h-96 overflow-auto bg-gray-900 border border-green-700 rounded-2xl shadow-2xl animate-fadein p-3">
-                                    <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2" role="listbox">
+                                    <ul className="flex flex-col gap-2" role="listbox">
                                         <li
                                             className={`px-5 py-3 cursor-pointer hover:bg-green-900/40 rounded-xl flex items-center gap-3 text-lg font-bold transition-all border border-transparent ${!selectedClub ? 'bg-green-800/30 border-green-500' : ''}`}
                                             onClick={() => { onClubChange(''); setOpen(false); }}
@@ -136,7 +136,7 @@ export const TopbarFilter: React.FC<TopbarFilterProps> = ({
                 <div className="flex gap-3 sm:gap-6 items-center justify-start sm:justify-end mt-3 sm:mt-0 w-full sm:w-auto">
                     {user ? (
                         <>
-                            <span className="text-lg text-green-400 font-semibold flex items-center gap-2"><FaFutbol className="inline text-green-500" />{user.email}</span>
+                            <span className="text-lg text-green-400 font-semibold flex items-center gap-2 max-w-[180px] sm:max-w-xs truncate whitespace-nowrap overflow-hidden"><FaFutbol className="inline text-green-500" />{user.email}</span>
                             <button
                                 onClick={onLogoutClick}
                                 className="bg-gray-800 hover:bg-red-700 text-white px-7 py-3 sm:px-5 sm:py-3 rounded-xl shadow-lg transition-all font-bold border border-gray-700 hover:border-red-500 focus:outline-none focus:ring-2 focus:ring-red-500 touch-manipulation min-h-[48px] min-w-[48px]"
