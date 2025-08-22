@@ -48,6 +48,8 @@ export default function Home() {
   }, []);
 
   useEffect(() => {
+    // Force reload of club data to ensure color fields are present
+    sessionStorage.removeItem('clubs');
     let isMounted = true;
     const cached = sessionStorage.getItem('clubs');
     if (cached) {
