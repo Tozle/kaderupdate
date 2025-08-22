@@ -56,7 +56,7 @@ export default function Home() {
     }
     supabase
       .from('clubs')
-      .select('id, name, logo_url')
+      .select('id, name, logo_url, color_primary_hex, color_secondary_hex')
       .then(({ data, error }) => {
         if (!isMounted) return;
         if (error) {
