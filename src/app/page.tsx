@@ -12,7 +12,7 @@ import Head from 'next/head';
 import { TopbarFilter } from '@/components/TopbarFilter';
 import NewsCard from '@/components/NewsCard';
 
-type Club = { id: string; name: string; logo_url?: string };
+type Club = { id: string; name: string; logo_url?: string; color_primary_hex?: string; color_secondary_hex?: string };
 type Source = { id: string; name: string; type: string; url?: string; trust_level?: number };
 type News = {
   id: string;
