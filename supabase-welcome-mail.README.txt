@@ -1,0 +1,12 @@
+// Beispiel für Willkommens-E-Mail (Supabase SMTP muss konfiguriert sein)
+// Diese Datei ist ein Hinweis für die Backend-Konfiguration.
+
+/*
+Supabase sendet automatisch eine Bestätigungs- und Willkommensmail nach Registrierung.
+Für individuelle Mails kann ein Edge Function oder ein externer Service (z.B. Resend, Mailgun) genutzt werden.
+
+Empfohlen:
+- SMTP in Supabase Dashboard einrichten
+- E-Mail-Templates im Supabase Auth Bereich anpassen
+- Für Willkommensmails nach Login/Registrierung ggf. Edge Function nutzen
+*/
