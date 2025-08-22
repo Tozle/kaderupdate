@@ -2,6 +2,7 @@ import { supabase } from '@/lib/supabaseClient';
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
 import dynamic from 'next/dynamic';
+import Link from 'next/link';
 
 const Kader = dynamic(() => import('./kader'), { ssr: false });
 const ClubStats = dynamic(() => import('./stats'), { ssr: false });
@@ -53,7 +54,7 @@ export default async function ClubDetailPage({ params }: { params: { id: string 
         <Kader players={demoPlayers} />
         <ClubStats stats={demoStats} />
         <ClubSocialFeed embeds={demoEmbeds} />
-        <a href="/" className="mt-8 inline-block text-green-400 underline hover:text-green-300 transition">Zurück zur Übersicht</a>
+  <Link href="/" className="mt-8 inline-block text-green-400 underline hover:text-green-300 transition">Zurück zur Übersicht</Link>
       </div>
     </main>
   );
