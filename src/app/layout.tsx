@@ -4,7 +4,6 @@ import "./globals.css";
 import '../sentry.client';
 import PlausibleAnalytics from '../components/PlausibleAnalytics';
 import LegalFooter from '../components/LegalFooter';
-import CookieNotice from '../components/CookieNotice';
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -58,7 +57,6 @@ export default function RootLayout({
           {children}
         </main>
   <LegalFooter />
-  <CookieNotice onAccept={() => localStorage.setItem('cookie-accepted', '1')} />
       </body>
     </html>
   );
