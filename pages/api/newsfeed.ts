@@ -34,10 +34,11 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   if (distinct === 'club') {
     // Extrahiere nur Clubs (club kann auch ein Array sein)
     type Club = { id: string; name: string; logo_url?: string };
+    type News = { club: Club | Club[] | null | undefined };
     const clubs: Club[] = [];
-    (data || []).forEach((n: any) => {
+    (data as News[] || []).forEach((n) => {
       if (Array.isArray(n.club)) {
-        n.club.forEach((c: any) => c && clubs.push(c));
+        n.club.forEach((c) => c && clubs.push(c));
       } else if (n.club) {
         clubs.push(n.club);
       }
