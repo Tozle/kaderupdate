@@ -37,8 +37,16 @@ export default function Home() {
   const [user, setUser] = useState<User | null>(null);
   const [showLogin, setShowLogin] = useState(false);
   const [showRegister, setShowRegister] = useState(false);
+  const [showOnlyFavs, setShowOnlyFavs] = useState(false);
+  const [favIds, setFavIds] = useState<string[]>([]);
   const locale = useLocale();
   const t = translations[locale] || translations['de'];
+
+  // Favoriten aus LocalStorage laden
+  useEffect(() => {
+    const stored = Object.keys(localStorage).filter(k => k.startsWith('fav-') && localStorage.getItem(k) === '1').map(k => k.replace('fav-', ''));
+    setFavIds(stored);
+  }, [showOnlyFavs, news]);
   useEffect(() => {
     supabase.auth.getUser().then(({ data }) => setUser(data.user));
     const { data: listener } = supabase.auth.onAuthStateChange((_event, session) => {
@@ -126,6 +134,8 @@ export default function Home() {
           onClubChange={setClub}
           searchValue={q}
           onSearchChange={setQ}
+          showOnlyFavs={showOnlyFavs}
+          onToggleFavs={() => setShowOnlyFavs(f => !f)}
           user={user}
           onLoginClick={() => { setShowLogin(true); setShowRegister(false); }}
           onLogoutClick={async () => { await supabase.auth.signOut(); }}
@@ -177,7 +187,7 @@ export default function Home() {
               <span className="text-gray-500 mt-2">{locale === 'en' ? 'Try another club or search term.' : 'Probiere einen anderen Verein oder Suchbegriff.'}</span>
             </div>
           )}
-          {!loading && !error && news.map(n => (
+          {!loading && !error && (showOnlyFavs ? news.filter(n => favIds.includes(n.club.id)).map(n => (
             <NewsCard
               key={n.id}
               title={n.title}
@@ -187,7 +197,17 @@ export default function Home() {
               sources={n.sources}
               social_embed={n.social_embed}
             />
-          ))}
+          )) : news.map(n => (
+            <NewsCard
+              key={n.id}
+              title={n.title}
+              summary={n.summary}
+              badge={n.badge}
+              club={n.club}
+              sources={n.sources}
+              social_embed={n.social_embed}
+            />
+          )))}
         </section>
       </main>
     </>

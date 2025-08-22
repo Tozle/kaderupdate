@@ -19,6 +19,8 @@ interface TopbarFilterProps {
     onClubChange: (club: string) => void;
     searchValue: string;
     onSearchChange: (q: string) => void;
+    showOnlyFavs: boolean;
+    onToggleFavs: () => void;
     user?: User | null;
     onLoginClick?: () => void;
     onLogoutClick?: () => void;
@@ -30,6 +32,8 @@ export const TopbarFilter: React.FC<TopbarFilterProps> = ({
     onClubChange,
     searchValue,
     onSearchChange,
+    showOnlyFavs,
+    onToggleFavs,
     user,
     onLoginClick,
     onLogoutClick,
@@ -66,6 +70,18 @@ export const TopbarFilter: React.FC<TopbarFilterProps> = ({
                     <span className="ml-3 text-sm text-green-500 font-bold uppercase tracking-widest hidden sm:inline">.com & .de</span>
                 </div>
                 <div className="flex flex-col sm:flex-row gap-3 sm:gap-6 items-center w-full sm:w-auto mt-3 sm:mt-0">
+                    <button
+                        onClick={onToggleFavs}
+                        className={`flex items-center gap-2 px-4 py-2 rounded-xl border-2 font-bold shadow transition-all text-base ${showOnlyFavs ? 'bg-green-700 border-green-400 text-white' : 'bg-gray-800 border-green-700 text-green-300 hover:bg-green-900'} focus:outline-none focus-visible:ring-2 focus-visible:ring-green-400`}
+                        aria-pressed={showOnlyFavs}
+                        aria-label={showOnlyFavs ? (locale === 'en' ? 'Show all news' : 'Alle News anzeigen') : (locale === 'en' ? 'Show only favorites' : 'Nur Favoriten anzeigen')}
+                        style={{ minHeight: 44 }}
+                    >
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill={showOnlyFavs ? 'currentColor' : 'none'} stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5">
+                            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41 0.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+                        </svg>
+                        {showOnlyFavs ? (locale === 'en' ? 'Only favorites' : 'Nur Favoriten') : (locale === 'en' ? 'All news' : 'Alle News')}
+                    </button>
                     <label htmlFor="club-select" className="sr-only">{locale === 'en' ? 'Select club' : 'Verein auswählen'}</label>
                     <div className="relative w-full sm:w-auto">
                         <div className="relative w-full sm:w-auto">
