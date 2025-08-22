@@ -1,43 +1,14 @@
 
-"use client";
-import { useState } from 'react';
-import { useRouter, useSearchParams } from 'next/navigation';
-import { supabase } from '@/lib/supabaseClient';
-// import { translations } from '@/lib/translations'; // entfernt, da ungenutzt
-import { useLocale } from '@/lib/useLocale';
-import Head from 'next/head';
+import { Suspense } from "react";
+import SetNewPasswordPage from "./SetNewPasswordPage";
 
-export default function SetNewPasswordPage() {
-    const router = useRouter();
-    const searchParams = useSearchParams() ?? new URLSearchParams();
-    const accessToken = searchParams.get('access_token');
-    const [password, setPassword] = useState('');
-    const [loading, setLoading] = useState(false);
-    const [error, setError] = useState<string | null>(null);
-    const [success, setSuccess] = useState(false);
-    const localeRaw = useLocale();
-    const locale: 'de' | 'en' = localeRaw === 'en' ? 'en' : 'de';
-    // const t = translations[locale] || translations['de']; // entfernt, da ungenutzt
-
-    // i18n-Strings für diese Seite
-    const i18n = {
-        title: {
-            de: 'Neues Passwort setzen',
-            en: 'Set New Password',
-        },
-        placeholder: {
-            de: 'Neues Passwort',
-            en: 'New password',
-        },
-        submit: {
-            de: 'Passwort setzen',
-            en: 'Set password',
-        },
-        loading: {
-            de: 'Setze Passwort…',
-            en: 'Setting password…',
-        },
-        errorNoToken: {
+export default function Page() {
+    return (
+        <Suspense fallback={<div>Lädt...</div>}>
+            <SetNewPasswordPage />
+        </Suspense>
+    );
+}
             de: 'Kein Token gefunden. Bitte Link aus E-Mail nutzen.',
             en: 'No token found. Please use the link from your email.',
         },
