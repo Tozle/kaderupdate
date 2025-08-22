@@ -41,8 +41,9 @@ export const TopbarFilter: React.FC<TopbarFilterProps> = ({
                     id="club-select"
                     value={selectedClub}
                     onChange={e => onClubChange(e.target.value)}
-                    className="bg-gray-800 border border-green-600 rounded-lg p-2 text-white focus:ring-2 focus:ring-green-400 focus:border-green-400 transition-all text-base min-w-[140px] shadow hover:border-green-400 hover:bg-gray-900 w-full sm:w-auto focus:outline-none"
+                    className="bg-gray-800 border border-green-600 rounded-lg p-3 sm:p-2 text-white focus:ring-2 focus:ring-green-400 focus:border-green-400 transition-all text-base min-w-[140px] shadow hover:border-green-400 hover:bg-gray-900 w-full sm:w-auto focus:outline-none touch-manipulation"
                     aria-label="Verein auswählen"
+                    style={{ minHeight: '48px' }}
                 >
                     <option value="">Alle Vereine</option>
                     {clubs.map(c => (
@@ -55,9 +56,10 @@ export const TopbarFilter: React.FC<TopbarFilterProps> = ({
                     value={searchValue}
                     onChange={e => onSearchChange(e.target.value)}
                     placeholder="Suche..."
-                    className="bg-gray-800 border border-green-600 rounded-lg p-2 text-white flex-1 focus:ring-2 focus:ring-green-400 focus:border-green-400 transition-all mt-0 text-base shadow hover:border-green-400 hover:bg-gray-900 w-full sm:w-[180px] focus:outline-none"
+                    className="bg-gray-800 border border-green-600 rounded-lg p-3 sm:p-2 text-white flex-1 focus:ring-2 focus:ring-green-400 focus:border-green-400 transition-all mt-0 text-base shadow hover:border-green-400 hover:bg-gray-900 w-full sm:w-[180px] focus:outline-none touch-manipulation"
                     aria-label="News durchsuchen"
                     tabIndex={0}
+                    style={{ minHeight: '48px' }}
                 />
             </div>
             <div className="flex gap-2 sm:gap-4 items-center justify-center sm:justify-end mt-2 sm:mt-0">
@@ -66,8 +68,9 @@ export const TopbarFilter: React.FC<TopbarFilterProps> = ({
                         <span className="text-base text-green-400 font-semibold flex items-center gap-2"><FaFutbol className="inline text-green-500" />{user.email}</span>
                         <button
                             onClick={onLogoutClick}
-                            className="bg-gray-800 hover:bg-red-700 text-white px-4 py-2 rounded-lg shadow transition-all font-bold border border-gray-700 hover:border-red-500 focus:outline-none focus:ring-2 focus:ring-red-500"
+                            className="bg-gray-800 hover:bg-red-700 text-white px-6 py-3 sm:px-4 sm:py-2 rounded-lg shadow transition-all font-bold border border-gray-700 hover:border-red-500 focus:outline-none focus:ring-2 focus:ring-red-500 touch-manipulation"
                             aria-label="Logout"
+                            style={{ minHeight: '48px', minWidth: '48px' }}
                         >
                             Logout
                         </button>
@@ -75,8 +78,9 @@ export const TopbarFilter: React.FC<TopbarFilterProps> = ({
                 ) : (
                     <button
                         onClick={onLoginClick}
-                        className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg shadow transition-all font-bold border border-green-700 hover:border-green-400 focus:outline-none focus:ring-2 focus:ring-green-500"
+                        className="bg-green-600 hover:bg-green-700 text-white px-6 py-3 sm:px-4 sm:py-2 rounded-lg shadow transition-all font-bold border border-green-700 hover:border-green-400 focus:outline-none focus:ring-2 focus:ring-green-500 touch-manipulation"
                         aria-label="Login"
+                        style={{ minHeight: '48px', minWidth: '48px' }}
                     >
                         Login
                     </button>
