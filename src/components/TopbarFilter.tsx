@@ -1,5 +1,5 @@
 import React from 'react';
-import { translations } from '@/lib/translations';
+// import { translations } from '@/lib/translations'; // entfernt, da ungenutzt
 import { useLocale } from '@/lib/useLocale';
 import { FaFutbol } from 'react-icons/fa';
 import Image from 'next/image';
@@ -33,7 +33,7 @@ export const TopbarFilter: React.FC<TopbarFilterProps> = ({
     onLogoutClick,
 }) => {
     const locale = useLocale();
-    const t = translations[locale] || translations['de'];
+    const t = { allClubs: locale === 'en' ? 'All clubs' : 'Alle Vereine', search: locale === 'en' ? 'Search news' : 'News durchsuchen', login: 'Login', logout: 'Logout' };
     const [open, setOpen] = React.useState(false);
     return (
         <header className="sticky top-0 z-40 w-full bg-gradient-to-r from-green-950 via-gray-950 to-green-900 shadow-2xl border-b border-green-800" role="banner">
@@ -56,7 +56,7 @@ export const TopbarFilter: React.FC<TopbarFilterProps> = ({
                                 onClick={() => setOpen(v => !v)}
                             >
                                 {selectedClub && clubs.find(c => c.id === selectedClub)?.logo_url ? (
-                                    <Image src={clubs.find(c => c.id === selectedClub)?.logo_url!} alt="Club Logo" width={28} height={28} className="w-7 h-7 rounded-full object-contain mr-2" />
+                                    <Image src={clubs.find(c => c.id === selectedClub)?.logo_url || ''} alt="Club Logo" width={28} height={28} className="w-7 h-7 rounded-full object-contain mr-2" />
                                 ) : (
                                     <FaFutbol className="text-green-400 text-xl mr-2" />
                                 )}

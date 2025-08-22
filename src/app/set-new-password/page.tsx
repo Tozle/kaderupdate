@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { supabase } from '@/lib/supabaseClient';
-import { translations } from '@/lib/translations';
+// import { translations } from '@/lib/translations'; // entfernt, da ungenutzt
 import { useLocale } from '@/lib/useLocale';
 import Head from 'next/head';
 

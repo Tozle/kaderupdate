@@ -4,7 +4,7 @@ import Image from 'next/image';
 import { Badge, BadgeType } from './Badge';
 import { XEmbed } from './XEmbed';
 import { FaFutbol } from 'react-icons/fa';
-import { translations } from '@/lib/translations';
+// import { translations } from '@/lib/translations'; // entfernt, da ungenutzt
 import { useLocale } from '@/lib/useLocale';
 
 
