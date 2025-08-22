@@ -8,7 +8,7 @@ export function middleware() {
         [
             "default-src 'self';",
             "img-src 'self' data: https:;",
-            "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com;",
+            "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://plausible.io;",
             "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;",
             "font-src 'self' https://fonts.gstatic.com;",
             "connect-src 'self' https://*.supabase.co;",

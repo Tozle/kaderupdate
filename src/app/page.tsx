@@ -9,6 +9,7 @@ import { translations } from '@/lib/translations';
 import { useLocale } from '@/lib/useLocale';
 import Head from 'next/head';
 
+
 import { TopbarFilter } from '@/components/TopbarFilter';
 import NewsCard from '@/components/NewsCard';
 

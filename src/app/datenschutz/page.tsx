@@ -31,14 +31,14 @@ export default function DatenschutzPage() {
                 <title>{i18n.title[locale] || i18n.title.de} | KaderUpdate</title>
                 <meta name="description" content={i18n.metaDesc[locale] || i18n.metaDesc.de} />
             </Head>
-            <main className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-gray-950 via-gray-900 to-gray-950 py-16 px-4">
-                <div className="bg-white/95 rounded-3xl shadow-2xl p-10 max-w-2xl w-full flex flex-col items-center border border-gray-200">
-                    <h1 className="text-4xl font-extrabold mb-6 text-green-700 text-center drop-shadow-lg tracking-tight">{i18n.title[locale] || i18n.title.de}</h1>
-                    <p className="text-lg text-gray-800 text-center mb-6 leading-relaxed">{i18n.content[locale] || i18n.content.de}</p>
-                    <p className="mt-8 text-sm text-gray-400 text-center italic">{i18n.demo[locale] || i18n.demo.de}</p>
+            <main className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-gray-950 via-gray-900 to-gray-950 py-10 px-2">
+                <div className="bg-gray-900/95 rounded-2xl shadow-2xl p-6 sm:p-10 max-w-lg w-full flex flex-col items-center border border-green-700">
+                    <h1 className="text-3xl sm:text-4xl font-extrabold mb-4 sm:mb-6 text-green-400 text-center drop-shadow-lg tracking-tight">{i18n.title[locale] || i18n.title.de}</h1>
+                    <p className="text-base sm:text-lg text-gray-200 text-center mb-4 sm:mb-6 leading-relaxed">{i18n.content[locale] || i18n.content.de}</p>
+                    <p className="mt-4 sm:mt-8 text-xs sm:text-sm text-gray-400 text-center italic">{i18n.demo[locale] || i18n.demo.de}</p>
                 </div>
-                <div className="mt-10 w-full max-w-2xl">
-                  <LegalFooter />
+                <div className="mt-6 sm:mt-10 w-full max-w-lg">
+                    <LegalFooter />
                 </div>
             </main>
         </>
