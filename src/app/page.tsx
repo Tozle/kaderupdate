@@ -64,6 +64,7 @@ export default function Home() {
           console.error('Fehler beim Laden der Vereine:', error.message);
           return;
         }
+        console.log('Clubs from Supabase:', data);
         setClubs(data || []);
         if (data) sessionStorage.setItem('clubs', JSON.stringify(data));
       });
@@ -120,7 +121,7 @@ export default function Home() {
         {/* Login/Registrierung Modal */}
         {(showLogin || showRegister) && (
           <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 px-2 sm:px-0 transition-opacity animate-fadeIn" role="dialog" aria-modal="true">
-            <div className="bg-gray-900 p-4 sm:p-6 rounded-xl shadow-xl relative w-full max-w-xs sm:max-w-sm mx-auto transform transition-all duration-300 animate-scaleIn">
+            <div className="bg-gray-900 p-6 sm:p-8 rounded-2xl shadow-2xl border border-gray-800 relative w-full max-w-xs sm:max-w-sm mx-auto transform transition-all duration-300 animate-scaleIn modal">
               <button
                 className="absolute top-2 right-2 text-gray-400 hover:text-white text-2xl sm:text-2xl p-1 sm:p-2 rounded focus:outline-none focus:ring-2 focus:ring-green-500"
                 onClick={() => { setShowLogin(false); setShowRegister(false); }}

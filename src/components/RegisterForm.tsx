@@ -55,7 +55,7 @@ export default function RegisterForm({ onSwitchToLogin }: { onSwitchToLogin?: ()
                     value={email}
                     onChange={e => setEmail(e.target.value)}
                     placeholder={locale === 'en' ? 'E-mail' : 'E-Mail'}
-                    className="bg-transparent border-none outline-none text-white flex-1"
+                    className="bg-gray-800 border border-green-600 rounded-lg px-4 py-2 text-white flex-1 focus:ring-2 focus:ring-green-400 focus:border-green-400 transition-all shadow"
                     required
                     autoFocus
                     disabled={loading}
@@ -69,14 +69,14 @@ export default function RegisterForm({ onSwitchToLogin }: { onSwitchToLogin?: ()
                     value={password}
                     onChange={e => setPassword(e.target.value)}
                     placeholder={locale === 'en' ? 'Password' : 'Passwort'}
-                    className="bg-transparent border-none outline-none text-white flex-1"
+                    className="bg-gray-800 border border-green-600 rounded-lg px-4 py-2 text-white flex-1 focus:ring-2 focus:ring-green-400 focus:border-green-400 transition-all shadow"
                     required
                     disabled={loading}
                 />
             </div>
             <button
                 type="submit"
-                className="bg-green-600 hover:bg-green-700 text-white font-bold py-2 rounded-lg mt-2 disabled:opacity-60 flex items-center justify-center gap-2 text-lg shadow"
+                className="bg-green-600 hover:bg-green-700 text-white font-bold py-2 rounded-lg mt-2 disabled:opacity-60 flex items-center justify-center gap-2 text-lg shadow transition-all focus:outline-none focus:ring-2 focus:ring-green-400 min-h-[44px] min-w-[44px] px-5"
                 disabled={loading}
             >
                 {loading && <span className="loader border-t-2 border-white border-solid rounded-full w-4 h-4 animate-spin"></span>}

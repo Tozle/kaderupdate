@@ -6,6 +6,7 @@ import { FaFutbol } from 'react-icons/fa';
 interface Club {
     id: string;
     name: string;
+    logo_url?: string;
 }
 
 import type { User } from '@supabase/supabase-js';
@@ -42,19 +43,36 @@ export const TopbarFilter: React.FC<TopbarFilterProps> = ({
                 </div>
                 <div className="flex flex-col sm:flex-row gap-2 sm:gap-4 items-center w-full sm:w-auto">
                     <label htmlFor="club-select" className="sr-only">{locale === 'en' ? 'Select club' : 'Verein auswählen'}</label>
-                    <select
-                        id="club-select"
-                        value={selectedClub}
-                        onChange={e => onClubChange(e.target.value)}
-                        className="bg-gray-800 border border-green-600 rounded-lg p-3 sm:p-2 text-white focus:ring-2 focus:ring-green-400 focus:border-green-400 transition-all text-base min-w-[140px] shadow hover:border-green-400 hover:bg-gray-900 w-full sm:w-auto focus:outline-none touch-manipulation"
-                        aria-label={locale === 'en' ? 'Select club' : 'Verein auswählen'}
-                        style={{ minHeight: '48px' }}
-                    >
-                        <option value="">{t.allClubs}</option>
-                        {clubs.map(c => (
-                            <option key={c.id} value={c.id}>{c.name}</option>
-                        ))}
-                    </select>
+                    <div className="relative w-full sm:w-auto">
+                        <select
+                            id="club-select"
+                            value={selectedClub}
+                            onChange={e => onClubChange(e.target.value)}
+                            className="bg-gray-800 border border-green-600 rounded-lg p-3 sm:p-2 text-white focus:ring-2 focus:ring-green-400 focus:border-green-400 transition-all text-base min-w-[140px] shadow hover:border-green-400 hover:bg-gray-900 w-full sm:w-auto focus:outline-none touch-manipulation font-semibold pr-10"
+                            aria-label={locale === 'en' ? 'Select club' : 'Verein auswählen'}
+                            style={{ minHeight: '48px', appearance: 'none', WebkitAppearance: 'none', MozAppearance: 'none' }}
+                        >
+                            <option value="">{t.allClubs}</option>
+                            {clubs.map(c => (
+                                <option key={c.id} value={c.id}>
+                                    {c.name}
+                                </option>
+                            ))}
+                        </select>
+                        {/* Custom Dropdown Arrow */}
+                        <span className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-green-400 text-lg">
+                            ▼
+                        </span>
+                        {/* Club-Logo Preview (selected) */}
+                        {selectedClub && clubs.find(c => c.id === selectedClub && c.logo_url) && (
+                            <img
+                                src={clubs.find(c => c.id === selectedClub)?.logo_url}
+                                alt="Club Logo"
+                                className="absolute left-2 top-1/2 -translate-y-1/2 w-7 h-7 rounded-full bg-gray-700 border border-green-500 shadow"
+                                style={{ pointerEvents: 'none' }}
+                            />
+                        )}
+                    </div>
                     <label className="sr-only" htmlFor="news-search">{locale === 'en' ? 'Search news' : 'News durchsuchen'}</label>
                     <input
                         id="news-search"
