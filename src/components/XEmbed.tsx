@@ -5,10 +5,10 @@ interface XEmbedProps {
 }
 
 export const XEmbed: React.FC<XEmbedProps> = ({ url }) => (
-    <div className="my-2">
+    <div className="my-1">
         <iframe
             src={url}
-            className="w-full h-64 rounded-lg border-none"
+            className="w-full h-64 border border-gray-200 bg-white"
             allowFullScreen
             title="X Embed"
         />

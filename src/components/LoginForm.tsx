@@ -56,31 +56,31 @@ export default function LoginForm({ onSwitchToRegister }: { onSwitchToRegister?:
 
     if (showReset) {
         return (
-            <form onSubmit={handleReset} className="bg-gray-950 p-8 rounded-2xl shadow-2xl flex flex-col gap-5 max-w-sm mx-auto mt-16 border border-gray-800">
-                <h2 className="text-2xl font-extrabold mb-2 text-green-400 flex items-center gap-2"><FaUndo className="inline" />{locale === 'en' ? 'Reset password' : 'Passwort zurücksetzen'}</h2>
-                <div className="flex items-center gap-2 bg-gray-900 rounded-lg px-3 py-2 border border-gray-700">
-                    <FaEnvelope className="text-green-500" />
+            <form onSubmit={handleReset} className="bg-white/95 p-6 rounded-xl shadow flex flex-col gap-4 max-w-sm mx-auto mt-16 border border-gray-200">
+                <h2 className="text-xl font-semibold mb-2 text-gray-800 flex items-center gap-2"><FaUndo className="inline" />{locale === 'en' ? 'Reset password' : 'Passwort zurücksetzen'}</h2>
+                <div className="flex items-center gap-2 bg-gray-100 rounded px-2 py-1 border border-gray-200">
+                    <FaEnvelope className="text-gray-400" />
                     <input
                         ref={emailRef}
                         type="email"
                         value={email}
                         onChange={e => setEmail(e.target.value)}
                         placeholder={locale === 'en' ? 'E-mail' : 'E-Mail'}
-                        className="bg-gray-800 border border-green-600 rounded-lg px-4 py-2 text-white flex-1 focus:ring-2 focus:ring-green-400 focus:border-green-400 transition-all shadow"
+                        className="bg-transparent border-none rounded px-2 py-1 text-gray-800 flex-1 focus:ring-2 focus:ring-gray-400 transition-all"
                         required
                     />
                 </div>
                 <button
                     type="submit"
-                    className="bg-green-600 hover:bg-green-700 text-white font-bold py-2 rounded-lg mt-2 disabled:opacity-60 flex items-center justify-center gap-2 text-lg shadow transition-all focus:outline-none focus:ring-2 focus:ring-green-400 min-h-[44px] min-w-[44px] px-5"
+                    className="bg-gray-900 hover:bg-gray-800 text-white font-medium py-2 rounded mt-2 disabled:opacity-60 flex items-center justify-center gap-2 text-base transition-colors focus:outline-none focus:ring-2 focus:ring-gray-400 min-h-[40px] min-w-[40px] px-4"
                     disabled={loading}
                 >
                     {loading ? (locale === 'en' ? 'Sending link…' : 'Sende Link…') : <><FaEnvelope />{locale === 'en' ? 'Send password reset link' : 'Passwort-Reset Link senden'}</>}
                 </button>
-                {resetError && <div className="text-red-400 text-sm text-center">{resetError}</div>}
-                {resetSent && <div className="text-green-400 text-sm text-center">{locale === 'en' ? 'Password reset e-mail sent!' : 'E-Mail zum Zurücksetzen gesendet!'}</div>}
-                <div className="text-sm text-gray-400 mt-2 text-center">
-                    <button type="button" className="underline text-green-400 hover:text-green-300 font-semibold" onClick={() => setShowReset(false)}>
+                {resetError && <div className="text-red-500 text-xs text-center">{resetError}</div>}
+                {resetSent && <div className="text-green-600 text-xs text-center">{locale === 'en' ? 'Password reset e-mail sent!' : 'E-Mail zum Zurücksetzen gesendet!'}</div>}
+                <div className="text-xs text-gray-400 mt-2 text-center">
+                    <button type="button" className="underline text-gray-700 hover:text-black font-medium" onClick={() => setShowReset(false)}>
                         <FaSignInAlt className="inline mr-1" />{locale === 'en' ? 'Back to login' : 'Zurück zum Login'}
                     </button>
                 </div>
@@ -89,38 +89,38 @@ export default function LoginForm({ onSwitchToRegister }: { onSwitchToRegister?:
     }
 
     return (
-        <form onSubmit={handleLogin} className="bg-gray-950 p-6 sm:p-8 rounded-2xl shadow-2xl flex flex-col gap-5 max-w-md w-full mx-auto mt-16 border border-gray-800">
-            <h2 className="text-2xl font-extrabold mb-2 text-green-400 flex items-center gap-2"><FaSignInAlt className="inline" />{t.login}</h2>
-            <div className="flex items-center gap-2 bg-gray-900 rounded-lg px-3 py-2 border border-gray-700 w-full">
-                <FaEnvelope className="text-green-500" />
+        <form onSubmit={handleLogin} className="bg-white/95 p-5 sm:p-6 rounded-xl shadow flex flex-col gap-4 max-w-md w-full mx-auto mt-16 border border-gray-200">
+            <h2 className="text-xl font-semibold mb-2 text-gray-800 flex items-center gap-2"><FaSignInAlt className="inline" />{t.login}</h2>
+            <div className="flex items-center gap-2 bg-gray-100 rounded px-2 py-1 border border-gray-200 w-full">
+                <FaEnvelope className="text-gray-400" />
                 <input
                     ref={emailRef}
                     type="email"
                     value={email}
                     onChange={e => setEmail(e.target.value)}
                     placeholder={locale === 'en' ? 'E-mail' : 'E-Mail'}
-                    className="bg-gray-800 border border-green-600 rounded-lg px-4 py-3 text-white flex-1 focus-visible:ring-2 focus-visible:ring-green-400 focus-visible:border-green-400 transition-all shadow min-h-[48px] w-full"
+                    className="bg-transparent border-none rounded px-2 py-2 text-gray-800 flex-1 focus:ring-2 focus:ring-gray-400 transition-all min-h-[40px] w-full"
                     required
                     autoFocus
                     disabled={loading}
                 />
             </div>
-            <div className="flex items-center gap-2 bg-gray-900 rounded-lg px-3 py-2 border border-gray-700 w-full">
-                <FaLock className="text-green-500" />
+            <div className="flex items-center gap-2 bg-gray-100 rounded px-2 py-1 border border-gray-200 w-full">
+                <FaLock className="text-gray-400" />
                 <input
                     ref={passwordRef}
                     type="password"
                     value={password}
                     onChange={e => setPassword(e.target.value)}
                     placeholder={locale === 'en' ? 'Password' : 'Passwort'}
-                    className="bg-gray-800 border border-green-600 rounded-lg px-4 py-3 text-white flex-1 focus-visible:ring-2 focus-visible:ring-green-400 focus-visible:border-green-400 transition-all shadow min-h-[48px] w-full"
+                    className="bg-transparent border-none rounded px-2 py-2 text-gray-800 flex-1 focus:ring-2 focus:ring-gray-400 transition-all min-h-[40px] w-full"
                     required
                     disabled={loading}
                 />
             </div>
             <button
                 type="submit"
-                className={`bg-green-600 hover:bg-green-700 text-white font-bold py-2 rounded-lg mt-2 disabled:opacity-60 flex items-center justify-center gap-2 text-lg shadow transition-all focus:outline-none focus:ring-2 focus:ring-green-400 min-h-[44px] min-w-[44px] px-5 ${loading ? 'animate-pulse' : ''}`}
+                className={`bg-gray-900 hover:bg-gray-800 text-white font-medium py-2 rounded mt-2 disabled:opacity-60 flex items-center justify-center gap-2 text-base transition-colors focus:outline-none focus:ring-2 focus:ring-gray-400 min-h-[40px] min-w-[40px] px-4 ${loading ? 'animate-pulse' : ''}`}
                 disabled={loading}
             >
                 {loading && <span className="loader border-t-2 border-white border-solid rounded-full w-4 h-4 animate-spin"></span>}
@@ -128,17 +128,17 @@ export default function LoginForm({ onSwitchToRegister }: { onSwitchToRegister?:
             </button>
             <button
                 type="button"
-                className="text-xs underline text-green-400 hover:text-green-300 mt-1 self-end font-semibold"
+                className="text-xs underline text-gray-700 hover:text-black mt-1 self-end font-medium"
                 onClick={() => setShowReset(true)}
                 disabled={loading}
             >
                 {locale === 'en' ? 'Forgot password?' : 'Passwort vergessen?'}
             </button>
-            {error && <div className="text-red-400 text-sm text-center" role="alert" aria-live="assertive">{error}</div>}
-            {success && <div className="text-green-400 text-sm text-center" role="status" aria-live="polite">{locale === 'en' ? 'Login successful!' : 'Login erfolgreich!'}</div>}
-            <div className="text-sm text-gray-400 mt-2 text-center">
+            {error && <div className="text-red-500 text-xs text-center" role="alert" aria-live="assertive">{error}</div>}
+            {success && <div className="text-green-600 text-xs text-center" role="status" aria-live="polite">{locale === 'en' ? 'Login successful!' : 'Login erfolgreich!'}</div>}
+            <div className="text-xs text-gray-400 mt-2 text-center">
                 {locale === 'en' ? "Don't have an account?" : 'Noch kein Account?'}{' '}
-                <button type="button" className="underline text-green-400 hover:text-green-300 font-semibold" onClick={onSwitchToRegister} disabled={loading}>
+                <button type="button" className="underline text-gray-700 hover:text-black font-medium" onClick={onSwitchToRegister} disabled={loading}>
                     {locale === 'en' ? 'Register now' : 'Jetzt registrieren'}
                 </button>
             </div>

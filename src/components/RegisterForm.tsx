@@ -57,38 +57,38 @@ export default function RegisterForm({ onSwitchToLogin }: { onSwitchToLogin?: ()
     };
 
     return (
-        <form onSubmit={handleRegister} className="bg-gray-950 p-6 sm:p-8 rounded-2xl shadow-2xl flex flex-col gap-5 max-w-md w-full mx-auto mt-16 border border-gray-800">
-            <h2 className="text-2xl font-extrabold mb-2 text-green-400 flex items-center gap-2"><FaUserPlus className="inline" />{t.register}</h2>
-            <div className="flex items-center gap-2 bg-gray-900 rounded-lg px-3 py-2 border border-gray-700 w-full">
-                <FaEnvelope className="text-green-500" />
+        <form onSubmit={handleRegister} className="bg-white/95 p-5 sm:p-6 rounded-xl shadow flex flex-col gap-4 max-w-md w-full mx-auto mt-16 border border-gray-200">
+            <h2 className="text-xl font-semibold mb-2 text-gray-800 flex items-center gap-2"><FaUserPlus className="inline" />{t.register}</h2>
+            <div className="flex items-center gap-2 bg-gray-100 rounded px-2 py-1 border border-gray-200 w-full">
+                <FaEnvelope className="text-gray-400" />
                 <input
                     ref={emailRef}
                     type="email"
                     value={email}
                     onChange={e => setEmail(e.target.value)}
                     placeholder={locale === 'en' ? 'E-mail' : 'E-Mail'}
-                    className="bg-gray-800 border border-green-600 rounded-lg px-4 py-3 text-white flex-1 focus-visible:ring-2 focus-visible:ring-green-400 focus-visible:border-green-400 transition-all shadow min-h-[48px] w-full"
+                    className="bg-transparent border-none rounded px-2 py-2 text-gray-800 flex-1 focus:ring-2 focus:ring-gray-400 transition-all min-h-[40px] w-full"
                     required
                     autoFocus
                     disabled={loading}
                 />
             </div>
-            <div className="flex items-center gap-2 bg-gray-900 rounded-lg px-3 py-2 border border-gray-700 relative w-full">
-                <FaLock className="text-green-500" />
+            <div className="flex items-center gap-2 bg-gray-100 rounded px-2 py-1 border border-gray-200 relative w-full">
+                <FaLock className="text-gray-400" />
                 <input
                     ref={passwordRef}
                     type={showPassword ? 'text' : 'password'}
                     value={password}
                     onChange={e => setPassword(e.target.value)}
                     placeholder={locale === 'en' ? 'Password' : 'Passwort'}
-                    className="bg-gray-800 border border-green-600 rounded-lg px-4 py-3 text-white flex-1 focus-visible:ring-2 focus-visible:ring-green-400 focus-visible:border-green-400 transition-all shadow pr-10 min-h-[48px] w-full"
+                    className="bg-transparent border-none rounded px-2 py-2 text-gray-800 flex-1 focus:ring-2 focus:ring-gray-400 transition-all pr-10 min-h-[40px] w-full"
                     required
                     disabled={loading}
                 />
                 <button
                     type="button"
                     tabIndex={-1}
-                    className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-green-400 focus:outline-none"
+                    className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-black focus:outline-none"
                     onClick={() => setShowPassword(v => !v)}
                     aria-label={showPassword ? (locale === 'en' ? 'Hide password' : 'Passwort verbergen') : (locale === 'en' ? 'Show password' : 'Passwort anzeigen')}
                 >
@@ -101,28 +101,28 @@ export default function RegisterForm({ onSwitchToLogin }: { onSwitchToLogin?: ()
             </div>
             <button
                 type="submit"
-                className="bg-green-600 hover:bg-green-700 text-white font-bold py-2 rounded-lg mt-2 disabled:opacity-60 flex items-center justify-center gap-2 text-lg shadow transition-all focus:outline-none focus:ring-2 focus:ring-green-400 min-h-[44px] min-w-[44px] px-5"
+                className="bg-gray-900 hover:bg-gray-800 text-white font-medium py-2 rounded mt-2 disabled:opacity-60 flex items-center justify-center gap-2 text-base transition-colors focus:outline-none focus:ring-2 focus:ring-gray-400 min-h-[40px] min-w-[40px] px-4"
                 disabled={loading}
             >
                 {loading && <span className="loader border-t-2 border-white border-solid rounded-full w-4 h-4 animate-spin"></span>}
                 <FaUserPlus /> {loading ? (locale === 'en' ? 'Registering…' : 'Registrieren…') : t.register}
             </button>
-            {error && <div className="text-red-400 text-sm text-center" role="alert" aria-live="assertive">{error}</div>}
+            {error && <div className="text-red-500 text-xs text-center" role="alert" aria-live="assertive">{error}</div>}
             {success && (
-                <div className="text-green-400 text-base text-center font-semibold p-4 bg-green-900/40 rounded-xl border border-green-700 mt-2 animate-pulse" role="status" aria-live="polite">
+                <div className="text-green-600 text-base text-center font-semibold p-4 bg-green-100/60 rounded-xl border border-green-200 mt-2 animate-pulse" role="status" aria-live="polite">
                     <FaEnvelope className="inline mr-1" />
                     {locale === 'en'
                         ? 'We just sent you an e-mail. Please confirm your address and then log in.'
                         : 'Wir haben dir soeben eine E-Mail geschickt. Bitte bestätige deine Adresse und logge dich anschließend ein.'}
                     <br />
-                    <span className="text-green-300 block mt-1">{locale === 'en' ? 'Check your spam folder if you do not see the mail.' : 'Schau auch im Spam-Ordner nach, falls du keine Mail findest.'}</span>
-                    <span className="text-green-200 block mt-1">{locale === 'en' ? 'You will be redirected to login…' : 'Du wirst gleich zum Login weitergeleitet…'}</span>
+                    <span className="text-green-700 block mt-1">{locale === 'en' ? 'Check your spam folder if you do not see the mail.' : 'Schau auch im Spam-Ordner nach, falls du keine Mail findest.'}</span>
+                    <span className="text-green-800 block mt-1">{locale === 'en' ? 'You will be redirected to login…' : 'Du wirst gleich zum Login weitergeleitet…'}</span>
                 </div>
             )}
             {!success && (
-                <div className="text-sm text-gray-400 mt-2 text-center">
+                <div className="text-xs text-gray-400 mt-2 text-center">
                     {locale === 'en' ? 'Already registered?' : 'Bereits registriert?'}{' '}
-                    <button type="button" className="underline text-green-400 hover:text-green-300 font-semibold" onClick={onSwitchToLogin} disabled={loading}>
+                    <button type="button" className="underline text-gray-700 hover:text-black font-medium" onClick={onSwitchToLogin} disabled={loading}>
                         <FaSignInAlt className="inline mr-1" />{locale === 'en' ? 'To login' : 'Zum Login'}
                     </button>
                 </div>

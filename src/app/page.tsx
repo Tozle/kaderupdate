@@ -38,11 +38,9 @@ export default function Home() {
   const [user, setUser] = useState<User | null>(null);
   const [showLogin, setShowLogin] = useState(false);
   const [showRegister, setShowRegister] = useState(false);
-  // Favoriten-Logik entfernt
-  // Onboarding/Anleitung entfernt
   const locale = useLocale();
   const t = translations[locale] || translations['de'];
-  // Onboarding/Anleitung entfernt
+  
 
   // Favoriten-Logik entfernt
   useEffect(() => {
@@ -126,7 +124,7 @@ export default function Home() {
         <meta name="twitter:image" content="/vercel.svg" />
       </Head>
       <main className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-gray-950 text-white">
-        {/* Onboarding/Anleitung entfernt */}
+        
         <TopbarFilter
           clubs={clubs}
           selectedClub={club}

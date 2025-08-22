@@ -42,51 +42,43 @@ const NewsCard: React.FC<NewsCardProps> = ({ title, summary, badge, club, source
     const secondary = club.color_secondary_hex || '#166534';
     return (
         <article
-            className="bg-gradient-to-br from-gray-950 via-gray-900 to-gray-950 rounded-3xl shadow-2xl p-8 sm:p-12 flex flex-col gap-5 transition-all hover:scale-[1.025] group focus-within:scale-[1.025] outline-none ring-0"
-            style={{
-                border: `2px solid ${primary}`,
-                boxShadow: `0 0 0 2px ${primary}33, 0 8px 32px 0 ${secondary}22`,
-            }}
+            className="bg-gray-950 rounded-xl shadow p-4 sm:p-6 flex flex-col gap-3 transition-all hover:scale-[1.01] group focus-within:scale-[1.01] outline-none ring-0 border border-gray-800"
             tabIndex={0}
             aria-label={`News: ${title}`}
         >
-            <div className="flex flex-col xs:flex-row xs:items-center gap-4 xs:gap-6 mb-2">
-                {/* Club-Logo mit Fallback und optimiertem Laden */}
+            <div className="flex flex-row items-center gap-3 mb-2">
                 {club.logo_url ? (
                     <Link href={`/club/${club.id}`} tabIndex={-1} aria-label={locale === 'en' ? `Go to ${club.name}` : `Zu ${club.name}`}>
                         <Image
                             src={club.logo_url}
                             alt={locale === 'en' ? `Logo of ${club.name}` : `Logo von ${club.name}`}
-                            width={56}
-                            height={56}
-                            className="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-gray-700 object-contain border-2 shadow-lg group-hover:border-green-400 group-focus-within:border-green-400 transition-all"
-                            style={{ objectFit: 'contain', borderColor: secondary }}
+                            width={40}
+                            height={40}
+                            className="w-10 h-10 rounded-full bg-gray-700 object-contain border border-gray-700"
+                            style={{ objectFit: 'contain' }}
                             loading="lazy"
                             decoding="async"
                             fetchPriority="high"
                         />
                     </Link>
                 ) : (
-                    <span className="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-gray-700 flex items-center justify-center text-3xl sm:text-4xl border-2 shadow-lg" style={{ color: primary, borderColor: secondary }} aria-label={locale === 'en' ? 'No logo' : 'Kein Logo'}><FaFutbol /></span>
+                    <span className="w-10 h-10 rounded-full bg-gray-700 flex items-center justify-center text-2xl border border-gray-700" aria-label={locale === 'en' ? 'No logo' : 'Kein Logo'}><FaFutbol /></span>
                 )}
-                <Link href={`/club/${club.id}`} className="font-extrabold text-2xl sm:text-3xl tracking-wide drop-shadow ml-0 xs:ml-2 font-sans flex-1 truncate hover:underline focus:underline" style={{ color: primary }} aria-label={locale === 'en' ? `Go to ${club.name}` : `Zu ${club.name}`}>{club.name}</Link>
-                <span className="xs:ml-auto mt-1 xs:mt-0 flex items-center gap-3">
-                    <Badge type={badge} style={{ background: primary, color: '#fff', borderColor: secondary }} />
-                </span>
+                <Link href={`/club/${club.id}`} className="font-bold text-lg flex-1 truncate hover:underline focus:underline text-green-300" aria-label={locale === 'en' ? `Go to ${club.name}` : `Zu ${club.name}`}>{club.name}</Link>
+                <Badge type={badge} style={{ background: '#22c55e', color: '#fff', borderColor: '#166534' }} />
             </div>
-            <h2 className="text-2xl sm:text-3xl font-extrabold leading-tight drop-shadow mb-1 font-sans group-hover:opacity-80 group-focus-within:opacity-80 transition-colors" style={{ color: primary }}>
+            <h2 className="text-lg font-bold leading-tight mb-1 text-green-200 group-hover:opacity-80 group-focus-within:opacity-80 transition-colors">
                 {title}
             </h2>
-            <p className="text-gray-200 text-base sm:text-lg mb-3 font-medium leading-relaxed max-w-3xl">
+            <p className="text-gray-300 text-sm mb-2 font-normal leading-relaxed max-w-2xl">
                 {summary}
             </p>
-            {/* Social Embed */}
             {typeof social_embed === 'string' && social_embed.length > 0 && (
-                <div className="rounded-lg overflow-hidden border" style={{ borderColor: secondary, background: '#18181b' }}>
+                <div className="rounded-lg overflow-hidden border border-gray-800 bg-gray-900">
                     <XEmbed url={social_embed} />
                 </div>
             )}
-            <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-3 text-xs text-gray-400 mt-3">
+            <div className="flex flex-row flex-wrap items-center gap-2 text-xs text-gray-400 mt-2">
                 <span>
                     <span className="font-semibold text-green-500">{locale === 'en' ? 'Sources:' : 'Quellen:'}</span> {sources.map((s, i) => (
                         <React.Fragment key={s.id}>
