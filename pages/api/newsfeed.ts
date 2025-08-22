@@ -32,8 +32,16 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     return;
   }
   if (distinct === 'club') {
-    // Extrahiere nur Clubs
-    const clubs = (data || []).map((n: any) => n.club).filter(Boolean);
+    // Extrahiere nur Clubs (club kann auch ein Array sein)
+    type Club = { id: string; name: string; logo_url?: string };
+    const clubs: Club[] = [];
+    (data || []).forEach((n: any) => {
+      if (Array.isArray(n.club)) {
+        n.club.forEach((c: any) => c && clubs.push(c));
+      } else if (n.club) {
+        clubs.push(n.club);
+      }
+    });
     res.status(200).json(clubs);
     return;
   }
