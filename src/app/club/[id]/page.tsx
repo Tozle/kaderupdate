@@ -1,7 +1,6 @@
 import { supabase } from '@/lib/supabaseClient';
 import { notFound } from 'next/navigation';
 import ClubDetailClient from './ClubDetailClient';
-type PageProps = { params: { id: string } };
 // Dummy-Funktion, damit Next.js die Typen generiert
 export async function generateStaticParams() {
     // Dummy-Parameter, damit Next.js die Typen generiert
