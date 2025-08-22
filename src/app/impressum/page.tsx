@@ -31,10 +31,12 @@ export default function ImpressumPage() {
                 <title>{i18n.title[locale] || i18n.title.de} | KaderUpdate</title>
                 <meta name="description" content={i18n.metaDesc[locale] || i18n.metaDesc.de} />
             </Head>
-            <main className="max-w-2xl mx-auto p-6 text-gray-200">
-                <h1 className="text-2xl font-bold mb-4">{i18n.title[locale] || i18n.title.de}</h1>
-                <p dangerouslySetInnerHTML={{ __html: i18n.content[locale] || i18n.content.de }} />
-                <p className="mt-6 text-xs text-gray-500">{i18n.demo[locale] || i18n.demo.de}</p>
+            <main className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-gray-950 via-gray-900 to-gray-950 py-12 px-4">
+                <div className="bg-gray-900/90 rounded-3xl shadow-2xl p-8 max-w-xl w-full border-4 border-green-700 flex flex-col items-center">
+                    <h1 className="text-3xl font-extrabold mb-4 text-green-400 text-center drop-shadow">{i18n.title[locale] || i18n.title.de}</h1>
+                    <div className="text-base text-gray-200 text-center mb-4" dangerouslySetInnerHTML={{ __html: i18n.content[locale] || i18n.content.de }} />
+                    <p className="mt-6 text-xs text-gray-500 text-center">{i18n.demo[locale] || i18n.demo.de}</p>
+                </div>
                 <LegalFooter />
             </main>
         </>

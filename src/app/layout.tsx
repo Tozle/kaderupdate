@@ -17,11 +17,11 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "KaderUpdate – Fußball News, Gerüchte & Updates | .com & .de",
-  description: "KaderUpdate liefert dir aktuelle Fußball-News, Gerüchte, Transfers und Aufstellungen. Schnell, modern, sportlich – für alle Fans der Bundesliga und internationalen Ligen.",
+  title: "KaderUpdate – Fußball Kader, Vereine & Statistiken",
+  description: "KaderUpdate liefert dir aktuelle Kader, Vereine und Statistiken der Bundesliga und internationalen Ligen.",
   openGraph: {
-    title: "KaderUpdate – Fußball News, Gerüchte & Updates | .com & .de",
-    description: "KaderUpdate liefert dir aktuelle Fußball-News, Gerüchte, Transfers und Aufstellungen. Schnell, modern, sportlich – für alle Fans der Bundesliga und internationalen Ligen.",
+    title: "KaderUpdate – Fußball Kader, Vereine & Statistiken",
+    description: "KaderUpdate liefert dir aktuelle Kader, Vereine und Statistiken der Bundesliga und internationalen Ligen.",
     url: "https://kaderupdate.com",
     siteName: "KaderUpdate",
     images: [
@@ -29,7 +29,7 @@ export const metadata: Metadata = {
         url: "/kaderupdate-og.png",
         width: 1200,
         height: 630,
-        alt: "KaderUpdate – Fußball News, Gerüchte & Updates"
+        alt: "KaderUpdate – Fußball Kader, Vereine & Statistiken"
       }
     ],
     locale: "de_DE",
@@ -37,8 +37,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "KaderUpdate – Fußball News, Gerüchte & Updates | .com & .de",
-    description: "KaderUpdate liefert dir aktuelle Fußball-News, Gerüchte, Transfers und Aufstellungen. Schnell, modern, sportlich – für alle Fans der Bundesliga und internationalen Ligen.",
+    title: "KaderUpdate – Fußball Kader, Vereine & Statistiken",
+    description: "KaderUpdate liefert dir aktuelle Kader, Vereine und Statistiken der Bundesliga und internationalen Ligen.",
     images: ["/kaderupdate-og.png"]
   }
 };
