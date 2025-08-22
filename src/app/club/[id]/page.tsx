@@ -7,6 +7,7 @@ export async function generateStaticParams() {
     return [{ id: 'dummy' }];
 }
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export default async function ClubDetailPage(props: any) {
     const { params } = props;
     const { data: club, error } = await supabase
