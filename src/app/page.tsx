@@ -72,7 +72,7 @@ export default function Home() {
         <meta name="twitter:description" content={locale === 'en' ? 'All football news, rumors and squad updates for the Bundesliga.' : 'Alle Fußball-News, Gerüchte und Kader-Updates zur Bundesliga.'} />
         <meta name="twitter:image" content="/vercel.svg" />
       </Head>
-      <main className="main-content">
+  <main className="main-content max-w-3xl mx-auto px-2 sm:px-6 py-8 sm:py-12 rounded-3xl bg-gradient-to-br from-gray-950/80 via-gray-900/90 to-gray-950/80 shadow-2xl border border-green-600/10 mt-6">
 
         <TopbarFilter
           user={user}
