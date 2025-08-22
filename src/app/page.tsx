@@ -8,7 +8,6 @@ import RegisterForm from '@/components/RegisterForm';
 
 import { TopbarFilter } from '@/components/TopbarFilter';
 import NewsCard from '@/components/NewsCard';
-// import type { BadgeType } from '@/components/Badge';
 
 type Club = { id: string; name: string; logo_url?: string };
 type Source = { id: string; name: string; type: string; url?: string; trust_level?: number };
@@ -27,17 +26,14 @@ export default function Home() {
   const [news, setNews] = useState<News[]>([]);
   const [clubs, setClubs] = useState<Club[]>([]);
   const [club, setClub] = useState('');
-  // const [badge, setBadge] = useState<BadgeType>('');
   const [q, setQ] = useState('');
   const [debouncedQ, setDebouncedQ] = useState('');
   const debounceTimeout = useRef<NodeJS.Timeout | null>(null);
-  // const [showSearch, setShowSearch] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [user, setUser] = useState<User | null>(null);
   const [showLogin, setShowLogin] = useState(false);
   const [showRegister, setShowRegister] = useState(false);
-  // Check Auth-Status beim Mount
   useEffect(() => {
     supabase.auth.getUser().then(({ data }) => setUser(data.user));
     const { data: listener } = supabase.auth.onAuthStateChange((_event, session) => {
@@ -46,7 +42,6 @@ export default function Home() {
     return () => { listener.subscription.unsubscribe(); };
   }, []);
 
-  // Clubs werden nur einmal geladen und gecached
   useEffect(() => {
     let isMounted = true;
     const cached = sessionStorage.getItem('clubs');
@@ -70,7 +65,6 @@ export default function Home() {
     return () => { isMounted = false; };
   }, []);
 
-  // Debounce die Suche
   useEffect(() => {
     if (debounceTimeout.current) clearTimeout(debounceTimeout.current);
     debounceTimeout.current = setTimeout(() => {
@@ -84,7 +78,6 @@ export default function Home() {
   useEffect(() => {
     const params = new URLSearchParams();
     if (club) params.append('club', club);
-    // if (badge) params.append('badge', badge);
     if (debouncedQ) params.append('q', debouncedQ);
     setLoading(true);
     setError(null);

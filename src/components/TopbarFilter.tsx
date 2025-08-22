@@ -6,7 +6,6 @@ interface Club {
     name: string;
 }
 
-// BadgeType entfernt, da Badge-Filter entfernt wurde
 import type { User } from '@supabase/supabase-js';
 interface TopbarFilterProps {
     clubs: Club[];
