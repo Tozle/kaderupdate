@@ -11,6 +11,8 @@ import Head from 'next/head';
 
 import { TopbarFilter } from '@/components/TopbarFilter';
 import NewsCard from '@/components/NewsCard';
+import dynamic from 'next/dynamic';
+const OnboardingTour = dynamic(() => import('@/components/OnboardingTour'), { ssr: false });
 
 type Club = { id: string; name: string; logo_url?: string; color_primary_hex?: string; color_secondary_hex?: string };
 type Source = { id: string; name: string; type: string; url?: string; trust_level?: number };
@@ -39,8 +41,20 @@ export default function Home() {
   const [showRegister, setShowRegister] = useState(false);
   const [showOnlyFavs, setShowOnlyFavs] = useState(false);
   const [favIds, setFavIds] = useState<string[]>([]);
+  const [showTour, setShowTour] = useState(false);
   const locale = useLocale();
   const t = translations[locale] || translations['de'];
+  // Onboarding-Tour nur beim ersten Besuch anzeigen
+  useEffect(() => {
+    if (!localStorage.getItem('onboarding-tour-seen')) {
+      setShowTour(true);
+    }
+  }, []);
+
+  const handleCloseTour = () => {
+    localStorage.setItem('onboarding-tour-seen', '1');
+    setShowTour(false);
+  };
 
   // Favoriten aus LocalStorage laden
   useEffect(() => {
@@ -128,6 +142,7 @@ export default function Home() {
         <meta name="twitter:image" content="/vercel.svg" />
       </Head>
       <main className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-gray-950 text-white">
+        {showTour && <OnboardingTour onClose={handleCloseTour} />}
         <TopbarFilter
           clubs={clubs}
           selectedClub={club}
