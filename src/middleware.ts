@@ -1,6 +1,5 @@
 // Next.js custom middleware for security headers (CSP, Referrer, X-Frame, etc.)
 import { NextResponse } from 'next/server';
-import type { NextRequest } from 'next/server';
 
 export function middleware() {
     const response = NextResponse.next();
