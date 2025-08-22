@@ -3,6 +3,8 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import '../sentry.client';
 import PlausibleAnalytics from '../components/PlausibleAnalytics';
+import LegalFooter from '../components/LegalFooter';
+import CookieNotice from '../components/CookieNotice';
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -52,7 +54,9 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <PlausibleAnalytics />
-        {children}
+  {children}
+  <LegalFooter />
+  <CookieNotice />
       </body>
     </html>
   );
