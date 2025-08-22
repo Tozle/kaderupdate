@@ -89,7 +89,7 @@ export default function LoginForm({ onSwitchToRegister }: { onSwitchToRegister?:
     }
 
     return (
-    <form onSubmit={handleLogin} className="bg-gray-950 p-6 sm:p-8 rounded-2xl shadow-2xl flex flex-col gap-5 max-w-md w-full mx-auto mt-16 border border-gray-800">
+        <form onSubmit={handleLogin} className="bg-gray-950 p-6 sm:p-8 rounded-2xl shadow-2xl flex flex-col gap-5 max-w-md w-full mx-auto mt-16 border border-gray-800">
             <h2 className="text-2xl font-extrabold mb-2 text-green-400 flex items-center gap-2"><FaSignInAlt className="inline" />{t.login}</h2>
             <div className="flex items-center gap-2 bg-gray-900 rounded-lg px-3 py-2 border border-gray-700 w-full">
                 <FaEnvelope className="text-green-500" />
