@@ -73,6 +73,7 @@ export const TopbarFilter: React.FC<TopbarFilterProps> = ({
                             onClick={onLoginClick}
                             className="bg-green-600 hover:bg-green-700 text-white px-3 py-1 rounded-lg shadow transition font-bold border border-green-700 hover:border-green-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-green-500 min-h-[36px] min-w-[36px] text-xs"
                             title="Login"
+                            style={{ color: '#fff' }}
                         >
                             Login
                         </button>
