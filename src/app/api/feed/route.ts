@@ -1,4 +1,6 @@
 
+export const dynamic = 'force-dynamic';
+
 import { supabaseAdmin } from '@/lib/supabaseClient';
 import type { NextRequest } from 'next/server';
 
