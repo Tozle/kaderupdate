@@ -28,11 +28,12 @@ export const TopbarFilter: React.FC<TopbarFilterProps> = ({
     onLoginClick,
     onLogoutClick,
 }) => (
-    <header className="sticky top-0 z-40 w-full bg-gradient-to-r from-gray-950 via-gray-900 to-gray-950 shadow-lg border-b border-gray-800" role="banner">
+    <header className="sticky top-0 z-40 w-full bg-gradient-to-r from-green-900 via-gray-900 to-green-950 shadow-lg border-b border-green-800" role="banner">
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between px-2 sm:px-4 py-3 max-w-7xl mx-auto gap-2 sm:gap-0">
             <div className="flex items-center gap-3 justify-center sm:justify-start">
-                <FaFutbol className="text-green-500 text-2xl drop-shadow" />
-                <span className="font-extrabold text-2xl tracking-tight text-white font-sans select-none" style={{ letterSpacing: '0.04em' }}>LigaInsider</span>
+                <FaFutbol className="text-green-400 text-2xl drop-shadow animate-bounce-slow" />
+                <span className="font-extrabold text-2xl tracking-tight text-green-200 font-sans select-none" style={{ letterSpacing: '0.04em', fontFamily: 'Montserrat, Arial, sans-serif' }}>KaderUpdate</span>
+                <span className="ml-2 text-xs text-green-500 font-bold uppercase tracking-widest hidden sm:inline">.com & .de</span>
             </div>
             <div className="flex flex-col sm:flex-row gap-2 sm:gap-4 items-center w-full sm:w-auto">
                 <label htmlFor="club-select" className="sr-only">Verein auswählen</label>
