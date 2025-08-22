@@ -6,6 +6,7 @@ interface Club {
 }
 
 type BadgeType = 'Bestätigt' | 'Gut belegt' | 'Gerücht' | '';
+import type { User } from '@supabase/supabase-js';
 interface TopbarFilterProps {
     clubs: Club[];
     selectedClub: string;
@@ -16,7 +17,7 @@ interface TopbarFilterProps {
     onShowSearch: () => void;
     searchValue: string;
     onSearchChange: (q: string) => void;
-    user?: any;
+    user?: User | null;
     onLoginClick?: () => void;
     onLogoutClick?: () => void;
 }

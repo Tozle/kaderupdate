@@ -2,6 +2,7 @@
 
 import { useEffect, useState, useRef } from 'react';
 import { supabase } from '@/lib/supabaseClient';
+import type { User } from '@supabase/supabase-js';
 import LoginForm from '@/components/LoginForm';
 import RegisterForm from '@/components/RegisterForm';
 
@@ -33,7 +34,7 @@ export default function Home() {
   const [showSearch, setShowSearch] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [user, setUser] = useState<any>(null);
+  const [user, setUser] = useState<User | null>(null);
   const [showLogin, setShowLogin] = useState(false);
   const [showRegister, setShowRegister] = useState(false);
   // Check Auth-Status beim Mount
@@ -143,7 +144,6 @@ export default function Home() {
             summary={n.summary}
             badge={n.badge as any}
             club={n.club}
-            timestamp={n.timestamp}
             sources={n.sources}
             social_embed={n.social_embed}
           />

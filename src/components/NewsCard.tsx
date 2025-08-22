@@ -1,5 +1,6 @@
 
 import React from 'react';
+import Image from 'next/image';
 import { Badge, BadgeType } from './Badge';
 import { XEmbed } from './XEmbed';
 
@@ -23,22 +24,29 @@ interface NewsCardProps {
     summary: string;
     badge: BadgeType;
     club: Club;
-    timestamp: string;
     sources: Source[];
     social_embed?: string;
 }
 
 
-const NewsCard: React.FC<NewsCardProps> = ({ title, summary, badge, club, timestamp, sources, social_embed }) => {
+const NewsCard: React.FC<NewsCardProps> = ({ title, summary, badge, club, sources, social_embed }) => {
     return (
         <article className="bg-gradient-to-br from-gray-800 via-gray-900 to-gray-950 rounded-2xl shadow-xl p-6 flex flex-col gap-4 border border-gray-800 hover:border-blue-500 transition-all hover:scale-[1.02]">
             <div className="flex items-center gap-3">
                 {/* Club-Logo mit Fallback und alt-Text */}
-                {club.logo_url ? (
-                    <img src={club.logo_url} alt={club.name + ' Logo'} className="w-7 h-7 rounded-full bg-gray-700 object-contain" />
-                ) : (
-                    <span className="w-7 h-7 rounded-full bg-gray-700 flex items-center justify-center text-xs text-gray-400" aria-label="Kein Logo">?</span>
-                )}
+                                {club.logo_url ? (
+                                    <Image
+                                        src={club.logo_url}
+                                        alt={club.name + ' Logo'}
+                                        width={28}
+                                        height={28}
+                                        className="w-7 h-7 rounded-full bg-gray-700 object-contain"
+                                        style={{ objectFit: 'contain' }}
+                                        unoptimized
+                                    />
+                                ) : (
+                                    <span className="w-7 h-7 rounded-full bg-gray-700 flex items-center justify-center text-xs text-gray-400" aria-label="Kein Logo">?</span>
+                                )}
                 <span className="font-bold text-lg tracking-wide drop-shadow ml-2">{club.name}</span>
                 <span className="ml-auto"><Badge type={badge} /></span>
             </div>
