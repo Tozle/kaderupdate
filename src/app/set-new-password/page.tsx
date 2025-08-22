@@ -6,6 +6,7 @@ import { supabase } from '@/lib/supabaseClient';
 export default function SetNewPasswordPage() {
     const router = useRouter();
     const searchParams = useSearchParams();
+    // useSearchParams() never returns null in Next.js App Router
     const accessToken = searchParams.get('access_token');
     const [password, setPassword] = useState('');
     const [loading, setLoading] = useState(false);
