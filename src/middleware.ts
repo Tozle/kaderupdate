@@ -9,7 +9,7 @@ export function middleware() {
             "default-src 'self';",
             "img-src 'self' data: https:;",
             "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://plausible.io;",
-            "script-src-elem 'self' https://plausible.io;",
+            "script-src-elem 'self' 'unsafe-inline' https://plausible.io;",
             "frame-src 'self' https://www.youtube.com/;",
             "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;",
             "font-src 'self' https://fonts.gstatic.com;",
