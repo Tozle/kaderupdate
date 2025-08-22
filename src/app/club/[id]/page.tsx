@@ -4,7 +4,9 @@ import { notFound } from 'next/navigation';
 import ClubDetailClient from './ClubDetailClient';
 
 
-export default async function ClubDetailPage({ params }: { params: { id: string } }) {
+type PageProps = { params: { id: string } };
+
+export default async function ClubDetailPage({ params }: PageProps) {
     const { data: club, error } = await supabase
         .from('clubs')
         .select('id, name, logo_url, color_primary_hex, color_secondary_hex')
