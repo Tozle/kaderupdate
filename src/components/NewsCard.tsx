@@ -12,6 +12,8 @@ interface Club {
     id: string;
     name: string;
     logo_url?: string;
+    color_primary_hex?: string;
+    color_secondary_hex?: string;
 }
 
 interface Source {
@@ -45,9 +47,16 @@ const NewsCard: React.FC<NewsCardProps> = ({ title, summary, badge, club, source
         setFav(newFav);
         localStorage.setItem(`fav-${club.id}`, newFav ? '1' : '0');
     };
+    // Farben aus Club holen (Fallbacks wie im Dropdown)
+    const primary = club.color_primary_hex || '#22c55e';
+    const secondary = club.color_secondary_hex || '#166534';
     return (
         <article
-            className="bg-gradient-to-br from-gray-950 via-gray-900 to-gray-950 rounded-3xl shadow-2xl p-8 sm:p-12 flex flex-col gap-5 border border-gray-800 hover:border-green-500 hover:shadow-green-500/30 focus-within:shadow-green-400/40 transition-all hover:scale-[1.025] group focus-within:scale-[1.025] focus-within:border-green-400 outline-none ring-0 focus-within:ring-2 focus-within:ring-green-400"
+            className="bg-gradient-to-br from-gray-950 via-gray-900 to-gray-950 rounded-3xl shadow-2xl p-8 sm:p-12 flex flex-col gap-5 transition-all hover:scale-[1.025] group focus-within:scale-[1.025] outline-none ring-0"
+            style={{
+                border: `2px solid ${primary}`,
+                boxShadow: `0 0 0 2px ${primary}33, 0 8px 32px 0 ${secondary}22`,
+            }}
             tabIndex={0}
             aria-label={`News: ${title}`}
         >
@@ -59,33 +68,33 @@ const NewsCard: React.FC<NewsCardProps> = ({ title, summary, badge, club, source
                         alt={locale === 'en' ? `Logo of ${club.name}` : `Logo von ${club.name}`}
                         width={56}
                         height={56}
-                        className="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-gray-700 object-contain border-2 border-green-600 shadow-lg group-hover:border-green-400 group-focus-within:border-green-400 transition-all"
-                        style={{ objectFit: 'contain' }}
+                        className="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-gray-700 object-contain border-2 shadow-lg group-hover:border-green-400 group-focus-within:border-green-400 transition-all"
+                        style={{ objectFit: 'contain', borderColor: secondary }}
                         loading="lazy"
                         priority={false}
                     />
                 ) : (
-                    <span className="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-gray-700 flex items-center justify-center text-3xl sm:text-4xl text-green-500 border-2 border-green-600 shadow-lg" aria-label={locale === 'en' ? 'No logo' : 'Kein Logo'}><FaFutbol /></span>
+                    <span className="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-gray-700 flex items-center justify-center text-3xl sm:text-4xl border-2 shadow-lg" style={{ color: primary, borderColor: secondary }} aria-label={locale === 'en' ? 'No logo' : 'Kein Logo'}><FaFutbol /></span>
                 )}
-                <span className="font-extrabold text-2xl sm:text-3xl tracking-wide drop-shadow ml-0 xs:ml-2 text-white font-sans flex-1 truncate">
+                <span className="font-extrabold text-2xl sm:text-3xl tracking-wide drop-shadow ml-0 xs:ml-2 font-sans flex-1 truncate" style={{ color: primary }}>
                     {club.name}
                 </span>
                 <span className="xs:ml-auto mt-1 xs:mt-0 flex items-center gap-3">
                     <button
                         aria-label={fav ? (locale === 'en' ? 'Remove from favorites' : 'Aus Favoriten entfernen') : (locale === 'en' ? 'Mark as favorite' : 'Als Favorit markieren')}
                         onClick={toggleFav}
-                        className={`transition-all text-3xl ${fav ? 'text-pink-500 scale-125' : 'text-gray-400 hover:text-pink-400'} focus:outline-none focus-visible:ring-2 focus-visible:ring-pink-400 rounded-full bg-gray-800/70 p-2 shadow-md`}
-                        style={{ filter: fav ? 'drop-shadow(0 0 8px #f472b6)' : undefined }}
+                        className={`transition-all text-3xl ${fav ? '' : 'hover:scale-110'} focus:outline-none focus-visible:ring-2 rounded-full bg-gray-800/70 p-2 shadow-md`}
+                        style={{ color: fav ? primary : secondary, border: `2px solid ${primary}`, filter: fav ? `drop-shadow(0 0 8px ${primary})` : undefined }}
                         tabIndex={0}
                     >
                         <svg viewBox="0 0 24 24" fill={fav ? 'currentColor' : 'none'} stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-7 h-7">
                             <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41 0.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
                         </svg>
                     </button>
-                    <Badge type={badge} />
+                    <Badge type={badge} style={{ background: primary, color: '#fff', borderColor: secondary }} />
                 </span>
             </div>
-            <h2 className="text-2xl sm:text-3xl font-extrabold leading-tight drop-shadow text-white mb-1 font-sans group-hover:text-green-400 group-focus-within:text-green-400 transition-colors">
+            <h2 className="text-2xl sm:text-3xl font-extrabold leading-tight drop-shadow mb-1 font-sans group-hover:opacity-80 group-focus-within:opacity-80 transition-colors" style={{ color: primary }}>
                 {title}
             </h2>
             <p className="text-gray-200 text-base sm:text-lg mb-3 font-medium leading-relaxed max-w-3xl">
@@ -93,7 +102,7 @@ const NewsCard: React.FC<NewsCardProps> = ({ title, summary, badge, club, source
             </p>
             {/* Social Embed */}
             {typeof social_embed === 'string' && social_embed.length > 0 && (
-                <div className="rounded-lg overflow-hidden border border-gray-700 bg-gray-950 my-2">
+                <div className="rounded-lg overflow-hidden border" style={{ borderColor: secondary, background: '#18181b' }}>
                     <XEmbed url={social_embed} />
                 </div>
             )}

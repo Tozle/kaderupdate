@@ -4,6 +4,7 @@ export type BadgeType = '' | 'Bestätigt' | 'Gut belegt' | 'Gerücht';
 
 interface BadgeProps {
     type: BadgeType;
+    style?: React.CSSProperties;
 }
 
 const badgeStyles: Record<BadgeType, string> = {
@@ -13,10 +14,11 @@ const badgeStyles: Record<BadgeType, string> = {
     'Gerücht': 'bg-red-700/90 text-red-100 border border-red-400',
 };
 
-export const Badge: React.FC<BadgeProps> = ({ type }) => (
+export const Badge: React.FC<BadgeProps> = ({ type, style }) => (
     <span
         className={`px-4 py-1.5 rounded-full text-sm font-bold shadow-md transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-green-400 hover:shadow-green-400/30 ${badgeStyles[type]}`}
         tabIndex={0}
+        style={style}
     >
         {type}
     </span>
