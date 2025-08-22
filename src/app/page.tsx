@@ -48,7 +48,7 @@ export default function Home() {
 
   useEffect(() => {
     // Clubs aus Supabase laden (optional: nur einmal beim Mount)
-  fetch('/api/newsfeed?distinct=club')
+    fetch('/api/newsfeed?distinct=club')
       .then(res => res.json())
       .then(data => {
         // Extrahiere Clubs aus News
@@ -80,7 +80,7 @@ export default function Home() {
     if (debouncedQ) params.append('q', debouncedQ);
     setLoading(true);
     setError(null);
-  fetch(`/api/newsfeed?${params.toString()}`)
+    fetch(`/api/newsfeed?${params.toString()}`)
       .then(async res => {
         if (!res.ok) {
           const err = await res.json().catch(() => ({}));
