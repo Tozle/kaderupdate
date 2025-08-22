@@ -99,8 +99,7 @@ export default function Home() {
                 clubs={clubs}
                 selectedClub={club}
                 onClubChange={setClub}
-                selectedBadge={badge}
-                onBadgeChange={setBadge}
+                // Badge-Filter entfernt
                 showSearch={showSearch}
                 onShowSearch={() => setShowSearch(v => !v)}
                 searchValue={q}
