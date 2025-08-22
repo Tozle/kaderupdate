@@ -32,7 +32,7 @@ interface NewsCardProps {
 
 const NewsCard: React.FC<NewsCardProps> = ({ title, summary, badge, club, sources, social_embed }) => {
     return (
-        <article className="bg-gradient-to-br from-gray-900 via-gray-950 to-gray-900 rounded-2xl shadow-2xl p-4 sm:p-6 flex flex-col gap-3 sm:gap-4 border border-gray-800 hover:border-green-500 hover:shadow-green-700/30 transition-all hover:scale-[1.025] group">
+        <article className="bg-gradient-to-br from-gray-900 via-gray-950 to-gray-900 rounded-2xl shadow-2xl p-4 sm:p-6 flex flex-col gap-3 sm:gap-4 border border-gray-800 hover:border-green-500 hover:shadow-green-700/30 transition-all hover:scale-[1.025] group" tabIndex={0} aria-label={`News: ${title}`}>
             <div className="flex flex-col xs:flex-row xs:items-center gap-2 xs:gap-4 mb-1">
                 {/* Club-Logo mit Fallback und alt-Text */}
                 {club.logo_url ? (
