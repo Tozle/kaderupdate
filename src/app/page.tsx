@@ -107,6 +107,17 @@ export default function Home() {
       <Head>
         <title>KaderUpdate | {t.allClubs}</title>
         <meta name="description" content={locale === 'en' ? 'All football news, rumors and squad updates for the Bundesliga.' : 'Alle Fußball-News, Gerüchte und Kader-Updates zur Bundesliga.'} />
+        {/* Open Graph Meta-Tags */}
+        <meta property="og:title" content="KaderUpdate | {t.allClubs}" />
+        <meta property="og:description" content={locale === 'en' ? 'All football news, rumors and squad updates for the Bundesliga.' : 'Alle Fußball-News, Gerüchte und Kader-Updates zur Bundesliga.'} />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://kaderupdate.de/" />
+        <meta property="og:image" content="/vercel.svg" />
+        {/* Twitter Card Meta-Tags */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="KaderUpdate | {t.allClubs}" />
+        <meta name="twitter:description" content={locale === 'en' ? 'All football news, rumors and squad updates for the Bundesliga.' : 'Alle Fußball-News, Gerüchte und Kader-Updates zur Bundesliga.'} />
+        <meta name="twitter:image" content="/vercel.svg" />
       </Head>
       <main className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-gray-950 text-white">
         <TopbarFilter
