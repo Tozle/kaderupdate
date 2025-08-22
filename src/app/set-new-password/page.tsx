@@ -1,12 +1,11 @@
 "use client";
 import { useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
-import type { ReadonlyURLSearchParams } from 'next/navigation';
 import { supabase } from '@/lib/supabaseClient';
 
 export default function SetNewPasswordPage() {
     const router = useRouter();
-    const searchParams: ReadonlyURLSearchParams = useSearchParams();
+    const searchParams = useSearchParams();
     const accessToken = searchParams.get('access_token');
     const [password, setPassword] = useState('');
     const [loading, setLoading] = useState(false);
