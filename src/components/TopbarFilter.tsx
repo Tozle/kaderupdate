@@ -39,6 +39,16 @@ export const TopbarFilter: React.FC<TopbarFilterProps> = ({
     const [open, setOpen] = React.useState(false);
     // Vereine alphabetisch sortieren
     const sortedClubs = [...clubs].sort((a, b) => a.name.localeCompare(b.name, locale === 'en' ? 'en' : 'de'));
+    // Tastatursteuerung für Dropdown
+    const dropdownRef = React.useRef<HTMLDivElement>(null);
+    React.useEffect(() => {
+        if (!open) return;
+        const handleKeyDown = (e: KeyboardEvent) => {
+            if (e.key === 'Escape') setOpen(false);
+        };
+        window.addEventListener('keydown', handleKeyDown);
+        return () => window.removeEventListener('keydown', handleKeyDown);
+    }, [open]);
 
     // Hilfsfunktion für Farbstile
     function getClubColors(club: Club) {
@@ -64,8 +74,11 @@ export const TopbarFilter: React.FC<TopbarFilterProps> = ({
                                 className="bg-gray-800 border border-green-600 rounded-2xl p-4 text-white focus-visible:ring-2 focus-visible:ring-green-400 focus-visible:border-green-400 transition-all text-lg min-w-[220px] shadow-xl hover:border-green-400 hover:bg-gray-900 w-full sm:w-auto font-bold pr-14 flex items-center gap-3"
                                 aria-haspopup="listbox"
                                 aria-expanded={open}
+                                aria-controls="club-dropdown-listbox"
                                 tabIndex={0}
                                 onClick={() => setOpen(v => !v)}
+                                onKeyDown={e => { if (e.key === 'ArrowDown' && !open) setOpen(true); }}
+                                aria-label={locale === 'en' ? 'Select club' : 'Verein auswählen'}
                             >
                                 {selectedClub && clubs.find(c => c.id === selectedClub)?.logo_url ? (
                                     <Image src={clubs.find(c => c.id === selectedClub)?.logo_url || ''} alt="Club Logo" width={38} height={38} className="w-10 h-10 rounded-full object-contain mr-3" loading="lazy" />
@@ -77,13 +90,16 @@ export const TopbarFilter: React.FC<TopbarFilterProps> = ({
                             </button>
                             {/* Dropdown-Overlay */}
                             {open && (
-                                <div className="absolute z-50 left-0 mt-2 w-full max-h-96 overflow-auto bg-gray-900 border border-green-700 rounded-2xl shadow-2xl animate-fadein p-3">
-                                    <ul className="flex flex-col gap-2" role="listbox">
+                                <div ref={dropdownRef} className="absolute z-50 left-0 mt-2 w-full max-h-96 overflow-auto bg-gray-900 border border-green-700 rounded-2xl shadow-2xl animate-fadein p-3" role="dialog" aria-modal="true" aria-label={locale === 'en' ? 'Club selection' : 'Vereinsauswahl'}>
+                                    <ul className="flex flex-col gap-2" role="listbox" id="club-dropdown-listbox" tabIndex={-1} aria-activedescendant={selectedClub ? `club-option-${selectedClub}` : 'club-option-all'}>
                                         <li
+                                            id="club-option-all"
                                             className={`px-5 py-3 cursor-pointer hover:bg-green-900/40 rounded-xl flex items-center gap-3 text-lg font-bold transition-all border border-transparent ${!selectedClub ? 'bg-green-800/30 border-green-500' : ''}`}
                                             onClick={() => { onClubChange(''); setOpen(false); }}
                                             role="option"
                                             aria-selected={!selectedClub}
+                                            tabIndex={0}
+                                            onKeyDown={e => { if (e.key === 'Enter' || e.key === ' ') { onClubChange(''); setOpen(false); } }}
                                         >
                                             <FaFutbol className="text-green-400 text-2xl" />
                                             <span>{t.allClubs}</span>
@@ -95,6 +111,7 @@ export const TopbarFilter: React.FC<TopbarFilterProps> = ({
                                             return (
                                                 <li
                                                     key={c.id}
+                                                    id={`club-option-${c.id}`}
                                                     className={`px-5 py-3 cursor-pointer rounded-xl flex items-center gap-3 text-lg font-semibold transition-all border-2 ${selectedClub === c.id ? '' : 'border-transparent'} ${selectedClub === c.id ? '' : 'hover:shadow-lg'} `}
                                                     style={{
                                                         borderColor: selectedClub === c.id ? primary : 'transparent',
@@ -104,6 +121,8 @@ export const TopbarFilter: React.FC<TopbarFilterProps> = ({
                                                     onClick={() => { onClubChange(c.id); setOpen(false); }}
                                                     role="option"
                                                     aria-selected={selectedClub === c.id}
+                                                    tabIndex={0}
+                                                    onKeyDown={e => { if (e.key === 'Enter' || e.key === ' ') { onClubChange(c.id); setOpen(false); } }}
                                                 >
                                                     {/* Farbbalken */}
                                                     <span style={{ background: primary, width: 6, height: 38, borderRadius: 4, marginRight: 8, display: 'inline-block' }}></span>
