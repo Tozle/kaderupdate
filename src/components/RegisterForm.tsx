@@ -1,8 +1,12 @@
 import { useState, useRef, useEffect } from 'react';
 import { supabase } from '@/lib/supabaseClient';
 import { FaUserPlus, FaEnvelope, FaLock, FaSignInAlt } from 'react-icons/fa';
+import { translations } from '@/lib/translations';
+import { useLocale } from '@/lib/useLocale';
 
 export default function RegisterForm({ onSwitchToLogin }: { onSwitchToLogin?: () => void }) {
+    const locale = useLocale();
+    const t = translations[locale] || translations['de'];
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [loading, setLoading] = useState(false);
@@ -23,7 +27,7 @@ export default function RegisterForm({ onSwitchToLogin }: { onSwitchToLogin?: ()
         setError(null);
         setSuccess(false);
         if (!email || !password) {
-            setError('Bitte fülle alle Felder aus.');
+            setError(locale === 'en' ? 'Please fill in all fields.' : 'Bitte fülle alle Felder aus.');
             setLoading(false);
             return;
         }
@@ -42,7 +46,7 @@ export default function RegisterForm({ onSwitchToLogin }: { onSwitchToLogin?: ()
 
     return (
         <form onSubmit={handleRegister} className="bg-gray-950 p-8 rounded-2xl shadow-2xl flex flex-col gap-5 max-w-sm mx-auto mt-16 border border-gray-800">
-            <h2 className="text-2xl font-extrabold mb-2 text-green-400 flex items-center gap-2"><FaUserPlus className="inline" /> Registrieren</h2>
+            <h2 className="text-2xl font-extrabold mb-2 text-green-400 flex items-center gap-2"><FaUserPlus className="inline" />{t.register}</h2>
             <div className="flex items-center gap-2 bg-gray-900 rounded-lg px-3 py-2 border border-gray-700">
                 <FaEnvelope className="text-green-500" />
                 <input
@@ -50,7 +54,7 @@ export default function RegisterForm({ onSwitchToLogin }: { onSwitchToLogin?: ()
                     type="email"
                     value={email}
                     onChange={e => setEmail(e.target.value)}
-                    placeholder="E-Mail"
+                    placeholder={locale === 'en' ? 'E-mail' : 'E-Mail'}
                     className="bg-transparent border-none outline-none text-white flex-1"
                     required
                     autoFocus
@@ -64,7 +68,7 @@ export default function RegisterForm({ onSwitchToLogin }: { onSwitchToLogin?: ()
                     type="password"
                     value={password}
                     onChange={e => setPassword(e.target.value)}
-                    placeholder="Passwort"
+                    placeholder={locale === 'en' ? 'Password' : 'Passwort'}
                     className="bg-transparent border-none outline-none text-white flex-1"
                     required
                     disabled={loading}
@@ -76,21 +80,24 @@ export default function RegisterForm({ onSwitchToLogin }: { onSwitchToLogin?: ()
                 disabled={loading}
             >
                 {loading && <span className="loader border-t-2 border-white border-solid rounded-full w-4 h-4 animate-spin"></span>}
-                <FaUserPlus /> {loading ? 'Registrieren…' : 'Registrieren'}
+                <FaUserPlus /> {loading ? (locale === 'en' ? 'Registering…' : 'Registrieren…') : t.register}
             </button>
             {error && <div className="text-red-400 text-sm text-center" role="alert" aria-live="assertive">{error}</div>}
             {success && (
                 <div className="text-green-400 text-sm text-center" role="status" aria-live="polite">
-                    <FaEnvelope className="inline mr-1" /> Wir haben dir soeben eine E-Mail geschickt.<br />
-                    Bitte bestätige deine Adresse und logge dich anschließend ein.<br />
-                    <span className="text-green-300">Du wirst gleich zum Login weitergeleitet…</span>
+                    <FaEnvelope className="inline mr-1" />
+                    {locale === 'en'
+                        ? 'We just sent you an e-mail. Please confirm your address and then log in.'
+                        : 'Wir haben dir soeben eine E-Mail geschickt. Bitte bestätige deine Adresse und logge dich anschließend ein.'}
+                    <br />
+                    <span className="text-green-300">{locale === 'en' ? 'You will be redirected to login…' : 'Du wirst gleich zum Login weitergeleitet…'}</span>
                 </div>
             )}
             {!success && (
                 <div className="text-sm text-gray-400 mt-2 text-center">
-                    Bereits registriert?{' '}
+                    {locale === 'en' ? 'Already registered?' : 'Bereits registriert?'}{' '}
                     <button type="button" className="underline text-green-400 hover:text-green-300 font-semibold" onClick={onSwitchToLogin} disabled={loading}>
-                        <FaSignInAlt className="inline mr-1" /> Zum Login
+                        <FaSignInAlt className="inline mr-1" />{locale === 'en' ? 'To login' : 'Zum Login'}
                     </button>
                 </div>
             )}

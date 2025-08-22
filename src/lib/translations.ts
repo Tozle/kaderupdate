@@ -1,5 +1,14 @@
 // Beispiel für Übersetzungen (de/en)
-export const translations = {
+export const translations: Record<string, {
+  login: string;
+  register: string;
+  logout: string;
+  search: string;
+  allClubs: string;
+  newsNotFound: string;
+  loading: string;
+  error: string;
+}> = {
   de: {
     login: 'Login',
     register: 'Registrieren',

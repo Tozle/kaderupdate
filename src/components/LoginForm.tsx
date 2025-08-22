@@ -1,8 +1,12 @@
 import { useState, useRef, useEffect } from 'react';
 import { supabase } from '@/lib/supabaseClient';
 import { FaSignInAlt, FaEnvelope, FaLock, FaUndo } from 'react-icons/fa';
+import { translations } from '@/lib/translations';
+import { useLocale } from '@/lib/useLocale';
 
 export default function LoginForm({ onSwitchToRegister }: { onSwitchToRegister?: () => void }) {
+    const locale = useLocale();
+    const t = translations[locale] || translations['de'];
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [loading, setLoading] = useState(false);
@@ -15,11 +19,7 @@ export default function LoginForm({ onSwitchToRegister }: { onSwitchToRegister?:
     const passwordRef = useRef<HTMLInputElement>(null);
 
     useEffect(() => {
-        if (showReset) {
-            emailRef.current?.focus();
-        } else {
-            emailRef.current?.focus();
-        }
+        emailRef.current?.focus();
     }, [showReset]);
 
     const handleLogin = async (e: React.FormEvent) => {
@@ -29,7 +29,9 @@ export default function LoginForm({ onSwitchToRegister }: { onSwitchToRegister?:
         setSuccess(false);
         const { error } = await supabase.auth.signInWithPassword({ email, password });
         if (error) {
-            setError(error.message === 'Invalid login credentials' ? 'E-Mail oder Passwort falsch.' : error.message);
+            setError(error.message === 'Invalid login credentials'
+                ? (locale === 'en' ? 'E-mail or password incorrect.' : 'E-Mail oder Passwort falsch.')
+                : error.message);
             setSuccess(false);
             passwordRef.current?.focus();
         } else {
@@ -43,7 +45,7 @@ export default function LoginForm({ onSwitchToRegister }: { onSwitchToRegister?:
         setResetError(null);
         setResetSent(false);
         if (!email) {
-            setResetError('Bitte gib deine E-Mail-Adresse ein.');
+            setResetError(locale === 'en' ? 'Please enter your e-mail address.' : 'Bitte gib deine E-Mail-Adresse ein.');
             emailRef.current?.focus();
             return;
         }
@@ -55,7 +57,7 @@ export default function LoginForm({ onSwitchToRegister }: { onSwitchToRegister?:
     if (showReset) {
         return (
             <form onSubmit={handleReset} className="bg-gray-950 p-8 rounded-2xl shadow-2xl flex flex-col gap-5 max-w-sm mx-auto mt-16 border border-gray-800">
-                <h2 className="text-2xl font-extrabold mb-2 text-green-400 flex items-center gap-2"><FaUndo className="inline" /> Passwort zurücksetzen</h2>
+                <h2 className="text-2xl font-extrabold mb-2 text-green-400 flex items-center gap-2"><FaUndo className="inline" />{locale === 'en' ? 'Reset password' : 'Passwort zurücksetzen'}</h2>
                 <div className="flex items-center gap-2 bg-gray-900 rounded-lg px-3 py-2 border border-gray-700">
                     <FaEnvelope className="text-green-500" />
                     <input
@@ -63,7 +65,7 @@ export default function LoginForm({ onSwitchToRegister }: { onSwitchToRegister?:
                         type="email"
                         value={email}
                         onChange={e => setEmail(e.target.value)}
-                        placeholder="E-Mail"
+                        placeholder={locale === 'en' ? 'E-mail' : 'E-Mail'}
                         className="bg-transparent border-none outline-none text-white flex-1"
                         required
                     />
@@ -73,13 +75,13 @@ export default function LoginForm({ onSwitchToRegister }: { onSwitchToRegister?:
                     className="bg-green-600 hover:bg-green-700 text-white font-bold py-2 rounded-lg mt-2 disabled:opacity-60 flex items-center justify-center gap-2 text-lg shadow"
                     disabled={loading}
                 >
-                    {loading ? 'Sende Link…' : <><FaEnvelope /> Passwort-Reset Link senden</>}
+                    {loading ? (locale === 'en' ? 'Sending link…' : 'Sende Link…') : <><FaEnvelope />{locale === 'en' ? 'Send password reset link' : 'Passwort-Reset Link senden'}</>}
                 </button>
                 {resetError && <div className="text-red-400 text-sm text-center">{resetError}</div>}
-                {resetSent && <div className="text-green-400 text-sm text-center">E-Mail zum Zurücksetzen gesendet!</div>}
+                {resetSent && <div className="text-green-400 text-sm text-center">{locale === 'en' ? 'Password reset e-mail sent!' : 'E-Mail zum Zurücksetzen gesendet!'}</div>}
                 <div className="text-sm text-gray-400 mt-2 text-center">
                     <button type="button" className="underline text-green-400 hover:text-green-300 font-semibold" onClick={() => setShowReset(false)}>
-                        <FaSignInAlt className="inline mr-1" /> Zurück zum Login
+                        <FaSignInAlt className="inline mr-1" />{locale === 'en' ? 'Back to login' : 'Zurück zum Login'}
                     </button>
                 </div>
             </form>
@@ -88,7 +90,7 @@ export default function LoginForm({ onSwitchToRegister }: { onSwitchToRegister?:
 
     return (
         <form onSubmit={handleLogin} className="bg-gray-950 p-8 rounded-2xl shadow-2xl flex flex-col gap-5 max-w-sm mx-auto mt-16 border border-gray-800">
-            <h2 className="text-2xl font-extrabold mb-2 text-green-400 flex items-center gap-2"><FaSignInAlt className="inline" /> Login</h2>
+            <h2 className="text-2xl font-extrabold mb-2 text-green-400 flex items-center gap-2"><FaSignInAlt className="inline" />{t.login}</h2>
             <div className="flex items-center gap-2 bg-gray-900 rounded-lg px-3 py-2 border border-gray-700">
                 <FaEnvelope className="text-green-500" />
                 <input
@@ -96,7 +98,7 @@ export default function LoginForm({ onSwitchToRegister }: { onSwitchToRegister?:
                     type="email"
                     value={email}
                     onChange={e => setEmail(e.target.value)}
-                    placeholder="E-Mail"
+                    placeholder={locale === 'en' ? 'E-mail' : 'E-Mail'}
                     className="bg-transparent border-none outline-none text-white flex-1"
                     required
                     autoFocus
@@ -110,7 +112,7 @@ export default function LoginForm({ onSwitchToRegister }: { onSwitchToRegister?:
                     type="password"
                     value={password}
                     onChange={e => setPassword(e.target.value)}
-                    placeholder="Passwort"
+                    placeholder={locale === 'en' ? 'Password' : 'Passwort'}
                     className="bg-transparent border-none outline-none text-white flex-1"
                     required
                     disabled={loading}
@@ -118,11 +120,11 @@ export default function LoginForm({ onSwitchToRegister }: { onSwitchToRegister?:
             </div>
             <button
                 type="submit"
-                className="bg-green-600 hover:bg-green-700 text-white font-bold py-2 rounded-lg mt-2 disabled:opacity-60 flex items-center justify-center gap-2 text-lg shadow"
+                className={`bg-green-600 hover:bg-green-700 text-white font-bold py-2 rounded-lg mt-2 disabled:opacity-60 flex items-center justify-center gap-2 text-lg shadow transition-all focus:outline-none focus:ring-2 focus:ring-green-400 ${loading ? 'animate-pulse' : ''}`}
                 disabled={loading}
             >
                 {loading && <span className="loader border-t-2 border-white border-solid rounded-full w-4 h-4 animate-spin"></span>}
-                <FaSignInAlt /> {loading ? 'Einloggen…' : 'Login'}
+                <FaSignInAlt /> {loading ? (locale === 'en' ? 'Logging in…' : 'Einloggen…') : t.login}
             </button>
             <button
                 type="button"
@@ -130,14 +132,14 @@ export default function LoginForm({ onSwitchToRegister }: { onSwitchToRegister?:
                 onClick={() => setShowReset(true)}
                 disabled={loading}
             >
-                Passwort vergessen?
+                {locale === 'en' ? 'Forgot password?' : 'Passwort vergessen?'}
             </button>
             {error && <div className="text-red-400 text-sm text-center" role="alert" aria-live="assertive">{error}</div>}
-            {success && <div className="text-green-400 text-sm text-center" role="status" aria-live="polite">Login erfolgreich!</div>}
+            {success && <div className="text-green-400 text-sm text-center" role="status" aria-live="polite">{locale === 'en' ? 'Login successful!' : 'Login erfolgreich!'}</div>}
             <div className="text-sm text-gray-400 mt-2 text-center">
-                Noch kein Account?{' '}
+                {locale === 'en' ? "Don't have an account?" : 'Noch kein Account?'}{' '}
                 <button type="button" className="underline text-green-400 hover:text-green-300 font-semibold" onClick={onSwitchToRegister} disabled={loading}>
-                    Jetzt registrieren
+                    {locale === 'en' ? 'Register now' : 'Jetzt registrieren'}
                 </button>
             </div>
         </form>
