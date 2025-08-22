@@ -1,6 +1,9 @@
 import { supabase } from '@/lib/supabaseClient';
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
+import dynamic from 'next/dynamic';
+
+const Kader = dynamic(() => import('./kader'), { ssr: false });
 
 export default async function ClubDetailPage({ params }: { params: { id: string } }) {
   const { data: club, error } = await supabase
@@ -10,6 +13,14 @@ export default async function ClubDetailPage({ params }: { params: { id: string 
     .single();
 
   if (error || !club) return notFound();
+
+  // Demo-Daten für Kader
+  const demoPlayers = [
+    { id: '1', name: 'Max Mustermann', position: 'Torwart', number: 1 },
+    { id: '2', name: 'John Doe', position: 'Abwehr', number: 4 },
+    { id: '3', name: 'Jane Smith', position: 'Mittelfeld', number: 8 },
+    { id: '4', name: 'Alex Müller', position: 'Sturm', number: 9 },
+  ];
 
   return (
     <main className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-gray-950 text-white flex flex-col items-center justify-center p-8">
@@ -22,7 +33,8 @@ export default async function ClubDetailPage({ params }: { params: { id: string 
           <span className="w-8 h-8 rounded-full" style={{ background: club.color_primary_hex || '#22c55e', display: 'inline-block' }}></span>
           <span className="w-8 h-8 rounded-full" style={{ background: club.color_secondary_hex || '#166534', display: 'inline-block' }}></span>
         </div>
-        <div className="w-full text-center text-lg text-gray-300 mb-4">Kader, Statistiken und Social-Feed folgen hier!</div>
+        <Kader players={demoPlayers} />
+        <div className="w-full text-center text-lg text-gray-300 mb-4 mt-6">Statistiken und Social-Feed folgen hier!</div>
         <a href="/" className="mt-4 inline-block text-green-400 underline hover:text-green-300 transition">Zurück zur Übersicht</a>
       </div>
     </main>
