@@ -1,6 +1,7 @@
 
 import React from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 import { Badge, BadgeType } from './Badge';
 import { XEmbed } from './XEmbed';
 import { FaFutbol } from 'react-icons/fa';
@@ -63,21 +64,21 @@ const NewsCard: React.FC<NewsCardProps> = ({ title, summary, badge, club, source
             <div className="flex flex-col xs:flex-row xs:items-center gap-4 xs:gap-6 mb-2">
                 {/* Club-Logo mit Fallback und optimiertem Laden */}
                 {club.logo_url ? (
-                    <Image
-                        src={club.logo_url}
-                        alt={locale === 'en' ? `Logo of ${club.name}` : `Logo von ${club.name}`}
-                        width={56}
-                        height={56}
-                        className="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-gray-700 object-contain border-2 shadow-lg group-hover:border-green-400 group-focus-within:border-green-400 transition-all"
-                        style={{ objectFit: 'contain', borderColor: secondary }}
-                        loading="lazy"
-                    />
+                    <Link href={`/club/${club.id}`} tabIndex={-1} aria-label={locale === 'en' ? `Go to ${club.name}` : `Zu ${club.name}`}>
+                        <Image
+                            src={club.logo_url}
+                            alt={locale === 'en' ? `Logo of ${club.name}` : `Logo von ${club.name}`}
+                            width={56}
+                            height={56}
+                            className="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-gray-700 object-contain border-2 shadow-lg group-hover:border-green-400 group-focus-within:border-green-400 transition-all"
+                            style={{ objectFit: 'contain', borderColor: secondary }}
+                            loading="lazy"
+                        />
+                    </Link>
                 ) : (
                     <span className="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-gray-700 flex items-center justify-center text-3xl sm:text-4xl border-2 shadow-lg" style={{ color: primary, borderColor: secondary }} aria-label={locale === 'en' ? 'No logo' : 'Kein Logo'}><FaFutbol /></span>
                 )}
-                <span className="font-extrabold text-2xl sm:text-3xl tracking-wide drop-shadow ml-0 xs:ml-2 font-sans flex-1 truncate" style={{ color: primary }}>
-                    {club.name}
-                </span>
+                <Link href={`/club/${club.id}`} className="font-extrabold text-2xl sm:text-3xl tracking-wide drop-shadow ml-0 xs:ml-2 font-sans flex-1 truncate hover:underline focus:underline" style={{ color: primary }} aria-label={locale === 'en' ? `Go to ${club.name}` : `Zu ${club.name}`}>{club.name}</Link>
                 <span className="xs:ml-auto mt-1 xs:mt-0 flex items-center gap-3">
                     <button
                         aria-label={fav ? (locale === 'en' ? 'Remove from favorites' : 'Aus Favoriten entfernen') : (locale === 'en' ? 'Mark as favorite' : 'Als Favorit markieren')}
