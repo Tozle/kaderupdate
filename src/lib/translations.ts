@@ -14,7 +14,7 @@ export const translations: Record<string, {
         register: 'Registrieren',
         logout: 'Logout',
         search: 'Suche...',
-    // ...existing code...
+        allClubs: 'Alle Vereine',
         newsNotFound: 'Keine News gefunden.',
         loading: 'News werden geladen…',
         error: 'Fehler beim Laden der News',
