@@ -46,6 +46,12 @@ export default function Home() {
         return () => { listener.subscription.unsubscribe(); };
     }, []);
 
+    // Schließe Login/Registrierung Modal nach erfolgreichem Login
+    useEffect(() => {
+        if (user && showLogin) setShowLogin(false);
+        if (user && showRegister) setShowRegister(false);
+    }, [user]);
+
     useEffect(() => {
         // Clubs aus Supabase laden (optional: nur einmal beim Mount)
         fetch('/api/newsfeed?distinct=club')
@@ -100,8 +106,7 @@ export default function Home() {
                 selectedClub={club}
                 onClubChange={setClub}
                 // Badge-Filter entfernt
-                showSearch={showSearch}
-                onShowSearch={() => setShowSearch(v => !v)}
+
                 searchValue={q}
                 onSearchChange={setQ}
                 user={user}
