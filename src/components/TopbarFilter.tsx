@@ -35,8 +35,8 @@ export const TopbarFilter: React.FC<TopbarFilterProps> = ({
 }) => {
     const locale = useLocale();
     return (
-        <header className="sticky top-0 z-40 w-full bg-[var(--header-bg)] border-b border-[var(--card-border)] shadow-lg backdrop-blur-md" role="banner">
-            <div className="flex flex-row items-center justify-between px-4 py-3 max-w-5xl mx-auto gap-2 flex-wrap">
+        <header className="sticky top-0 z-50 w-full bg-transparent backdrop-blur-xl">
+            <div className="mx-auto max-w-5xl px-4 py-3 mt-2 rounded-2xl shadow-2xl border border-green-600/20 bg-gradient-to-br from-gray-900/90 via-gray-950/90 to-gray-900/90 flex flex-row items-center justify-between gap-2 flex-wrap">
                 <span className="font-extrabold text-2xl tracking-tight text-[var(--accent)] font-sans select-none drop-shadow-lg" style={{ letterSpacing: '0.03em', fontFamily: 'var(--font-geist-sans, Montserrat, Arial, sans-serif)' }}>KaderUpdate</span>
                 <div className="flex items-center gap-2 flex-1 justify-center">
                     <div className="relative">
