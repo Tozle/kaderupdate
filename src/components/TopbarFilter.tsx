@@ -2,6 +2,7 @@ import React from 'react';
 import { translations } from '@/lib/translations';
 import { useLocale } from '@/lib/useLocale';
 import { FaFutbol } from 'react-icons/fa';
+import Image from 'next/image';
 
 interface Club {
     id: string;
@@ -65,12 +66,16 @@ export const TopbarFilter: React.FC<TopbarFilterProps> = ({
                         </span>
                         {/* Club-Logo Preview (selected) */}
                         {selectedClub && clubs.find(c => c.id === selectedClub && c.logo_url) && (
-                            <img
-                                src={clubs.find(c => c.id === selectedClub)?.logo_url}
-                                alt="Club Logo"
-                                className="absolute left-2 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-gray-700 border-2 border-green-500 shadow-lg"
-                                style={{ pointerEvents: 'none' }}
-                            />
+                            <span className="absolute left-2 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-gray-700 border-2 border-green-500 shadow-lg flex items-center justify-center" style={{ pointerEvents: 'none' }}>
+                                <Image
+                                    src={clubs.find(c => c.id === selectedClub)?.logo_url || ''}
+                                    alt="Club Logo"
+                                    width={36}
+                                    height={36}
+                                    className="w-9 h-9 rounded-full object-contain"
+                                    priority={false}
+                                />
+                            </span>
                         )}
                     </div>
                     <label className="sr-only" htmlFor="news-search">{locale === 'en' ? 'Search news' : 'News durchsuchen'}</label>

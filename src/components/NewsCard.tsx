@@ -34,7 +34,7 @@ interface NewsCardProps {
 
 const NewsCard: React.FC<NewsCardProps> = ({ title, summary, badge, club, sources, social_embed }) => {
     const locale = useLocale();
-    const t = translations[locale] || translations['de'];
+    // const t = translations[locale] || translations['de']; // entfernt, da ungenutzt
     // Micro-Interaction: Favoriten-Herz (Demo, localStorage)
     const [fav, setFav] = React.useState(false);
     React.useEffect(() => {

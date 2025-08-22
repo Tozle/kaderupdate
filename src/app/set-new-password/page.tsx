@@ -17,7 +17,7 @@ export default function SetNewPasswordPage() {
     const [success, setSuccess] = useState(false);
     const localeRaw = useLocale();
     const locale: 'de' | 'en' = localeRaw === 'en' ? 'en' : 'de';
-    const t = translations[locale] || translations['de'];
+    // const t = translations[locale] || translations['de']; // entfernt, da ungenutzt
 
     // i18n-Strings für diese Seite
     const i18n = {

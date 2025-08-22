@@ -31,7 +31,7 @@ export default function Home() {
     const [q, setQ] = useState('');
     const [debouncedQ, setDebouncedQ] = useState('');
     const debounceTimeout = useRef<NodeJS.Timeout | null>(null);
-    const [showSearch, setShowSearch] = useState(false);
+    // const [showSearch, setShowSearch] = useState(false); // entfernt, da ungenutzt
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
     const [user, setUser] = useState<User | null>(null);
@@ -50,7 +50,7 @@ export default function Home() {
     useEffect(() => {
         if (user && showLogin) setShowLogin(false);
         if (user && showRegister) setShowRegister(false);
-    }, [user]);
+    }, [user, showLogin, showRegister]);
 
     useEffect(() => {
         // Clubs aus Supabase laden (optional: nur einmal beim Mount)
