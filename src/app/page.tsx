@@ -87,22 +87,27 @@ export default function Home() {
 
         {/* Login/Registrierung Modal */}
         {(showLogin || showRegister) && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 px-2 sm:px-0 transition-opacity animate-fadeIn" role="dialog" aria-modal="true">
-            <div className="bg-gray-900 p-6 sm:p-8 rounded-2xl shadow-2xl border border-gray-800 relative w-full max-w-xs sm:max-w-sm mx-auto transform transition-all duration-300 animate-scaleIn modal">
-              <button
-                className="absolute top-2 right-2 text-gray-400 hover:text-white text-2xl sm:text-2xl p-2 sm:p-3 rounded focus:outline-none focus-visible:ring-2 focus-visible:ring-green-500"
-                onClick={() => { setShowLogin(false); setShowRegister(false); }}
-                aria-label={locale === 'en' ? 'Close dialog' : 'Dialog schließen'}
-                tabIndex={0}
-              >
-                ×
-              </button>
-              {showLogin && (
-                <LoginForm onSwitchToRegister={() => { setShowLogin(false); setShowRegister(true); }} />
-              )}
-              {showRegister && (
-                <RegisterForm onSwitchToLogin={() => { setShowRegister(false); setShowLogin(true); }} />
-              )}
+          <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 px-2 sm:px-0 transition-opacity animate-fadeIn" role="dialog" aria-modal="true">
+            <div className="relative w-full max-w-xs sm:max-w-sm mx-auto">
+              <div className="bg-gradient-to-br from-gray-900 via-gray-950 to-gray-900 p-7 sm:p-9 rounded-3xl shadow-2xl border-2 border-green-600/30 relative transform transition-all duration-300 animate-scaleIn modal">
+                <button
+                  className="absolute top-3 right-3 text-gray-400 hover:text-green-400 text-2xl sm:text-2xl p-2 sm:p-3 rounded-full focus:outline-none focus-visible:ring-2 focus-visible:ring-green-500 bg-gray-800/60 hover:bg-gray-800/90 shadow"
+                  onClick={() => { setShowLogin(false); setShowRegister(false); }}
+                  aria-label={locale === 'en' ? 'Close dialog' : 'Dialog schließen'}
+                  tabIndex={0}
+                  style={{ transition: 'all 0.15s' }}
+                >
+                  ×
+                </button>
+                <div className="flex flex-col gap-2 animate-fadeIn">
+                  {showLogin && (
+                    <LoginForm onSwitchToRegister={() => { setShowLogin(false); setShowRegister(true); }} />
+                  )}
+                  {showRegister && (
+                    <RegisterForm onSwitchToLogin={() => { setShowRegister(false); setShowLogin(true); }} />
+                  )}
+                </div>
+              </div>
             </div>
           </div>
         )}
