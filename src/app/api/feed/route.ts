@@ -1,38 +1,34 @@
-import { News, Badge } from '@/types/news';
+
+import { supabaseAdmin } from '@/lib/supabaseClient';
 import type { NextRequest } from 'next/server';
 
-// Beispiel: Filterbare News-API (Mocked, später DB-Anbindung)
+// Holt News aus Supabase und filtert nach club, badge, q
 export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url);
   const club = searchParams.get('club');
-  const badge = searchParams.get('badge') as Badge | null;
+  const badge = searchParams.get('badge');
   const q = searchParams.get('q');
 
-  // TODO: Hole Daten aus Supabase
-  // Hier: Mocked News
-  const news: News[] = [
-    {
-      id: '1',
-      title: 'Beispielmeldung: Neuer verletzt',
-      summary: 'Manuel Neuer fällt mit Muskelverletzung aus.',
-      content: 'Torwart Manuel Neuer hat sich im Training verletzt...',
-      category: 'Verletzung',
-      trustScore: 5,
-      badge: 'Bestätigt',
-      club: { id: 'fcb', name: 'FC Bayern', logoUrl: '/logos/fcb.png' },
-      timestamp: new Date().toISOString(),
-      sources: [
-        { id: 'fcb', name: 'FC Bayern', type: 'offiziell', url: 'https://fcb.de', trustLevel: 5 }
-      ],
-      status: 'Bestätigt',
-    },
-  ];
+  if (!supabaseAdmin) {
+    return new Response(JSON.stringify({ error: 'Supabase not configured' }), { status: 500 });
+  }
 
-  // Filter (vereinfachtes Beispiel)
-  let filtered = news;
-  if (club) filtered = filtered.filter(n => n.club.id === club);
-  if (badge) filtered = filtered.filter(n => n.badge === badge);
-  if (q) filtered = filtered.filter(n => n.title.includes(q) || n.summary.includes(q));
+  let query = supabaseAdmin
+    .from('news')
+    .select(`
+      id, title, summary, content, category, trust_score, badge, club_id, timestamp, sources, social_embed, status,
+      club:club_id (id, name, logo_url)
+    `)
+    .order('timestamp', { ascending: false })
+    .limit(20);
 
-  return Response.json(filtered);
+  if (club) query = query.eq('club_id', club);
+  if (badge) query = query.eq('badge', badge);
+  if (q) query = query.ilike('title', `%${q}%`);
+
+  const { data, error } = await query;
+  if (error) {
+    return new Response(JSON.stringify({ error: error.message }), { status: 500 });
+  }
+  return Response.json(data || []);
 }
