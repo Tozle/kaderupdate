@@ -32,36 +32,36 @@ interface NewsCardProps {
 
 const NewsCard: React.FC<NewsCardProps> = ({ title, summary, badge, club, sources, social_embed }) => {
     return (
-        <article className="bg-gradient-to-br from-gray-900 via-gray-950 to-gray-900 rounded-2xl shadow-2xl p-6 flex flex-col gap-4 border border-gray-800 hover:border-green-500 hover:shadow-green-700/30 transition-all hover:scale-[1.025] group">
-            <div className="flex items-center gap-4 mb-1">
+        <article className="bg-gradient-to-br from-gray-900 via-gray-950 to-gray-900 rounded-2xl shadow-2xl p-4 sm:p-6 flex flex-col gap-3 sm:gap-4 border border-gray-800 hover:border-green-500 hover:shadow-green-700/30 transition-all hover:scale-[1.025] group">
+            <div className="flex flex-col xs:flex-row xs:items-center gap-2 xs:gap-4 mb-1">
                 {/* Club-Logo mit Fallback und alt-Text */}
                 {club.logo_url ? (
                     <Image
                         src={club.logo_url}
                         alt={club.name + ' Logo'}
-                        width={44}
-                        height={44}
-                        className="w-11 h-11 rounded-full bg-gray-700 object-contain border-2 border-green-700 shadow-md group-hover:border-green-400"
+                        width={40}
+                        height={40}
+                        className="w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-gray-700 object-contain border-2 border-green-700 shadow-md group-hover:border-green-400"
                         style={{ objectFit: 'contain' }}
                         unoptimized
                     />
                 ) : (
-                    <span className="w-11 h-11 rounded-full bg-gray-700 flex items-center justify-center text-2xl text-green-500 border-2 border-green-700 shadow-md" aria-label="Kein Logo"><FaFutbol /></span>
+                    <span className="w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-gray-700 flex items-center justify-center text-xl sm:text-2xl text-green-500 border-2 border-green-700 shadow-md" aria-label="Kein Logo"><FaFutbol /></span>
                 )}
-                <span className="font-extrabold text-xl tracking-wide drop-shadow ml-2 text-white font-sans">{club.name}</span>
-                <span className="ml-auto"><Badge type={badge} /></span>
+                <span className="font-extrabold text-lg sm:text-xl tracking-wide drop-shadow ml-0 xs:ml-2 text-white font-sans">{club.name}</span>
+                <span className="xs:ml-auto mt-1 xs:mt-0"><Badge type={badge} /></span>
             </div>
-            <h2 className="text-2xl font-extrabold leading-tight drop-shadow text-white mb-1 font-sans group-hover:text-green-400 transition-colors">
+            <h2 className="text-xl sm:text-2xl font-extrabold leading-tight drop-shadow text-white mb-1 font-sans group-hover:text-green-400 transition-colors">
                 {title}
             </h2>
-            <p className="text-gray-300 text-base mb-2 font-medium">{summary}</p>
+            <p className="text-gray-300 text-sm sm:text-base mb-2 font-medium">{summary}</p>
             {/* Social Embed */}
             {typeof social_embed === 'string' && social_embed.length > 0 && (
                 <div className="rounded-lg overflow-hidden border border-gray-700 bg-gray-950 my-2">
                     <XEmbed url={social_embed} />
                 </div>
             )}
-            <div className="flex items-center gap-3 text-xs text-gray-400 mt-2">
+            <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-3 text-xs text-gray-400 mt-2">
                 <span>
                     <span className="font-semibold text-green-500">Quellen:</span> {sources.map((s, i) => (
                         <React.Fragment key={s.id}>
