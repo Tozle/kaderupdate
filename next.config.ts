@@ -3,7 +3,7 @@ import type { NextConfig } from "next";
 
 const ContentSecurityPolicy =
   "default-src 'self'; " +
-  "script-src 'self' 'unsafe-inline' plausible.io; " +
+  "script-src-elem 'self' 'unsafe-inline' plausible.io; " +
   "style-src 'self' 'unsafe-inline'; " +
   "img-src * blob: data:; " +
   "media-src 'none'; " +
