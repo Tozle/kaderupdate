@@ -4,14 +4,15 @@ import type { NextRequest } from 'next/server';
 
 // Holt News aus Supabase und filtert nach club, badge, q
 export async function GET(req: NextRequest) {
-  // Robust gegen fehlendes nextUrl (z.B. Prerendering/Build)
-  if (!('nextUrl' in req) || !req.nextUrl) {
+  let club = null, badge = null, q = null;
+  try {
+    const searchParams = req.nextUrl?.searchParams;
+    club = searchParams?.get('club') ?? null;
+    badge = searchParams?.get('badge') ?? null;
+    q = searchParams?.get('q') ?? null;
+  } catch {
     return Response.json([]);
   }
-  const searchParams = req.nextUrl.searchParams;
-  const club = searchParams.get('club');
-  const badge = searchParams.get('badge');
-  const q = searchParams.get('q');
 
   if (!supabaseAdmin) {
     return new Response(JSON.stringify({ error: 'Supabase not configured' }), { status: 500 });
