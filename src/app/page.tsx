@@ -46,18 +46,28 @@ export default function Home() {
     return () => { listener.subscription.unsubscribe(); };
   }, []);
 
+  // Clubs werden nur einmal geladen und gecached
   useEffect(() => {
-    // Clubs direkt aus Supabase laden
+    let isMounted = true;
+    const cached = sessionStorage.getItem('clubs');
+    if (cached) {
+      setClubs(JSON.parse(cached));
+      return;
+    }
     supabase
       .from('clubs')
       .select('id, name, logo_url')
       .then(({ data, error }) => {
+        if (!isMounted) return;
         if (error) {
           setClubs([]);
+          console.error('Fehler beim Laden der Vereine:', error.message);
           return;
         }
         setClubs(data || []);
+        if (data) sessionStorage.setItem('clubs', JSON.stringify(data));
       });
+    return () => { isMounted = false; };
   }, []);
 
   // Debounce die Suche
