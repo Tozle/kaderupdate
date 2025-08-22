@@ -76,7 +76,7 @@ export default function Home() {
   useEffect(() => {
     const params = new URLSearchParams();
     if (club) params.append('club', club);
-  // if (badge) params.append('badge', badge);
+    // if (badge) params.append('badge', badge);
     if (debouncedQ) params.append('q', debouncedQ);
     setLoading(true);
     setError(null);
