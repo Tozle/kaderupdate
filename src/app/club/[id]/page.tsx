@@ -8,7 +8,7 @@ export async function generateStaticParams() {
     return [{ id: 'dummy' }];
 }
 
-export default async function ClubDetailPage({ params }: PageProps) {
+export default async function ClubDetailPage({ params }: { params: { id: string } }) {
     const { data: club, error } = await supabase
         .from('clubs')
         .select('id, name, logo_url, color_primary_hex, color_secondary_hex')
