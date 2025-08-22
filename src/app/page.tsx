@@ -126,11 +126,6 @@ export default function Home() {
       <main className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-gray-950 text-white">
 
         <TopbarFilter
-          clubs={clubs}
-          selectedClub={club}
-          onClubChange={setClub}
-          searchValue={q}
-          onSearchChange={setQ}
           user={user}
           onLoginClick={() => { setShowLogin(true); setShowRegister(false); }}
           onLogoutClick={async () => { await supabase.auth.signOut(); }}
