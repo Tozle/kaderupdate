@@ -13,7 +13,7 @@ export function middleware() {
             "frame-src 'self' https://www.youtube.com/;",
             "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;",
             "font-src 'self' https://fonts.gstatic.com;",
-            "connect-src 'self' https://*.supabase.co;",
+            "connect-src 'self' https://*.supabase.co https://plausible.io;",
             "frame-ancestors 'none';"
         ].join(' ')
     );
