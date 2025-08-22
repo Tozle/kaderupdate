@@ -4,6 +4,7 @@ import type { User } from '@supabase/supabase-js';
 import { useLocale } from '@/lib/useLocale';
 
 // ...existing code...
+export default TopbarFilter;
 
 interface Club {
     id: string;

@@ -10,7 +10,7 @@ import { useLocale } from '@/lib/useLocale';
 import Head from 'next/head';
 
 
-import { TopbarFilter } from '@/components/TopbarFilter';
+import TopbarFilter from '@/components/TopbarFilter';
 import NewsCard from '@/components/NewsCard';
 import type { News } from '@/types/news';
 
@@ -18,7 +18,7 @@ type Club = { id: string; name: string; logo_url?: string; color_primary_hex?: s
 export default function Home() {
   const [news, setNews] = useState<News[]>([]);
   const [clubs, setClubs] = useState<Club[]>([]);
-  const [selectedClub, setSelectedClub] = useState<string>('');
+  const [selectedClub, setSelectedClub] = useState<Club | null>(null);
   const [search, setSearch] = useState('');
   const [user, setUser] = useState<User | null>(null);
   const [showLogin, setShowLogin] = useState(false);
@@ -53,7 +53,7 @@ export default function Home() {
   }, []);
 
   const filteredNews = news.filter(n =>
-    (!selectedClub || n.club?.id === selectedClub) &&
+    (!selectedClub || n.club?.id === selectedClub.id) &&
     (!search || n.title.toLowerCase().includes(search.toLowerCase()) || n.summary.toLowerCase().includes(search.toLowerCase()))
   );
 
