@@ -51,12 +51,14 @@ export default function RootLayout({
   return (
     <html lang="de">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-gradient-to-br from-gray-950 via-gray-900 to-gray-950 min-h-screen text-white flex flex-col`}
       >
         <PlausibleAnalytics />
-  {children}
-  <LegalFooter />
-  <CookieNotice />
+        <main className="flex-1 w-full max-w-7xl mx-auto px-2 sm:px-6 py-4">
+          {children}
+        </main>
+        <LegalFooter />
+        <CookieNotice />
       </body>
     </html>
   );
