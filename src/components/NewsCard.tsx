@@ -37,17 +37,7 @@ interface NewsCardProps {
 
 const NewsCard: React.FC<NewsCardProps> = ({ title, summary, badge, club, sources, social_embed }) => {
     const locale = useLocale();
-    // const t = translations[locale] || translations['de']; // entfernt, da ungenutzt
-    // Micro-Interaction: Favoriten-Herz (Demo, localStorage)
-    const [fav, setFav] = React.useState(false);
-    React.useEffect(() => {
-        setFav(localStorage.getItem(`fav-${club.id}`) === '1');
-    }, [club.id]);
-    const toggleFav = () => {
-        const newFav = !fav;
-        setFav(newFav);
-        localStorage.setItem(`fav-${club.id}`, newFav ? '1' : '0');
-    };
+    // Favoriten-Logik entfernt
     // Farben aus Club holen (Fallbacks wie im Dropdown)
     const primary = club.color_primary_hex || '#22c55e';
     const secondary = club.color_secondary_hex || '#166534';
@@ -80,17 +70,6 @@ const NewsCard: React.FC<NewsCardProps> = ({ title, summary, badge, club, source
                 )}
                 <Link href={`/club/${club.id}`} className="font-extrabold text-2xl sm:text-3xl tracking-wide drop-shadow ml-0 xs:ml-2 font-sans flex-1 truncate hover:underline focus:underline" style={{ color: primary }} aria-label={locale === 'en' ? `Go to ${club.name}` : `Zu ${club.name}`}>{club.name}</Link>
                 <span className="xs:ml-auto mt-1 xs:mt-0 flex items-center gap-3">
-                    <button
-                        aria-label={fav ? (locale === 'en' ? 'Remove from favorites' : 'Aus Favoriten entfernen') : (locale === 'en' ? 'Mark as favorite' : 'Als Favorit markieren')}
-                        onClick={toggleFav}
-                        className={`transition-all text-3xl ${fav ? '' : 'hover:scale-110'} focus:outline-none focus-visible:ring-2 rounded-full bg-gray-800/70 p-2 shadow-md`}
-                        style={{ color: fav ? primary : secondary, border: `2px solid ${primary}`, filter: fav ? `drop-shadow(0 0 8px ${primary})` : undefined }}
-                        tabIndex={0}
-                    >
-                        <svg viewBox="0 0 24 24" fill={fav ? 'currentColor' : 'none'} stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-7 h-7">
-                            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41 0.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
-                        </svg>
-                    </button>
                     <Badge type={badge} style={{ background: primary, color: '#fff', borderColor: secondary }} />
                 </span>
             </div>

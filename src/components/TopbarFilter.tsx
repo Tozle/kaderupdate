@@ -67,7 +67,7 @@ export const TopbarFilter: React.FC<TopbarFilterProps> = ({
             value={searchValue}
             onChange={e => onSearchChange(e.target.value)}
             placeholder="Suchen..."
-            className="bg-gray-800 border border-green-600 rounded-xl px-3 py-1 text-white flex-1 focus-visible:ring-2 focus-visible:ring-green-400 focus-visible:border-green-400 transition-all mt-0 text-base shadow-lg hover:border-green-400 hover:bg-gray-900 w-full sm:w-[120px] focus:w-[220px] focus:py-3 focus:px-3 focus:outline-none duration-200"
+            className="bg-gray-800 border border-green-600 rounded-full px-4 py-1 text-white flex-1 focus-visible:ring-2 focus-visible:ring-green-400 focus-visible:border-green-400 transition-all mt-0 text-base shadow hover:shadow-lg hover:border-green-400 hover:bg-gray-900 w-full sm:w-[90px] focus:w-[220px] focus:py-3 focus:px-6 focus:outline-none duration-200"
             tabIndex={0}
             style={{ minHeight: '32px' }}
           />
