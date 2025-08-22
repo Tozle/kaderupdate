@@ -126,7 +126,7 @@ export default function Home() {
         <meta name="twitter:image" content="/vercel.svg" />
       </Head>
       <main className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-gray-950 text-white">
-  {/* Onboarding/Anleitung entfernt */}
+        {/* Onboarding/Anleitung entfernt */}
         <TopbarFilter
           clubs={clubs}
           selectedClub={club}

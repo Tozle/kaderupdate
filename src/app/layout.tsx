@@ -22,7 +22,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "KaderUpdate – Fußball Kader, Vereine & Statistiken",
     description: "KaderUpdate liefert dir aktuelle Kader, Vereine und Statistiken der Bundesliga und internationalen Ligen.",
-    url: "https://kaderupdate.com",
+    url: "https://kaderupdate.de",
     siteName: "KaderUpdate",
     images: [
       {
