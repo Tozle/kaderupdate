@@ -5,6 +5,8 @@ import { useLocale } from '@/lib/useLocale';
 interface Club {
   id: string;
   name: string;
+  color_primary_hex?: string;
+  color_secondary_hex?: string;
 }
 
 interface TopbarFilterProps {
@@ -46,7 +48,16 @@ export const TopbarFilter: React.FC<TopbarFilterProps> = ({
           >
             <option value="">Alle Vereine</option>
             {clubs.map(c => (
-              <option key={c.id} value={c.id}>{c.name}</option>
+              <option
+                key={c.id}
+                value={c.id}
+                style={c.color_primary_hex && c.color_secondary_hex ? {
+                  background: c.color_primary_hex,
+                  color: c.color_secondary_hex,
+                } : {}}
+              >
+                {c.name}
+              </option>
             ))}
           </select>
           {/* Suche */}
@@ -56,9 +67,9 @@ export const TopbarFilter: React.FC<TopbarFilterProps> = ({
             value={searchValue}
             onChange={e => onSearchChange(e.target.value)}
             placeholder="Suchen..."
-            className="bg-gray-800 border border-green-600 rounded-xl p-3 text-white flex-1 focus-visible:ring-2 focus-visible:ring-green-400 focus-visible:border-green-400 transition-all mt-0 text-base shadow-lg hover:border-green-400 hover:bg-gray-900 w-full sm:w-[200px] focus:outline-none"
+            className="bg-gray-800 border border-green-600 rounded-xl px-3 py-1 text-white flex-1 focus-visible:ring-2 focus-visible:ring-green-400 focus-visible:border-green-400 transition-all mt-0 text-base shadow-lg hover:border-green-400 hover:bg-gray-900 w-full sm:w-[120px] focus:w-[220px] focus:py-3 focus:px-3 focus:outline-none duration-200"
             tabIndex={0}
-            style={{ minHeight: '52px' }}
+            style={{ minHeight: '32px' }}
           />
         </div>
         <div className="flex gap-3 sm:gap-6 items-center justify-start sm:justify-end mt-3 sm:mt-0 w-full sm:w-auto">

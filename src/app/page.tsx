@@ -39,8 +39,7 @@ export default function Home() {
   const [user, setUser] = useState<User | null>(null);
   const [showLogin, setShowLogin] = useState(false);
   const [showRegister, setShowRegister] = useState(false);
-  const [showOnlyFavs, setShowOnlyFavs] = useState(false);
-  const [favIds, setFavIds] = useState<string[]>([]);
+  // Favoriten-Logik entfernt
   const [showTour, setShowTour] = useState(false);
   const locale = useLocale();
   const t = translations[locale] || translations['de'];
@@ -56,11 +55,7 @@ export default function Home() {
     setShowTour(false);
   };
 
-  // Favoriten aus LocalStorage laden
-  useEffect(() => {
-    const stored = Object.keys(localStorage).filter(k => k.startsWith('fav-') && localStorage.getItem(k) === '1').map(k => k.replace('fav-', ''));
-    setFavIds(stored);
-  }, [showOnlyFavs, news]);
+  // Favoriten-Logik entfernt
   useEffect(() => {
     supabase.auth.getUser().then(({ data }) => setUser(data.user));
     const { data: listener } = supabase.auth.onAuthStateChange((_event, session) => {
@@ -130,14 +125,14 @@ export default function Home() {
         <title>KaderUpdate | {t.allClubs}</title>
         <meta name="description" content={locale === 'en' ? 'All football news, rumors and squad updates for the Bundesliga.' : 'Alle Fußball-News, Gerüchte und Kader-Updates zur Bundesliga.'} />
         {/* Open Graph Meta-Tags */}
-        <meta property="og:title" content="KaderUpdate | {t.allClubs}" />
+        <meta property="og:title" content={`KaderUpdate | ${t.allClubs}`} />
         <meta property="og:description" content={locale === 'en' ? 'All football news, rumors and squad updates for the Bundesliga.' : 'Alle Fußball-News, Gerüchte und Kader-Updates zur Bundesliga.'} />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://kaderupdate.de/" />
+        <meta property="og:url" content="https://kaderupdate/" />
         <meta property="og:image" content="/vercel.svg" />
         {/* Twitter Card Meta-Tags */}
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="KaderUpdate | {t.allClubs}" />
+        <meta name="twitter:title" content={`KaderUpdate | ${t.allClubs}`} />
         <meta name="twitter:description" content={locale === 'en' ? 'All football news, rumors and squad updates for the Bundesliga.' : 'Alle Fußball-News, Gerüchte und Kader-Updates zur Bundesliga.'} />
         <meta name="twitter:image" content="/vercel.svg" />
       </Head>
@@ -149,8 +144,6 @@ export default function Home() {
           onClubChange={setClub}
           searchValue={q}
           onSearchChange={setQ}
-          showOnlyFavs={showOnlyFavs}
-          onToggleFavs={() => setShowOnlyFavs(f => !f)}
           user={user}
           onLoginClick={() => { setShowLogin(true); setShowRegister(false); }}
           onLogoutClick={async () => { await supabase.auth.signOut(); }}
@@ -202,7 +195,7 @@ export default function Home() {
               <span className="text-gray-500 mt-2">{locale === 'en' ? 'Try another club or search term.' : 'Probiere einen anderen Verein oder Suchbegriff.'}</span>
             </div>
           )}
-          {!loading && !error && (showOnlyFavs ? news.filter(n => favIds.includes(n.club.id)).map(n => (
+          {!loading && !error && news.map(n => (
             <NewsCard
               key={n.id}
               title={n.title}
@@ -212,17 +205,7 @@ export default function Home() {
               sources={n.sources}
               social_embed={n.social_embed}
             />
-          )) : news.map(n => (
-            <NewsCard
-              key={n.id}
-              title={n.title}
-              summary={n.summary}
-              badge={n.badge}
-              club={n.club}
-              sources={n.sources}
-              social_embed={n.social_embed}
-            />
-          )))}
+          ))}
         </section>
       </main>
     </>

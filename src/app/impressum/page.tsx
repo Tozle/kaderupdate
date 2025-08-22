@@ -14,8 +14,8 @@ const i18n: {
         en: 'Imprint and legal information for KaderUpdate.'
     },
     content: {
-        de: `Angaben gemäß § 5 TMG:<br />Max Mustermann<br />Musterstraße 1<br />12345 Musterstadt<br />E-Mail: info@kaderupdate.com`,
-        en: `Information according to § 5 TMG:<br />Max Mustermann<br />Musterstraße 1<br />12345 Musterstadt<br />E-Mail: info@kaderupdate.com`
+    de: `Angaben gemäß § 5 TMG:<br />Max Mustermann<br />Musterstraße 1<br />12345 Musterstadt<br />E-Mail: info@kaderupdate`,
+    en: `Information according to § 5 TMG:<br />Max Mustermann<br />Musterstraße 1<br />12345 Musterstadt<br />E-Mail: info@kaderupdate`
     },
     demo: {
         de: 'Dies ist ein Demo-Impressum. Bitte mit echten Daten ersetzen!',
