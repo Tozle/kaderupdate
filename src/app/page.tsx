@@ -8,7 +8,7 @@ import RegisterForm from '@/components/RegisterForm';
 
 import { TopbarFilter } from '@/components/TopbarFilter';
 import NewsCard from '@/components/NewsCard';
-import type { BadgeType } from '@/components/Badge';
+// import type { BadgeType } from '@/components/Badge';
 
 type Club = { id: string; name: string; logo_url?: string };
 type Source = { id: string; name: string; type: string; url?: string; trust_level?: number };
@@ -27,7 +27,7 @@ export default function Home() {
   const [news, setNews] = useState<News[]>([]);
   const [clubs, setClubs] = useState<Club[]>([]);
   const [club, setClub] = useState('');
-  const [badge, setBadge] = useState<BadgeType>('');
+  // const [badge, setBadge] = useState<BadgeType>('');
   const [q, setQ] = useState('');
   const [debouncedQ, setDebouncedQ] = useState('');
   const debounceTimeout = useRef<NodeJS.Timeout | null>(null);
@@ -76,7 +76,7 @@ export default function Home() {
   useEffect(() => {
     const params = new URLSearchParams();
     if (club) params.append('club', club);
-    if (badge) params.append('badge', badge);
+  // if (badge) params.append('badge', badge);
     if (debouncedQ) params.append('q', debouncedQ);
     setLoading(true);
     setError(null);
@@ -91,7 +91,7 @@ export default function Home() {
       .then(setNews)
       .catch(e => setError(e.message))
       .finally(() => setLoading(false));
-  }, [club, badge, debouncedQ]);
+  }, [club, debouncedQ]);
 
   return (
     <main className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-gray-950 text-white">
@@ -99,8 +99,6 @@ export default function Home() {
         clubs={clubs}
         selectedClub={club}
         onClubChange={setClub}
-        selectedBadge={badge}
-        onBadgeChange={setBadge}
         showSearch={showSearch}
         onShowSearch={() => setShowSearch(v => !v)}
         searchValue={q}
@@ -142,7 +140,7 @@ export default function Home() {
             key={n.id}
             title={n.title}
             summary={n.summary}
-            badge={n.badge as BadgeType}
+            badge={n.badge}
             club={n.club}
             sources={n.sources}
             social_embed={n.social_embed}
