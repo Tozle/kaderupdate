@@ -16,21 +16,46 @@
 
 @import "tailwindcss";
 
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --background: #10151a;
+  --foreground: #e6e6e6;
+  --accent: #22c55e;
+  --accent-dark: #166534;
+  --card-bg: #181f25;
+  --card-border: #232b33;
+  --badge-bg: #22c55e;
+  --badge-text: #fff;
+  --badge-border: #166534;
+  --footer-bg: #13181d;
+  --header-bg: #181f25cc;
+  --shadow: 0 2px 16px 0 #000a;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-geist-sans, 'Geist', 'Montserrat', Arial, Helvetica, sans-serif);
+  font-size: 1.08rem;
+  line-height: 1.7;
+  min-height: 100vh;
+  letter-spacing: 0.01em;
+  -webkit-font-smoothing: antialiased;
+  padding: 0;
+  margin: 0;
+}
+
+.main-content {
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 2.5rem 1rem 1.5rem 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+}
+
+@media (max-width: 600px) {
+  .main-content {
+    padding: 1.2rem 0.2rem 1rem 0.2rem;
+  }
 }

@@ -31,20 +31,19 @@ export default function DatenschutzPage() {
                 <title>{i18n.title[locale] || i18n.title.de} | KaderUpdate</title>
                 <meta name="description" content={i18n.metaDesc[locale] || i18n.metaDesc.de} />
             </Head>
-            <main className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-gray-950 via-gray-900 to-gray-950 py-10 px-2">
-                <div className="bg-gray-900/95 rounded-2xl shadow-2xl p-6 sm:p-10 max-w-lg w-full flex flex-col items-center border border-green-700">
-                    <h1 className="text-3xl sm:text-4xl font-extrabold mb-4 sm:mb-6 text-green-400 text-center drop-shadow-lg tracking-tight">{i18n.title[locale] || i18n.title.de}</h1>
-                    <p className="text-base sm:text-lg text-gray-200 text-center mb-4 sm:mb-6 leading-relaxed">{i18n.content[locale] || i18n.content.de}</p>
+            <main className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-gray-100 via-gray-50 to-gray-200 dark:from-gray-950 dark:via-gray-900 dark:to-gray-950 py-10 px-2">
+                <div className="absolute left-0 top-0 mt-6 ml-4">
+                    <a href="/" className="inline-flex items-center gap-2 text-gray-500 hover:text-green-600 text-base font-medium bg-white/80 dark:bg-gray-900/80 rounded-xl px-4 py-2 shadow border border-gray-200 dark:border-gray-800 transition-all">
+                        <svg width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path d="M15 19l-7-7 7-7" /></svg>
+                        {locale === 'en' ? 'Back' : 'Zurück'}
+                    </a>
+                </div>
+                <section className="bg-white/90 dark:bg-gray-950/90 rounded-3xl shadow-lg p-7 sm:p-12 max-w-xl w-full flex flex-col items-center border border-gray-200 dark:border-gray-800 mt-10">
+                    <h1 className="text-3xl sm:text-4xl font-extrabold mb-4 sm:mb-6 text-green-500 text-center tracking-tight">{i18n.title[locale] || i18n.title.de}</h1>
+                    <p className="text-base sm:text-lg text-gray-700 dark:text-gray-200 text-center mb-4 sm:mb-6 leading-relaxed">{i18n.content[locale] || i18n.content.de}</p>
                     <p className="mt-4 sm:mt-8 text-xs sm:text-sm text-gray-400 text-center italic">{i18n.demo[locale] || i18n.demo.de}</p>
-                </div>
-                <div className="mt-6 sm:mt-10 w-full max-w-lg">
-                    <ul className="list-disc pl-5 text-gray-300">
-                        <li className="mb-2">Abschnitt 1: Einleitung</li>
-                        <li className="mb-2">Abschnitt 2: Datenverarbeitung</li>
-                        <li className="mb-2">Abschnitt 3: Rechte der Nutzer</li>
-                    </ul>
-                </div>
-                <div className="mt-6 sm:mt-10 w-full max-w-lg">
+                </section>
+                <div className="mt-6 sm:mt-10 w-full max-w-xl">
                     <LegalFooter />
                 </div>
             </main>
