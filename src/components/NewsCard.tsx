@@ -47,7 +47,7 @@ const NewsCard: React.FC<NewsCardProps> = ({ title, summary, badge, club, source
     };
     return (
         <article
-            className="bg-gradient-to-br from-gray-950 via-gray-900 to-gray-950 rounded-3xl shadow-2xl p-6 sm:p-8 flex flex-col gap-5 border border-gray-800 hover:border-green-500 hover:shadow-green-500/30 focus-within:shadow-green-400/40 transition-all hover:scale-[1.025] group focus-within:scale-[1.025] focus-within:border-green-400 outline-none ring-0 focus-within:ring-2 focus-within:ring-green-400"
+            className="bg-gradient-to-br from-gray-950 via-gray-900 to-gray-950 rounded-3xl shadow-2xl p-8 sm:p-12 flex flex-col gap-5 border border-gray-800 hover:border-green-500 hover:shadow-green-500/30 focus-within:shadow-green-400/40 transition-all hover:scale-[1.025] group focus-within:scale-[1.025] focus-within:border-green-400 outline-none ring-0 focus-within:ring-2 focus-within:ring-green-400"
             tabIndex={0}
             aria-label={`News: ${title}`}
         >
@@ -74,7 +74,7 @@ const NewsCard: React.FC<NewsCardProps> = ({ title, summary, badge, club, source
                     <button
                         aria-label={fav ? (locale === 'en' ? 'Remove from favorites' : 'Aus Favoriten entfernen') : (locale === 'en' ? 'Mark as favorite' : 'Als Favorit markieren')}
                         onClick={toggleFav}
-                        className={`transition-all text-3xl ${fav ? 'text-pink-500 scale-125' : 'text-gray-400 hover:text-pink-400'} focus:outline-none focus:ring-2 focus:ring-pink-400 rounded-full bg-gray-800/70 p-2 shadow-md`}
+                        className={`transition-all text-3xl ${fav ? 'text-pink-500 scale-125' : 'text-gray-400 hover:text-pink-400'} focus:outline-none focus-visible:ring-2 focus-visible:ring-pink-400 rounded-full bg-gray-800/70 p-2 shadow-md`}
                         style={{ filter: fav ? 'drop-shadow(0 0 8px #f472b6)' : undefined }}
                         tabIndex={0}
                     >

@@ -2,7 +2,7 @@
 
   button,
   .btn {
-    @apply rounded-lg font-bold transition-all focus:outline-none focus:ring-2 focus:ring-green-400 shadow;
+  /* Tailwind-Klassen direkt in Komponenten verwenden */
     min-height: 44px;
     min-width: 44px;
     padding-left: 1.25rem;
@@ -11,64 +11,28 @@
     padding-bottom: 0.5rem;
   }
 
-  button:active,
-  .btn:active {
-    @apply scale-95;
-  }
 
-  button:disabled,
-  .btn:disabled {
-    @apply opacity-60 cursor-not-allowed;
-  }
-
-  input,
-  .input {
-    @apply rounded-lg bg-gray-800 border border-green-600 text-white px-4 py-2 focus:ring-2 focus:ring-green-400 focus:border-green-400 transition-all shadow;
-    min-height: 44px;
-  }
-
-  input:focus,
-  .input:focus {
-    @apply border-green-400 ring-green-400;
-  }
 
   select,
   .select {
-    @apply rounded-lg bg-gray-800 border border-green-600 text-white px-4 py-2 focus:ring-2 focus:ring-green-400 focus:border-green-400 transition-all shadow;
+  /* Tailwind-Klassen direkt in Komponenten verwenden */
     min-height: 44px;
   }
 
-  select:focus,
-  .select:focus {
-    @apply border-green-400 ring-green-400;
-  }
-
   .modal {
-    @apply bg-gray-900 p-6 rounded-2xl shadow-2xl border border-gray-800 transition-all;
+  /* Tailwind-Klassen direkt in Komponenten verwenden */
     animation: scaleIn 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-  }
-}
-
-@layer utilities {
-  .animate-fadeIn {
     animation: fadeIn 0.25s ease;
   }
 
   .animate-scaleIn {
     animation: scaleIn 0.25s cubic-bezier(0.4, 0, 0.2, 1);
   }
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
+  input,
+  .input {
+  /* Tailwind-Klassen direkt in Komponenten verwenden */
+    min-height: 44px;
   }
-
-  to {
-    opacity: 1;
-  }
-}
-
 @keyframes scaleIn {
   from {
     opacity: 0;

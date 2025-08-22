@@ -123,7 +123,7 @@ export default function Home() {
           <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 px-2 sm:px-0 transition-opacity animate-fadeIn" role="dialog" aria-modal="true">
             <div className="bg-gray-900 p-6 sm:p-8 rounded-2xl shadow-2xl border border-gray-800 relative w-full max-w-xs sm:max-w-sm mx-auto transform transition-all duration-300 animate-scaleIn modal">
               <button
-                className="absolute top-2 right-2 text-gray-400 hover:text-white text-2xl sm:text-2xl p-1 sm:p-2 rounded focus:outline-none focus:ring-2 focus:ring-green-500"
+                className="absolute top-2 right-2 text-gray-400 hover:text-white text-2xl sm:text-2xl p-2 sm:p-3 rounded focus:outline-none focus-visible:ring-2 focus-visible:ring-green-500"
                 onClick={() => { setShowLogin(false); setShowRegister(false); }}
                 aria-label={locale === 'en' ? 'Close dialog' : 'Dialog schließen'}
                 tabIndex={0}
@@ -140,7 +140,7 @@ export default function Home() {
           </div>
         )}
 
-        <section className="p-6 grid gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+  <section className="p-8 grid gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           {loading && (
             <div className="col-span-full flex flex-col items-center justify-center py-12">
               <svg className="animate-spin h-10 w-10 text-green-500 mb-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">

@@ -15,7 +15,7 @@ const badgeStyles: Record<BadgeType, string> = {
 
 export const Badge: React.FC<BadgeProps> = ({ type }) => (
     <span
-        className={`px-4 py-1.5 rounded-full text-sm font-bold shadow-md transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-green-400 hover:shadow-green-400/30 ${badgeStyles[type]}`}
+    className={`px-4 py-1.5 rounded-full text-sm font-bold shadow-md transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-green-400 hover:shadow-green-400/30 ${badgeStyles[type]}`}
         tabIndex={0}
     >
         {type}
