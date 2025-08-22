@@ -3,6 +3,7 @@ import React from 'react';
 import { useLocale } from '@/lib/useLocale';
 import { FaFutbol } from 'react-icons/fa';
 import Image from 'next/image';
+import Link from 'next/link';
 
 interface Club {
     id: string;
@@ -143,11 +144,13 @@ export const TopbarFilter: React.FC<TopbarFilterProps> = ({
                                                     {/* Farbbalken */}
                                                     <span style={{ background: primary, width: 6, height: 38, borderRadius: 4, marginRight: 8, display: 'inline-block' }}></span>
                                                     {c.logo_url ? (
-                                                        <Image src={c.logo_url} alt={c.name} width={38} height={38} className="w-10 h-10 rounded-full object-contain border-2" style={{ borderColor: secondary }} loading="lazy" />
+                                                        <Link href={`/club/${c.id}`} tabIndex={-1} aria-label={locale === 'en' ? `Go to ${c.name}` : `Zu ${c.name}`}>
+                                                            <Image src={c.logo_url} alt={c.name} width={38} height={38} className="w-10 h-10 rounded-full object-contain border-2" style={{ borderColor: secondary }} loading="lazy" />
+                                                        </Link>
                                                     ) : (
                                                         <FaFutbol className="text-2xl" style={{ color: primary }} />
                                                     )}
-                                                    <span style={{ color: primary }}>{c.name}</span>
+                                                    <Link href={`/club/${c.id}`} className="hover:underline focus:underline" style={{ color: primary }} aria-label={locale === 'en' ? `Go to ${c.name}` : `Zu ${c.name}`}>{c.name}</Link>
                                                 </li>
                                             );
                                         })}
