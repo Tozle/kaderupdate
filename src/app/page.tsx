@@ -31,7 +31,7 @@ export default function Home() {
   const [q, setQ] = useState('');
   const [debouncedQ, setDebouncedQ] = useState('');
   const debounceTimeout = useRef<NodeJS.Timeout | null>(null);
-  const [showSearch, setShowSearch] = useState(false);
+  // const [showSearch, setShowSearch] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [user, setUser] = useState<User | null>(null);
@@ -99,8 +99,6 @@ export default function Home() {
         clubs={clubs}
         selectedClub={club}
         onClubChange={setClub}
-        showSearch={showSearch}
-        onShowSearch={() => setShowSearch(v => !v)}
         searchValue={q}
         onSearchChange={setQ}
         user={user}

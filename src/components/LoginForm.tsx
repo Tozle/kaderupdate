@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
 import { supabase } from '@/lib/supabaseClient';
-import { FaFutbol, FaSignInAlt, FaEnvelope, FaLock, FaUndo } from 'react-icons/fa';
+import { FaSignInAlt, FaEnvelope, FaLock, FaUndo } from 'react-icons/fa';
 
 export default function LoginForm({ onSwitchToRegister }: { onSwitchToRegister?: () => void }) {
     const [email, setEmail] = useState('');
