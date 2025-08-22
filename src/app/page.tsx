@@ -2,6 +2,7 @@
 import { useEffect, useState } from 'react';
 import { News, Badge } from '@/types/news';
 
+"use client";
 const BADGES: Badge[] = ['Bestätigt', 'Gut belegt', 'Gerücht'];
 const CLUBS = [
   { id: 'fcb', name: 'FC Bayern' },
