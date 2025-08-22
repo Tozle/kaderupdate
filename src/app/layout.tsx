@@ -22,7 +22,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "KaderUpdate – Fußball Kader, Vereine & Statistiken",
     description: "KaderUpdate liefert dir aktuelle Kader, Vereine und Statistiken der Bundesliga und internationalen Ligen.",
-    url: "https://kaderupdate/",
+    url: "https://kaderupdate.de/",
     siteName: "KaderUpdate",
     images: [
       {
@@ -32,7 +32,7 @@ export const metadata: Metadata = {
         alt: "KaderUpdate – Fußball Kader, Vereine & Statistiken"
       }
     ],
-    locale: "",
+    locale: "de_DE",
     type: "website"
   },
   twitter: {
@@ -57,8 +57,8 @@ export default function RootLayout({
         <main className="flex-1 w-full max-w-7xl mx-auto px-2 sm:px-6 py-4">
           {children}
         </main>
-        <LegalFooter />
-        <CookieNotice />
+  <LegalFooter />
+  <CookieNotice onAccept={() => localStorage.setItem('cookie-accepted', '1')} />
       </body>
     </html>
   );
