@@ -40,9 +40,9 @@ export default function Home() {
   const [showRegister, setShowRegister] = useState(false);
   const locale = useLocale();
   const t = translations[locale] || translations['de'];
-  
 
-  // Favoriten-Logik entfernt
+
+  // ...existing code...
   useEffect(() => {
     supabase.auth.getUser().then(({ data }) => setUser(data.user));
     const { data: listener } = supabase.auth.onAuthStateChange((_event, session) => {
@@ -124,7 +124,7 @@ export default function Home() {
         <meta name="twitter:image" content="/vercel.svg" />
       </Head>
       <main className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-gray-950 text-white">
-        
+
         <TopbarFilter
           clubs={clubs}
           selectedClub={club}
