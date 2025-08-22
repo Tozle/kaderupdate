@@ -53,18 +53,14 @@ export default function Home() {
     }, [user, showLogin, showRegister]);
 
     useEffect(() => {
-        // Clubs aus Supabase laden (optional: nur einmal beim Mount)
-        fetch('/api/newsfeed?distinct=club')
-            .then(res => res.json())
-            .then(data => {
-                // Extrahiere Clubs aus News
-                const uniqueClubs: Club[] = [];
-                (data as News[]).forEach((n) => {
-                    if (n.club && !uniqueClubs.some(c => c.id === n.club.id)) {
-                        uniqueClubs.push(n.club);
-                    }
-                });
-                setClubs(uniqueClubs);
+        // Clubs direkt aus Supabase-Tabelle laden
+        supabase
+            .from('clubs')
+            .select('id, name, logo_url')
+            .order('name', { ascending: true })
+            .then(({ data, error }) => {
+                if (error) return;
+                setClubs(data || []);
             });
     }, []);
 
