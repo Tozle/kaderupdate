@@ -35,8 +35,8 @@ export default function Home() {
   }, []);
 
   useEffect(() => {
-    // Clubs laden
-    supabase.from('clubs').select('id, name, logo_url').then(({ data }) => {
+    // Clubs laden (inkl. Farben)
+    supabase.from('clubs').select('id, name, logo_url, color_primary_hex, color_secondary_hex').then(({ data }) => {
       if (data) setClubs(data);
     });
     // News laden
