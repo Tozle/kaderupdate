@@ -34,16 +34,17 @@ const NewsCard: React.FC<NewsCardProps> = ({ title, summary, badge, club, source
     return (
         <article className="bg-gradient-to-br from-gray-900 via-gray-950 to-gray-900 rounded-2xl shadow-2xl p-4 sm:p-6 flex flex-col gap-3 sm:gap-4 border border-gray-800 hover:border-green-500 hover:shadow-green-700/30 transition-all hover:scale-[1.025] group" tabIndex={0} aria-label={`News: ${title}`}>
             <div className="flex flex-col xs:flex-row xs:items-center gap-2 xs:gap-4 mb-1">
-                {/* Club-Logo mit Fallback und alt-Text */}
+                {/* Club-Logo mit Fallback und optimiertem Laden */}
                 {club.logo_url ? (
                     <Image
                         src={club.logo_url}
-                        alt={club.name + ' Logo'}
-                        width={40}
-                        height={40}
+                        alt={`Logo von ${club.name}`}
+                        width={44}
+                        height={44}
                         className="w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-gray-700 object-contain border-2 border-green-700 shadow-md group-hover:border-green-400"
                         style={{ objectFit: 'contain' }}
-                        unoptimized
+                        loading="lazy"
+                        priority={false}
                     />
                 ) : (
                     <span className="w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-gray-700 flex items-center justify-center text-xl sm:text-2xl text-green-500 border-2 border-green-700 shadow-md" aria-label="Kein Logo"><FaFutbol /></span>
