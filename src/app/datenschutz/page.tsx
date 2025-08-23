@@ -44,9 +44,7 @@ export default function DatenschutzPage() {
                     <p className="text-base sm:text-lg text-gray-700 dark:text-gray-200 text-center mb-4 sm:mb-6 leading-relaxed">{i18n.content[locale] || i18n.content.de}</p>
                     <p className="mt-4 sm:mt-8 text-xs sm:text-sm text-gray-400 text-center italic">{i18n.demo[locale] || i18n.demo.de}</p>
                 </section>
-                <div className="mt-6 sm:mt-10 w-full max-w-xl">
-                    <LegalFooter />
-                </div>
+                {/* Footer wird global über das Layout eingebunden */}
             </main>
         </>
     );

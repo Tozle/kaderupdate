@@ -4,7 +4,7 @@ import { FaSignInAlt, FaEnvelope, FaLock, FaUndo } from 'react-icons/fa';
 import { translations } from '@/lib/translations';
 import { useLocale } from '@/lib/useLocale';
 
-export default function LoginForm({ onSwitchToRegister }: { onSwitchToRegister?: () => void }) {
+export default function LoginForm({ onSwitchToRegister, onSuccess }: { onSwitchToRegister?: () => void, onSuccess?: () => void }) {
     const locale = useLocale();
     const t = translations[locale] || translations['de'];
     const [email, setEmail] = useState('');
@@ -36,6 +36,7 @@ export default function LoginForm({ onSwitchToRegister }: { onSwitchToRegister?:
             passwordRef.current?.focus();
         } else {
             setSuccess(true);
+            if (onSuccess) setTimeout(onSuccess, 600); // nach kurzem Feedback Modal schließen
         }
         setLoading(false);
     };
@@ -77,66 +78,70 @@ export default function LoginForm({ onSwitchToRegister }: { onSwitchToRegister?:
                 >
                     {loading ? (locale === 'en' ? 'Sending link…' : 'Sende Link…') : <><FaEnvelope />{locale === 'en' ? 'Send password reset link' : 'Passwort-Reset Link senden'}</>}
                 </button>
-                {resetError && <div className="text-red-400 text-base text-center">{resetError}</div>}
-                {resetSent && <div className="text-green-400 text-base text-center">{locale === 'en' ? 'Password reset e-mail sent!' : 'E-Mail zum Zurücksetzen gesendet!'}</div>}
-                <div className="text-sm text-gray-400 mt-2 text-center">
-                    <button type="button" className="underline text-green-400 hover:text-green-200 font-bold" onClick={() => setShowReset(false)}>
-                        <FaSignInAlt className="inline mr-1" />{locale === 'en' ? 'Back to login' : 'Zurück zum Login'}
-                    </button>
-                </div>
             </form>
         );
     }
 
     return (
-        <form onSubmit={handleLogin} className="bg-gradient-to-br from-gray-950/90 via-gray-900/95 to-gray-950/90 p-7 sm:p-8 rounded-2xl shadow-2xl flex flex-col gap-6 max-w-md w-full mx-auto border border-green-600/20 mt-10 animate-fadeIn">
-            <h2 className="text-2xl font-extrabold mb-2 text-green-400 flex items-center gap-2 justify-center"><FaSignInAlt className="inline" />{t.login}</h2>
-            <div className="flex items-center gap-2 bg-gray-900 rounded-xl px-3 py-2 border border-gray-700 w-full">
-                <FaEnvelope className="text-gray-400" />
-                <input
-                    ref={emailRef}
-                    type="email"
-                    value={email}
-                    onChange={e => setEmail(e.target.value)}
-                    placeholder={locale === 'en' ? 'E-mail' : 'E-Mail'}
-                    className="bg-transparent border-none rounded px-2 py-2 text-gray-200 flex-1 focus:ring-2 focus:ring-green-500 transition-all min-h-[48px] w-full text-lg"
-                    required
-                    autoFocus
-                    disabled={loading}
-                />
+    <form onSubmit={handleLogin} className="bg-gradient-to-br from-gray-950/90 via-gray-900/95 to-gray-950/90 p-6 sm:p-10 rounded-3xl shadow-xl flex flex-col gap-5 max-w-lg w-full mx-auto border border-green-400/20 mt-10 animate-fadeIn backdrop-blur-2xl">
+            <h2 className="text-2xl font-extrabold mb-4 text-green-400 flex items-center gap-2 justify-center drop-shadow-lg tracking-tight"><FaSignInAlt className="inline" />{t.login}</h2>
+            <div className="flex flex-col gap-4">
+                <div className="flex items-center gap-2 bg-gray-900/80 rounded-xl px-4 py-2 border border-gray-800 w-full">
+                    <FaEnvelope className="text-green-400 text-xl" />
+                    <input
+                        ref={emailRef}
+                        type="email"
+                        value={email}
+                        onChange={e => setEmail(e.target.value)}
+                        placeholder={locale === 'en' ? 'E-mail' : 'E-Mail'}
+                        className="bg-transparent border-none rounded px-2 py-2 text-gray-200 flex-1 focus:ring-2 focus:ring-green-500 transition-all min-h-[48px] w-full text-lg placeholder-gray-400"
+                        required
+                        autoFocus
+                        disabled={loading}
+                    />
+                </div>
+                <div className="flex items-center gap-2 bg-gray-900/80 rounded-xl px-4 py-2 border border-gray-800 w-full">
+                    <FaLock className="text-green-400 text-xl" />
+                    <input
+                        ref={passwordRef}
+                        type="password"
+                        value={password}
+                        onChange={e => setPassword(e.target.value)}
+                        placeholder={locale === 'en' ? 'Password' : 'Passwort'}
+                        className="bg-transparent border-none rounded px-2 py-2 text-gray-200 flex-1 focus:ring-2 focus:ring-green-500 transition-all min-h-[48px] w-full text-lg placeholder-gray-400"
+                        required
+                        disabled={loading}
+                    />
+                </div>
             </div>
-            <div className="flex items-center gap-2 bg-gray-900 rounded-xl px-3 py-2 border border-gray-700 w-full">
-                <FaLock className="text-gray-400" />
-                <input
-                    ref={passwordRef}
-                    type="password"
-                    value={password}
-                    onChange={e => setPassword(e.target.value)}
-                    placeholder={locale === 'en' ? 'Password' : 'Passwort'}
-                    className="bg-transparent border-none rounded px-2 py-2 text-gray-200 flex-1 focus:ring-2 focus:ring-green-500 transition-all min-h-[48px] w-full text-lg"
-                    required
+            <div className="flex flex-col gap-1 mt-1">
+                <button
+                    type="submit"
+                    className={`w-full flex items-center justify-center gap-2 py-1.5 px-2 rounded-md border-2 border-green-400 bg-transparent text-green-500 dark:text-green-300 font-semibold text-sm hover:bg-green-50 dark:hover:bg-green-900/30 transition-all focus:outline-none focus:ring-2 focus:ring-green-400 disabled:opacity-60 ${loading ? 'animate-pulse' : ''}`}
                     disabled={loading}
-                />
+                >
+                    <FaSignInAlt className="text-base" /> {loading ? (locale === 'en' ? 'Logging in…' : 'Einloggen…') : t.login}
+                </button>
+                <button
+                    type="button"
+                    className="w-full flex items-center justify-center gap-2 py-1.5 px-2 rounded-md border-2 border-gray-400 dark:border-gray-600 bg-transparent text-gray-600 dark:text-gray-300 font-semibold text-sm hover:bg-gray-100 dark:hover:bg-gray-800/40 transition-all focus:outline-none focus:ring-2 focus:ring-green-400 disabled:opacity-60"
+                    onClick={onSwitchToRegister}
+                    disabled={loading}
+                >
+                    <FaSignInAlt className="text-base" /> {locale === 'en' ? 'Register' : 'Registrieren'}
+                </button>
+                <button
+                    type="button"
+                    className="w-full py-1 px-2 rounded-md bg-transparent text-green-400 hover:text-green-600 text-xs font-semibold mt-1 focus:outline-none"
+                    onClick={() => setShowReset(true)}
+                    disabled={loading}
+                >
+                    {locale === 'en' ? 'Forgot password?' : 'Passwort vergessen?'}
+                </button>
             </div>
-            <button
-                type="submit"
-                className={`bg-green-600 hover:bg-green-700 text-white font-bold py-3 rounded-xl shadow-lg flex items-center justify-center gap-2 text-lg transition border border-green-700 hover:border-green-400 min-h-[48px] min-w-[48px] px-6 focus:outline-none focus:ring-2 focus:ring-green-500 disabled:opacity-60 ${loading ? 'animate-pulse' : ''}`}
-                disabled={loading}
-            >
-                {loading && <span className="loader border-t-2 border-white border-solid rounded-full w-5 h-5 animate-spin"></span>}
-                <FaSignInAlt /> {loading ? (locale === 'en' ? 'Logging in…' : 'Einloggen…') : t.login}
-            </button>
-            <button
-                type="button"
-                className="text-sm underline text-green-400 hover:text-green-200 mt-1 self-end font-bold transition"
-                onClick={() => setShowReset(true)}
-                disabled={loading}
-            >
-                {locale === 'en' ? 'Forgot password?' : 'Passwort vergessen?'}
-            </button>
-            {error && <div className="text-red-400 text-base text-center" role="alert" aria-live="assertive">{error}</div>}
-            {success && <div className="text-green-400 text-base text-center" role="status" aria-live="polite">{locale === 'en' ? 'Login successful!' : 'Login erfolgreich!'}</div>}
-            <div className="text-sm text-gray-400 mt-2 text-center">
+            {error && <div className="text-red-400 text-sm text-center mt-1" role="alert" aria-live="assertive">{error}</div>}
+            {success && <div className="text-green-400 text-sm text-center animate-fadeIn mt-1" role="status" aria-live="polite">{locale === 'en' ? 'Login successful!' : 'Login erfolgreich!'}</div>}
+            <div className="text-xs text-gray-400 mt-3 text-center border-t border-gray-800 pt-3">
                 {locale === 'en' ? "Don't have an account?" : 'Noch kein Account?'}{' '}
                 <button type="button" className="underline text-green-400 hover:text-green-200 font-bold" onClick={onSwitchToRegister} disabled={loading}>
                     {locale === 'en' ? 'Register now' : 'Jetzt registrieren'}

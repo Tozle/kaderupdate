@@ -1,5 +1,6 @@
 "use client";
 import CookieNoticeClient from "@/components/CookieNoticeClient";
+import LegalFooter from "@/components/LegalFooter";
 import { useEffect, useState } from 'react';
 import { supabase } from '@/lib/supabaseClient';
 import type { User } from '@supabase/supabase-js';
@@ -73,7 +74,8 @@ export default function Home() {
         <meta name="twitter:image" content="/vercel.svg" />
       </Head>
       <div className="min-h-screen w-full bg-gradient-to-br from-gray-100 via-gray-50 to-gray-200 dark:from-gray-950 dark:via-gray-900 dark:to-gray-950 flex flex-col items-center transition-all">
-        <main className="main-content w-full max-w-4xl px-2 sm:px-8 py-10 sm:py-16 rounded-[2.5rem] bg-white/80 dark:bg-gray-950/80 shadow-lg border border-gray-200 dark:border-gray-800 mt-10 backdrop-blur-xl transition-all flex flex-col gap-0">
+        {/* TopbarFilter prominent, mittig, mit Abstand nach oben */}
+        <div className="w-full flex flex-col items-center justify-center pt-8 pb-2">
           <TopbarFilter
             user={user}
             clubs={clubs}
@@ -84,11 +86,13 @@ export default function Home() {
             onLoginClick={() => { setShowLogin(true); setShowRegister(false); }}
             onLogoutClick={async () => { await supabase.auth.signOut(); }}
           />
+        </div>
+        <main className="main-content w-full max-w-4xl px-2 sm:px-8 py-10 sm:py-16 rounded-[2.5rem] bg-white/80 dark:bg-gray-950/80 shadow-lg border border-gray-200 dark:border-gray-800 mt-0 backdrop-blur-xl transition-all flex flex-col gap-0">
           {/* Login/Registrierung Modal */}
           {(showLogin || showRegister) && (
             <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 px-2 sm:px-0 transition-opacity animate-fadeIn" role="dialog" aria-modal="true">
-              <div className="relative w-full max-w-xs sm:max-w-sm mx-auto">
-                <div className="bg-white/95 dark:bg-gray-950/95 p-8 sm:p-10 rounded-3xl shadow-2xl border-2 border-green-600/20 relative transform transition-all duration-300 animate-scaleIn modal backdrop-blur-xl">
+              <div className="relative w-full max-w-lg mx-auto">
+                <div className="bg-white/90 dark:bg-gray-950/95 p-8 sm:p-12 rounded-3xl shadow-xl border border-green-600/10 relative transform transition-all duration-300 animate-scaleIn modal backdrop-blur-2xl">
                   <button
                     className="absolute top-3 right-3 text-gray-400 hover:text-green-500 text-2xl sm:text-2xl p-2 sm:p-3 rounded-full focus:outline-none focus-visible:ring-2 focus-visible:ring-green-500 bg-gray-200/60 dark:bg-gray-800/60 hover:bg-gray-200/90 dark:hover:bg-gray-800/90 shadow"
                     onClick={() => { setShowLogin(false); setShowRegister(false); }}
@@ -100,7 +104,10 @@ export default function Home() {
                   </button>
                   <div className="flex flex-col gap-2 animate-fadeIn">
                     {showLogin && (
-                      <LoginForm onSwitchToRegister={() => { setShowLogin(false); setShowRegister(true); }} />
+                      <LoginForm 
+                        onSwitchToRegister={() => { setShowLogin(false); setShowRegister(true); }}
+                        onSuccess={() => setShowLogin(false)}
+                      />
                     )}
                     {showRegister && (
                       <RegisterForm onSwitchToLogin={() => { setShowRegister(false); setShowLogin(true); }} />
@@ -136,7 +143,8 @@ export default function Home() {
             ))}
           </section>
         </main>
-        <CookieNoticeClient />
+  <CookieNoticeClient />
+  <LegalFooter />
       </div>
     </>
   );
