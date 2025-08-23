@@ -17,20 +17,25 @@
 @import "tailwindcss";
 
 
+
 :root {
-  --background: #10151a;
+  --background: #0a0e13;
   --foreground: #e6e6e6;
   --accent: #22c55e;
   --accent-dark: #166534;
-  --card-bg: #181f25;
-  --card-border: #232b33;
+  --accent-glow: 0 0 16px #22c55e88;
+  --card-bg: rgba(18,22,28,0.92);
+  --card-border: #1a232b;
+  --card-glass: rgba(18,22,28,0.82);
   --badge-bg: #22c55e;
   --badge-text: #fff;
   --badge-border: #166534;
-  --footer-bg: #13181d;
-  --header-bg: #181f25cc;
-  --shadow: 0 2px 16px 0 #000a;
+  --footer-bg: #10151a;
+  --header-bg: rgba(18,22,28,0.96);
+  --shadow: 0 4px 32px 0 #000c;
+  --stadion-lines: repeating-linear-gradient(135deg, #232b33 0 2px, transparent 2px 32px);
 }
+
 
 body {
   background: var(--background);
@@ -43,15 +48,118 @@ body {
   -webkit-font-smoothing: antialiased;
   padding: 0;
   margin: 0;
+  background-image: var(--stadion-lines);
+  background-size: 100vw 100vh;
+  background-attachment: fixed;
 }
 
+
 .main-content {
-  max-width: 700px;
+  max-width: 800px;
   margin: 0 auto;
   padding: 2.5rem 1rem 1.5rem 1rem;
   display: flex;
   flex-direction: column;
   gap: 2.5rem;
+  background: var(--card-glass);
+  border-radius: 2.5rem;
+  box-shadow: var(--shadow);
+  border: 1.5px solid var(--card-border);
+  backdrop-filter: blur(8px) saturate(1.2);
+}
+/* Card, Button, Input, Topbar, Badge, Modal Styles */
+.card, .news-card, .modal {
+  background: var(--card-bg);
+  border-radius: 2rem;
+  box-shadow: var(--shadow);
+  border: 1.5px solid var(--card-border);
+  backdrop-filter: blur(10px) saturate(1.2);
+  transition: box-shadow 0.2s, border-color 0.2s, background 0.2s;
+}
+
+.card:hover, .news-card:hover, .modal:focus-within {
+  box-shadow: 0 0 0 2px var(--accent), var(--shadow);
+  border-color: var(--accent);
+}
+
+.topbar, .topbar-filter {
+  background: var(--header-bg);
+  border-radius: 1.5rem;
+  box-shadow: 0 2px 16px 0 #0008;
+  border: 1.5px solid var(--card-border);
+  padding: 1rem 1.5rem;
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.btn, button, input[type="submit"] {
+  background: var(--accent);
+  color: var(--badge-text);
+  border: 1.5px solid var(--accent-dark);
+  border-radius: 1.2em;
+  font-weight: 700;
+  font-size: 1.08rem;
+  padding: 0.7em 1.5em;
+  box-shadow: 0 2px 8px 0 #22c55e22;
+  transition: background 0.15s, color 0.15s, box-shadow 0.15s, border-color 0.15s;
+  cursor: pointer;
+}
+.btn:hover, button:hover, input[type="submit"]:hover {
+  background: var(--accent-dark);
+  color: #fff;
+  box-shadow: 0 0 0 2px var(--accent), 0 2px 16px 0 #22c55e44;
+}
+.btn:active, button:active {
+  background: #1a232b;
+  color: var(--accent);
+}
+
+input, select, textarea {
+  background: #181f25;
+  color: var(--foreground);
+  border: 1.5px solid var(--card-border);
+  border-radius: 1em;
+  padding: 0.7em 1.2em;
+  font-size: 1.08rem;
+  transition: border-color 0.15s, box-shadow 0.15s;
+  outline: none;
+}
+input:focus, select:focus, textarea:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 2px var(--accent);
+}
+
+.badge {
+  background: var(--badge-bg);
+  color: var(--badge-text);
+  border: 1.5px solid var(--badge-border);
+  border-radius: 1em;
+  font-weight: 700;
+  font-size: 1rem;
+  padding: 0.3em 1em;
+  box-shadow: 0 1px 6px #22c55e33;
+  letter-spacing: 0.01em;
+}
+
+@media (max-width: 600px) {
+  .main-content {
+    padding: 1.2rem 0.2rem 1rem 0.2rem;
+    border-radius: 1.2rem;
+  }
+  .card, .news-card, .modal {
+    border-radius: 1.2rem;
+    padding: 1.1rem 0.7rem;
+  }
+  .topbar, .topbar-filter {
+    border-radius: 1.2rem;
+    padding: 0.7rem 0.5rem;
+  }
+  .btn, button, input[type="submit"] {
+    font-size: 1rem;
+    padding: 0.7em 1em;
+  }
 }
 
 @media (max-width: 600px) {

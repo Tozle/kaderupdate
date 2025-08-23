@@ -11,7 +11,6 @@ interface Club {
     color_primary_hex?: string;
     color_secondary_hex?: string;
 }
-
 interface TopbarFilterProps {
     user: User | null;
     clubs: Club[];
@@ -21,6 +20,7 @@ interface TopbarFilterProps {
     onSearch: (s: string) => void;
     onLoginClick: () => void;
     onLogoutClick: () => void;
+
 }
 
 const TopbarFilter: React.FC<TopbarFilterProps> = ({ user, clubs, selectedClub, onSelectClub, search, onSearch, onLoginClick, onLogoutClick }) => {
@@ -83,3 +83,4 @@ const TopbarFilter: React.FC<TopbarFilterProps> = ({ user, clubs, selectedClub, 
         </header>
     );
 };
+export default TopbarFilter;
