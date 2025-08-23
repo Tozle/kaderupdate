@@ -1,3 +1,16 @@
+/* Scrollbar für horizontale Club-Leiste ausblenden */
+.scrollbar-hide {
+  scrollbar-width: none;
+  /* Firefox */
+  -ms-overflow-style: none;
+  /* IE 10+ */
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+  /* Safari und Chrome */
+}
+
 @layer components {
   /* Custom component styles können hier ergänzt werden, aktuell leer */
 }

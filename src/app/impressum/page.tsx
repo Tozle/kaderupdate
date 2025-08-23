@@ -1,4 +1,3 @@
-import LegalFooter from '@/components/LegalFooter';
 import { useLocale } from '@/lib/useLocale';
 import Head from 'next/head';
 import Link from 'next/link';

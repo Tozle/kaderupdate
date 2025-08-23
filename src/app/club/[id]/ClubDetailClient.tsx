@@ -14,7 +14,7 @@ interface Club {
     color_primary_hex?: string;
     color_secondary_hex?: string;
 }
-interface Player { id: string; name: string; position: string; number: number; }
+interface Player { id: string; name: string; position_group: string; shirt_number?: number; }
 interface Stat { label: string; value: string | number; }
 interface Embed { url: string; }
 interface ClubDetailClientProps {

@@ -12,7 +12,7 @@ export default function CookieNotice({ onAccept }: { onAccept: () => void }) {
             <span className="flex-1 text-base leading-relaxed">Diese Website verwendet Cookies, um bestmögliche Funktionalität zu bieten. <a href="/datenschutz" className="underline hover:text-green-400 transition">Mehr erfahren</a></span>
             <button
                 onClick={onAccept}
-                className="bg-green-600 hover:bg-green-700 text-white px-5 py-2 rounded-xl shadow font-bold border border-green-700 hover:border-green-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-green-500 text-base transition"
+                className="btn text-base px-5 py-2"
             >
                 Ok
             </button>

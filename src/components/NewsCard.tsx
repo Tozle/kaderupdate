@@ -37,13 +37,12 @@ interface NewsCardProps {
 const NewsCard: React.FC<NewsCardProps> = ({ title, summary, badge, club, sources, social_embed }) => {
     const locale = useLocale();
     // Card-Akzentfarbe: Clubfarbe oder Default
-    const accentBg = club?.color_primary_hex || '#e5e7eb';
-    const accentText = club?.color_secondary_hex || '#222';
+
     return (
         <article
             className="relative rounded-3xl p-7 flex flex-col gap-4 transition-all hover:scale-[1.005] group focus-within:scale-[1.005] outline-none ring-0 border max-w-2xl mx-auto bg-white/80 dark:bg-gray-950/80 border-gray-200 dark:border-gray-800 hover:border-green-400 shadow-sm backdrop-blur-xl"
             tabIndex={0}
-            aria-label={`News: ${title}`}
+            aria-labelledby={`news-title-${title.replace(/\s+/g, '-')}`}
             style={{ boxShadow: `0 1px 8px 0 #e5e7eb55` }}
         >
             <div className="flex flex-row items-center gap-4 mb-1">
@@ -71,9 +70,9 @@ const NewsCard: React.FC<NewsCardProps> = ({ title, summary, badge, club, source
                 >
                     {club.name}
                 </Link>
-                <Badge type={badge} style={{ background: club?.color_primary_hex || '#e5e7eb', color: club?.color_secondary_hex || '#222', borderColor: club?.color_primary_hex || '#e5e7eb', fontWeight: 700, fontSize: '1rem', letterSpacing: '0.01em', boxShadow: 'none', padding: '0.3em 1em', borderRadius: '1em' }} />
+                <Badge type={badge} style={{ background: club?.color_primary_hex || '#e5e7eb', color: club?.color_secondary_hex || '#222', borderColor: club?.color_primary_hex || '#e5e7eb', fontWeight: 700, fontSize: '1rem', letterSpacing: '0.01em', boxShadow: 'none', padding: '0.3em 1em', borderRadius: '1em' }} aria-label={badge} />
             </div>
-            <h2 className="text-2xl font-bold leading-tight mb-1 group-hover:opacity-80 group-focus-within:opacity-80 transition-colors text-gray-800 dark:text-gray-100">
+            <h2 id={`news-title-${title.replace(/\s+/g, '-')}`} className="text-2xl font-bold leading-tight mb-1 group-hover:opacity-80 group-focus-within:opacity-80 transition-colors text-gray-800 dark:text-gray-100">
                 {title}
             </h2>
             <p className="text-gray-600 dark:text-gray-300 text-base mb-1 font-normal leading-relaxed max-w-2xl">
@@ -89,7 +88,7 @@ const NewsCard: React.FC<NewsCardProps> = ({ title, summary, badge, club, source
                     <span className="font-semibold" style={{ color: club?.color_primary_hex || '#bdbdbd' }}>{locale === 'en' ? 'Sources:' : 'Quellen:'}</span> {sources.map((s, i) => (
                         <React.Fragment key={s.id}>
                             {i > 0 && ', '}
-                            <a href={s.url} className="underline underline-offset-2" style={{ color: club?.color_primary_hex || '#bdbdbd' }} target="_blank" rel="noopener noreferrer">{s.name}</a>
+                            <a href={s.url} className="underline underline-offset-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-green-400" style={{ color: club?.color_primary_hex || '#bdbdbd' }} target="_blank" rel="noopener noreferrer" aria-label={locale === 'en' ? `Source: ${s.name}` : `Quelle: ${s.name}`}>{s.name}</a>
                         </React.Fragment>
                     ))}
                 </span>
